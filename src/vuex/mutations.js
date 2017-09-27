@@ -6,26 +6,36 @@ export default {
     state.datasets.push(dataset)
   },
   addFolder(state, folder) {
-    state.folder.children.addFolder(folder)
+    state.folders.push(folder)
   },
-  getUser(state, user) {
-    state.user = user
+  addFile(state, file) {
+    state.files.push(file)
   },
+  addFiles(state, files) {
+    state.files.concat(files)
+  },
+  // getUser(state, user) {
+  //   state.user = user
+  // },
   getDatasets(state, datasets) {
-    state.datasets = datasets
+    state.datasets.concat(datasets)
   },
-  getFolder(state, folder) {
-    state.folder = folder
+  getFolder(state, folders) {
+    state.folders.concat(folders)
   },
-  getFile(state, file) {
-    state.file = file
+  getFile(state, files) {
+    state.files.concat(files)
   },
   delDataset(state, id) {
-    state.datasets = state.datasets.filter(dataset => dataset.id !== id)
+    let index = state.datasets.findindex(dataset => dataset.id === id)
+    state.datasets.splice(index, 1)
   },
   delFolder(state, id) {
-    let index = state.folder.findindex(f => f.id === id)
-    state.folder.splice(index, 1)
+    let index = state.folders.findindex(f => f.id === id)
+    state.folders.splice(index, 1)
   },
-  delFile (state, id) {}
+  delFile (state, rowKey) {
+    let index = state.files.findindex(f => f.rowKey === rowKey)
+    state.files.splice(index, 1)
+  }
 }

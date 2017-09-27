@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import * as actions from './actions'
 import mutations from './mutations'
+import getters from './getters'
 
 Vue.use(Vuex)
 
@@ -15,14 +16,14 @@ const state = {
     // address: ''
   },
   datasets: [],
-  folder: [
+  folders: [
     // {
     //   id: '',
     //   name: '',
     //   children: []
     // }
   ],
-  file: [
+  files: [
     // id: '',
     // name: '',
     // data: {}
@@ -32,6 +33,7 @@ const state = {
 export default new Vuex.Store({
   state,
   actions,
-  mutations
+  mutations,
+  getters
 })
 

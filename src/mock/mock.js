@@ -8,6 +8,7 @@ var Random = Mock.Random
 const userId = 1
 const datasetId = 1
 const folderId = 1
+const fileRowKey = 1
 export default {
   start() {
     // init mock
@@ -84,6 +85,41 @@ export default {
       return new Promise((resolve, reject) => {
         let folderList = folders.filter(f => f.parentId === folderId)
         return resolve([200, {folderList}])
+      })
+    })
+    mock.onGet(folderUrl.subFile(folderId)).reply(config => {
+      return new Promise((resolve, reject) => {
+        let fileList = files.filter(f => f.parentId === folderId)
+        return resolve([200, {fileList}])
+      })
+    })
+    mock.onPost(folderUrl.singleFile(folderId)).reply(config => {
+      return new Promise((resolve, reject) => {
+        let file = JSON.parse(config.data)
+        files.push(file)
+        return resolve([200, {file}])
+      })
+    })
+    mock.onPost(folderUrl.mulFile(folderId)).reply(config => {
+      return new Promise((resolve, reject) => {
+        let fileList = JSON.parse(config.data)
+        files.concat(fileList)
+        return resolve([200, {fileList}])
+      })
+    })
+
+    // file operations
+    mock.onGet(fileUrl.addId(fileRowKey)).reply(config => {
+      return new Promise((resolve, reject) => {
+        let file = files.filter(f => f.rowKey === fileRowKey)
+        return resolve([200, {file}])
+      })
+    })
+    mock.onDelete(fileUrl.addId(fileRowKey)).reply(config => {
+      return new Promise((resolve, reject) => {
+        let index = files.findIndex(f => f.rowKey === fileRowKey)
+        files.splice(index, 1)
+        return resolve([200, {msg: 'delete success'}])
       })
     })
   }
