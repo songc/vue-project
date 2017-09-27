@@ -5,14 +5,16 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-
+import store from './vuex/store'
+import mock from './mock/mock'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-
+mock.start()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
