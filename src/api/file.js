@@ -2,10 +2,10 @@ import axios from 'axios'
 import {fileUrl} from './url'
 
 const fileApi = {
-  find(rowKey) {
+  getByRowKey(rowKey) {
     return axios.get(fileUrl.addId(rowKey))
   },
-  delete(rowKey) {
+  deleteByRowKey(rowKey) {
     return axios.delete(fileUrl.addId(rowKey))
   }
 }

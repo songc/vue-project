@@ -2,22 +2,22 @@ import axios from 'axios'
 import {folderUrl} from './url'
 
 const folderApi = {
-  save(folder) {
+  postFolder(folder) {
     return axios.post(folderUrl.base, folder)
   },
-  find(id) {
+  getFolder(id) {
     return axios.get(folderUrl.addId(id))
   },
   delete(id) {
     return axios.delete(folderUrl.addId(id))
   },
-  findSubFolder(id) {
+  getSubFolder(id) {
     return axios.get(folderUrl.subFolder(id))
   },
-  findSubFile(id) {
+  getSubFile(id) {
     return axios.get(folderUrl.subFile(id))
   },
-  saveSingleFile(id, data) {
+  postSingleFile(id, data) {
     return axios({
       url: folderUrl.singleFile(id),
       method: 'post',
@@ -27,7 +27,7 @@ const folderApi = {
       data: data
     })
   },
-  saveMulFile(id, data) {
+  postMulFile(id, data) {
     return axios({
       url: folderUrl.mulFile(id),
       method: 'post',

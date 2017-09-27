@@ -17,13 +17,13 @@ export const login = ({ commit }, user) => {
 }
 
 export const getDatasets = ({ commit }, userId) => {
-  userApi.findDataset(userId).then(res => {
-    commit('getDatasets', res.data)
+  userApi.getDataset(userId).then(res => {
+    commit('addDatasets', res.data)
   })
 }
 
-export const addDataset = ({ commit }, userId, dataset) => {
-  userApi.saveDataset(userId, dataset).then(res => {
+export const postDataset = ({ commit }, userId, dataset) => {
+  userApi.postDataset(userId, dataset).then(res => {
     commit('addDataset', res.data)
   })
 }
@@ -36,40 +36,40 @@ export const delDatasetById = ({ commit }, datasetId) => {
 }
 
 // action about
-export const saveFolder = ({ commit }, folder) => {
-  folderApi.save(folder).then(res => {
+export const postFolder = ({ commit }, folder) => {
+  folderApi.postFolder(folder).then(res => {
     commit('addFolder', res.data)
   })
 }
-export const findSubFolder = ({ commit }, folderId) => {
-  folderApi.findSubFile(folderId).then(res => {
+export const getSubFolder = ({ commit }, folderId) => {
+  folderApi.getSubFile(folderId).then(res => {
     commit('addFolders', res.data)
   })
 }
-export const findSubFile = ({commit}, folderId) => {
-  folderApi.findSubFile(folderId).then(res => {
-    commit('getFile', res.data)
+export const getSubFile = ({commit}, folderId) => {
+  folderApi.getSubFile(folderId).then(res => {
+    commit('addFiles', res.data)
   })
 }
-export const saveSingleFile = ({commit}, folderId, file) => {
-  folderApi.saveSingleFile(folderId, file).then(res => {
+export const postSingleFile = ({commit}, folderId, file) => {
+  folderApi.postSingleFile(folderId, file).then(res => {
     commit('addFile', res.data)
   })
 }
-export const saveMulFile = ({commit}, folderId, fileList) => {
-  folderApi.saveMulFile(folderId, fileList).then(res => {
-    commit('getFile', res.data)
+export const postMulFile = ({commit}, folderId, fileList) => {
+  folderApi.postMulFile(folderId, fileList).then(res => {
+    commit('addFiles', res.data)
   })
 }
 
 // operation file
-export const findFileByRowKey = ({commit}, rowKey) => {
-  fileApi.find(rowKey).then(res => {
+export const getFileByRowKey = ({commit}, rowKey) => {
+  fileApi.getByRowKey(rowKey).then(res => {
     commit('addFile', res.data)
   })
 }
 export const delFile = ({commit}, rowKey) => {
-  fileApi.delete(rowKey).then(res => {
+  fileApi.deleteByRowKey(rowKey).then(res => {
     commit('delFile', rowKey)
   })
 }

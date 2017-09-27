@@ -8,13 +8,13 @@ const userApi = {
   login(username, password) {
     return axios.post(userUrl.login, { params: {username: username, password: password} })
   },
-  findUser(userId) {
+  getUser(userId) {
     return axios.get(userUrl.addId(userId))
   },
-  findDataset(userId) {
+  getDataset(userId) {
     return axios.get(userUrl.opsDataset(userId))
   },
-  saveDataset(userId, dataset) {
+  postDataset(userId, dataset) {
     return axios.post(userUrl.opsDataset(userId), dataset)
   }
 }

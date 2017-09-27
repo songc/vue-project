@@ -2,7 +2,7 @@ import axios from 'axios'
 import {datasetUrl} from './url'
 
 const datasetApi = {
-  save(dataset) {
+  postDataset(dataset) {
     return axios.post(datasetUrl.base, dataset)
   },
   getPage(page, size) {
@@ -13,7 +13,7 @@ const datasetApi = {
       }
     })
   },
-  findById(id) {
+  getById(id) {
     return axios.get(datasetUrl.addId(id))
   },
   deleteById(id) {

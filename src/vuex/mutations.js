@@ -11,19 +11,13 @@ export default {
   addFile(state, file) {
     state.files.push(file)
   },
-  addFiles(state, files) {
-    state.files.concat(files)
-  },
-  // getUser(state, user) {
-  //   state.user = user
-  // },
-  getDatasets(state, datasets) {
+  addDatasets(state, datasets) {
     state.datasets.concat(datasets)
   },
-  getFolder(state, folders) {
+  addFolders(state, folders) {
     state.folders.concat(folders)
   },
-  getFile(state, files) {
+  addFiles(state, files) {
     state.files.concat(files)
   },
   delDataset(state, id) {
