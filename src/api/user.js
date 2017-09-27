@@ -6,7 +6,7 @@ const userApi = {
     return axios.post(userUrl.base, user)
   },
   login(username, password) {
-    return axios.post(userUrl.login, { params: {username: username, password: password} })
+    return axios.post(userUrl.login, {username: username, password: password})
   },
   getUser(userId) {
     return axios.get(userUrl.addId(userId))

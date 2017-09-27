@@ -1,4 +1,7 @@
 export default {
+  addMsg(state, msg) {
+    state.msg = msg
+  },
   addUser(state, user) {
     state.user = user
   },

@@ -6,7 +6,7 @@ function addUser(num) {
     user.push(Mock.mock({
       'id|+1': 1,
       username: 'songc',
-      'password|1-10': '4',
+      password: '445',
       email: Random.email(),
       address: Random.county(true),
       sex: 'man'

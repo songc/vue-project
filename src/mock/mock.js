@@ -16,20 +16,29 @@ export default {
 
     // operation user
     mock.onPost(userUrl.login).reply(config => {
-      let {username, password} = config.params
+      // let {username, password} = config.data
+      let user = Mock.mock({
+        'id|+1': 1,
+        name: Random.string(3, 10),
+        author: Random.string(3, 10),
+        decription: Random.string(20, 40),
+        folderId: 1,
+        userId: 1
+      })
       return new Promise((resolve, reject) => {
-        let user = {}
-        let hasUser = users.some(u => {
-          if (u.username === username && u.password === password) {
-            user = u
-            return true
-          }
-        })
-        if (hasUser) {
-          resolve([200, {user}])
-        } else {
-          resolve([500, {msg: 'password or username error'}])
-        }
+        // let user = {}
+        // let hasUser = users.some(u => {
+        //   if (u.username === username && u.password === password) {
+        //     user = u
+        //     return true
+        //   }
+        // })
+        // if (hasUser) {
+        //   resolve([200, {user}])
+        // } else {
+        //   resolve([500, {msg: 'password or username error'}])
+        // }
+        return resolve([200, { user }])
       })
     })
     mock.onPost(userUrl.base).reply(config => {
