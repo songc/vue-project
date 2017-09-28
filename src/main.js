@@ -3,13 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'
 import store from './vuex/store'
 import './mock/index'
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.use(iView)
 
 /* eslint-disable no-new */
 new Vue({
