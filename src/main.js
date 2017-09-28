@@ -6,11 +6,10 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import store from './vuex/store'
-import mock from './mock/mock'
+import './mock/index'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-mock.start()
 
 /* eslint-disable no-new */
 new Vue({

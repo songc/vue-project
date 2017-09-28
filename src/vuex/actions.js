@@ -12,7 +12,7 @@ export const register = ({ commit }, user) => {
 
 export const login = ({ commit }, user) => {
   userApi.login(user.username, user.password).then(res => {
-    commit('addUser', res.data.user)
+    commit('addUser', res.data)
   })
 }
 
@@ -24,7 +24,7 @@ export const getDatasets = ({ commit }, userId) => {
 
 export const postDataset = ({ commit }, userId, dataset) => {
   userApi.postDataset(userId, dataset).then(res => {
-    commit('addDataset', res.data.datasetList)
+    commit('addDataset', res.data)
   })
 }
 
@@ -39,7 +39,7 @@ export const delDatasetById = ({ commit }, datasetId) => {
 // action about
 export const postFolder = ({ commit }, folder) => {
   folderApi.postFolder(folder).then(res => {
-    commit('addFolder', res.data.folder)
+    commit('addFolder', res.data)
   })
 }
 export const getSubFolder = ({ commit }, folderId) => {
@@ -54,7 +54,7 @@ export const getSubFile = ({commit}, folderId) => {
 }
 export const postSingleFile = ({commit}, folderId, file) => {
   folderApi.postSingleFile(folderId, file).then(res => {
-    commit('addFile', res.data.file)
+    commit('addFile', res.data)
   })
 }
 export const postMulFile = ({commit}, folderId, fileList) => {
@@ -66,7 +66,7 @@ export const postMulFile = ({commit}, folderId, fileList) => {
 // operation file
 export const getFileByRowKey = ({commit}, rowKey) => {
   fileApi.getByRowKey(rowKey).then(res => {
-    commit('addFile', res.data.file)
+    commit('addFile', res.data)
   })
 }
 export const delFile = ({commit}, rowKey) => {
