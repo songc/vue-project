@@ -6,9 +6,10 @@
             <Icon type="ios-navigate"></Icon>
             导航一
         </template>
-        <MenuItem name="1-1">选项 1</MenuItem>
+        <mtree></mtree>
+        <!-- <MenuItem name="1-1">选项 1</MenuItem>
         <MenuItem name="1-2">选项 2</MenuItem>
-        <MenuItem name="1-3">选项 3</MenuItem>
+        <MenuItem name="1-3">选项 3</MenuItem> -->
     </Submenu>
     <Submenu name="2">
         <template slot="title">
@@ -30,7 +31,11 @@
 </template>
 
 <script>
+import Mtree from '../components/Mtree'
 export default {
+  components: {
+    Mtree
+  },
   data() {
     return {
 

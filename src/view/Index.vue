@@ -24,6 +24,8 @@ export default {
     SideNav
   },
   data() {
+    return {
+    }
   }
 }
 </script>
