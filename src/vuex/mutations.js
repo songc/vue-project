@@ -2,6 +2,9 @@ export default {
   addMsg(state, msg) {
     state.msg = msg
   },
+  ChangeLoginStatus(state, loginStatus) {
+    state.msg = loginStatus
+  },
   addUser(state, user) {
     state.user = user
   },

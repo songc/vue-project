@@ -6,12 +6,16 @@ import fileApi from '../api/file'
 // action about user
 export const register = ({ commit }, user) => {
   userApi.register(user).then(res => {
+    let loginStatus = true
+    commit('changeLoginStatus', loginStatus)
     commit('addUser', user)
   })
 }
 
 export const login = ({ commit }, user) => {
   userApi.login(user.username, user.password).then(res => {
+    let loginStatus = true
+    commit('changeLoginStatus', loginStatus)
     commit('addUser', res.data)
   })
 }
