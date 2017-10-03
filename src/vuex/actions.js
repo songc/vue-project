@@ -8,15 +8,18 @@ export const register = ({ commit }, user) => {
   userApi.register(user).then(res => {
     let loginStatus = true
     commit('changeLoginStatus', loginStatus)
-    commit('addUser', user)
+    commit('addUser', res.data)
   })
 }
 
 export const login = ({ commit }, user) => {
   userApi.login(user.username, user.password).then(res => {
-    let loginStatus = true
-    commit('changeLoginStatus', loginStatus)
-    commit('addUser', res.data)
+    return new Promise((resolve, reject) => {
+      let loginStatus = true
+      commit('changeLoginStatus', loginStatus)
+      commit('addUser', res.data)
+      resolve(res.data)
+    })
   })
 }
 

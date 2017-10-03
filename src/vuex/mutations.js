@@ -2,8 +2,8 @@ export default {
   addMsg(state, msg) {
     state.msg = msg
   },
-  ChangeLoginStatus(state, loginStatus) {
-    state.msg = loginStatus
+  changeLoginStatus(state, loginStatus) {
+    state.isLogin = loginStatus
   },
   addUser(state, user) {
     state.user = user
@@ -18,10 +18,10 @@ export default {
     state.files.push(file)
   },
   addDatasets(state, datasets) {
-    state.datasets.concat(datasets)
+    state.datasets = state.datasets.concat(datasets)
   },
   addFolders(state, folders) {
-    state.folders.concat(folders)
+    state.folders = state.folders.concat(folders)
   },
   addFiles(state, files) {
     state.files.concat(files)

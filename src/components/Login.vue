@@ -1,6 +1,6 @@
 <template>
     <Form ref="formLogin" :model="user" :rules="ruleInline">
-        <FormItem prop="user">
+        <FormItem prop="username">
             <Input type="text" v-model="user.username" placeholder="Username">
                 <Icon type="ios-person-outline" slot="prepend"></Icon>
             </Input>
@@ -24,12 +24,12 @@
             password: ''
           },
           ruleInline: {
-            user: [
-              { required: true, message: '请填写用户名', trigger: 'blur' }
+            username: [
+              { required: true, message: "This can't be null", trigger: 'blur' }
             ],
             password: [
-              { required: true, message: '请填写密码', trigger: 'blur' },
-              { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
+              { required: true, message: "This can't be null", trigger: 'blur' },
+              { type: 'string', min: 6, message: 'at least 6 characters', trigger: 'blur' }
             ]
           }
         }
@@ -38,9 +38,14 @@
         handleSubmit(name) {
           this.$refs[name].validate((valid) => {
             if (valid) {
-              this.$Message.success('提交成功!')
+              this.$store.dispatch('login', this.user).then(() => {
+                return this.$store.dispatch('getDatasets', this.$store.state.user.id)
+              }).then(() => {
+                this.$router.push('/main')
+                this.$Message.success('Login success!')
+              })
             } else {
-              this.$Message.error('表单验证失败!')
+              this.$Message.error('Something error!')
             }
           })
         }
