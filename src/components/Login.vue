@@ -38,8 +38,8 @@
         handleSubmit(name) {
           this.$refs[name].validate((valid) => {
             if (valid) {
-              this.$store.dispatch('login', this.user).then(() => {
-                return this.$store.dispatch('getDatasets', this.$store.state.user.id)
+              this.$store.dispatch('login', this.user).then((user) => {
+                this.$store.dispatch('getDatasets', user.id)
               }).then(() => {
                 this.$router.push('/main')
                 this.$Message.success('Login success!')

@@ -18,7 +18,7 @@ export default {
     state.files.push(file)
   },
   addDatasets(state, datasets) {
-    state.datasets = state.datasets.concat(datasets)
+    state.datasets = datasets
   },
   addFolders(state, folders) {
     state.folders = state.folders.concat(folders)

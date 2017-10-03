@@ -13,7 +13,7 @@ export const register = ({ commit }, user) => {
 }
 
 export const login = ({ commit }, user) => {
-  userApi.login(user.username, user.password).then(res => {
+  return userApi.login(user.username, user.password).then(res => {
     return new Promise((resolve, reject) => {
       let loginStatus = true
       commit('changeLoginStatus', loginStatus)
@@ -36,6 +36,11 @@ export const postDataset = ({ commit }, userId, dataset) => {
 }
 
 // action about dataset
+export const getPublicDatasets = ({ commit }, page, size) => {
+  datasetApi.getPage(page, size).then(res => {
+    commit('addDatasets', res.data.datasetList)
+  })
+}
 export const delDatasetById = ({ commit }, datasetId) => {
   datasetApi.deleteById(datasetId).then(res => {
     commit('delDataset', datasetId)
@@ -43,7 +48,7 @@ export const delDatasetById = ({ commit }, datasetId) => {
   })
 }
 
-// action about
+// action about folder
 export const postFolder = ({ commit }, folder) => {
   folderApi.postFolder(folder).then(res => {
     commit('addFolder', res.data)

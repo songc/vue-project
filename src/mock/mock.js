@@ -43,7 +43,18 @@ Mock.mock(/\/user\/\d+\/dataset/, 'post', {
   userId: Random.integer(1, 50)
 })
 
-Mock.mock('/dataset')
+Mock.mock(/\/dataset\?/, 'get', {
+  'datasetList|3-10': [
+    {
+      'id|+1': 1,
+      name: Random.string(3, 10),
+      author: Random.string(3, 10),
+      decription: Random.string(20, 40),
+      folderId: Random.integer(1, 20),
+      userId: Random.integer(1, 50)
+    }
+  ]
+})
 Mock.mock(/\/dataset\/\d+/, 'delete', {
   msg: 'delete success'
 })
