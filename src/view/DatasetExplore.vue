@@ -9,18 +9,14 @@
       <div>content</div>
       </Col>
     </Row>
-    <footer-menu></footer-menu>
   </div>
 </template>
 
 <script>
-import NavMenu from '../components/NavMenu'
-import FooterMenu from '../components/FooterMenu'
 import SideNav from '../components/SideNav'
 export default {
   components: {
     NavMenu,
-    FooterMenu,
     SideNav
   },
   data() {
@@ -46,4 +42,3 @@ export default {
   overflow: hidden;
 }
 </style>
-

@@ -1,13 +1,13 @@
 <template>
-  <Menu mode="horizontal" theme="light" active-name="1" @on-select="getDatasets">
+  <Menu mode="horizontal" theme="light" :active-name="menuItemName" @on-select="getDatasets">
     <Row type="flex" justify="space-between" align="middle">
       <Col span="2">
       <img src="../../assets/logo1.png" class="menu-logo"/>
       </Col>
       <Col span="12">
-      <MenuItem name="1"> You Dataset
+      <MenuItem name="private" v-show="isLogin"> You Dataset
       </MenuItem>
-      <MenuItem name="2"> Public Dataset
+      <MenuItem name="public"> Public Dataset
       </MenuItem>
       </Col>
       <Col span="3">
@@ -19,14 +19,14 @@
       </Col>
       <Col span="3">
       <Button type="ghost" size="small" icon="plus-circled">New Dataset</Button>
-      <Dropdown trigger="hover" placement="bottom">
+      <Dropdown trigger="hover" placement="bottom" @on-click="resolveClick">
         <Avatar icon="person" class="menu-avatar">
         </Avatar>
         <Icon type="arrow-down-b"></Icon>
         <DropdownMenu slot="list">
-          <DropdownItem>Your profile</DropdownItem>
-          <DropdownItem divided>Setting</DropdownItem>
-          <DropdownItem divided>Sign out</DropdownItem>
+          <DropdownItem name="profile">Your profile</DropdownItem>
+          <DropdownItem name="setting" divided>Setting</DropdownItem>
+          <DropdownItem name="logout" divided>Sign out</DropdownItem>
         </DropdownMenu>
       </Dropdown>
       </Col>
@@ -50,12 +50,41 @@ export default {
       register: false
     }
   },
+  beforeCreate: function() {
+    if (!this.$store.state.isLogin) {
+      this.$store.dispatch('getPublicDatasets', 10, 10)
+    }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin
+    },
+    menuItemName() {
+      if (this.$store.state.isLogin) {
+        return 'private'
+      } else {
+        return 'public'
+      }
+    }
+  },
   methods: {
     getDatasets(a) {
-      if (a === '1') {
+      if (a === 'private') {
         this.$store.dispatch('getDatasets', this.$store.state.user.id)
-      } else if (a === '2') {
+      } else if (a === 'public') {
         this.$store.dispatch('getPublicDatasets', 10, 10)
+      }
+    },
+    resolveClick(name) {
+      if (name === 'logout') {
+        this.$store.commit('logout')
+        this.$router.push({name: 'home'})
+      }
+      if (name === 'setting') {
+        this.$router.push('/main/setting')
+      }
+      if (name === 'profile') {
+        this.$router.push('/main/profile')
       }
     }
   }

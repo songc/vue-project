@@ -37,5 +37,12 @@ export default {
   delFile (state, rowKey) {
     let index = state.files.findindex(f => f.rowKey === rowKey)
     state.files.splice(index, 1)
+  },
+  logout(state) {
+    state.isLogin = false
+    state.user = {}
+    state.datasets = []
+    state.folders = []
+    state.files = []
   }
 }

@@ -1,10 +1,8 @@
 <template>
   <Menu mode="horizontal" theme="light" active-name="1">
     <Row type="flex" justify="space-around" align="middle">
-      <!-- <Col span="2"> -->
-      <img src="../assets/logo1.png"/>
-      <!-- </Col> -->
-      <Col span="6">
+      <img src="../assets/logo1.png">
+      <Col span="6" >
       <MenuItem name="1"> Home
       </MenuItem>
       <MenuItem name="2"> Project
@@ -16,10 +14,10 @@
       </Col>
       <Col span="4">
       <Input v-model="seachValue">
-      <Button slot="append" icon="ios-search"></Button>
+        <Button slot="append" icon="ios-search"></Button>
       </Input>
       </Col>
-      <Col span="3">
+      <Col span="4">
       <Button @click="login = true">Sign up</Button>
       <Modal v-model="login" title="Login in" ok-text = '' cancel-text = ''>
         <Login></Login>
@@ -47,7 +45,6 @@ export default {
   data() {
     return {
       seachValue: '',
-      select: 'self',
       login: false,
       register: false
     }
