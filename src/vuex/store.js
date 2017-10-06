@@ -7,7 +7,6 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
-  msg: '',
   isLogin: false,
   user: {
     // id: '',
@@ -18,13 +17,6 @@ const state = {
     // address: ''
   },
   datasets: [],
-  folders: [
-    // {
-    //   id: '',
-    //   name: '',
-    //   children: []
-    // }
-  ],
   files: [
     // id: '',
     // name: '',

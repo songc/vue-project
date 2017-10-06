@@ -18,6 +18,19 @@ const datasetApi = {
   },
   deleteById(id) {
     return axios.delete(datasetUrl.addId(id))
+  },
+  getFiles(id) {
+    return axios.get(datasetUrl.opsFile(id))
+  },
+  postFile(id, data) {
+    return axios({
+      url: datasetUrl.opsFile(id),
+      method: 'post',
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      data: data
+    })
   }
 }
 

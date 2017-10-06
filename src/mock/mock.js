@@ -58,25 +58,7 @@ Mock.mock(/\/dataset\?/, 'get', {
 Mock.mock(/\/dataset\/\d+/, 'delete', {
   msg: 'delete success'
 })
-
-Mock.mock('/folder', 'post', {
-  'id|+1': 1,
-  name: Random.string(3, 10),
-  'parentId|+1': 0
-})
-Mock.mock(/\/folder\/\d+/, 'delete', {
-  msg: 'delete success'
-})
-Mock.mock(/\/fodler\/\d+\/subfolder/, 'get', {
-  'folderList|3-5': [
-    {
-      'id|+1': 1,
-      name: Random.string(3, 10),
-      'parentId|+1': 0
-    }
-  ]
-})
-Mock.mock(/\/fodler\/\d+\/subfile/, 'get', {
+Mock.mock(/\/dataset\/\d+\/file/, 'get', {
   'fileList|5-25': [
     {
       rowKey: 1 + Random.string(3, 10),
@@ -85,12 +67,7 @@ Mock.mock(/\/fodler\/\d+\/subfile/, 'get', {
     }
   ]
 })
-Mock.mock(/\/fodler\/\d+\/singlefile/, 'post', {
-  rowKey: 1 + Random.string(3, 10),
-  name: Random.string(3, 10),
-  data: Random.dataImage()
-})
-Mock.mock(/\/fodler\/\d+\/mulfile/, 'post', {
+Mock.mock(/\/dataset\/\d+\/file/, 'post', {
   'fileList|5-25': [
     {
       rowKey: 1 + Random.string(3, 10),

@@ -1,6 +1,5 @@
 import userApi from '../api/user'
 import datasetApi from '../api/dataset'
-import folderApi from '../api/folder'
 import fileApi from '../api/file'
 
 // action about user
@@ -48,30 +47,15 @@ export const delDatasetById = ({ commit }, datasetId) => {
   })
 }
 
-// action about folder
-export const postFolder = ({ commit }, folder) => {
-  folderApi.postFolder(folder).then(res => {
-    commit('addFolder', res.data)
+export const getFiles = ({commit}, datasetId) => {
+  datasetApi.getFiles(datasetId).then(res => {
+    commit('addFiles', res.data)
   })
 }
-export const getSubFolder = ({ commit }, folderId) => {
-  folderApi.getSubFile(folderId).then(res => {
-    commit('addFolders', res.data.folderList)
-  })
-}
-export const getSubFile = ({commit}, folderId) => {
-  folderApi.getSubFile(folderId).then(res => {
-    commit('addFiles', res.data.fileList)
-  })
-}
-export const postSingleFile = ({commit}, folderId, file) => {
-  folderApi.postSingleFile(folderId, file).then(res => {
-    commit('addFile', res.data)
-  })
-}
-export const postMulFile = ({commit}, folderId, fileList) => {
-  folderApi.postMulFile(folderId, fileList).then(res => {
-    commit('addFiles', res.data.fileList)
+
+export const postFiles = ({commit}, datasetId, files) => {
+  datasetApi.postFile(datasetId, files).then(res => {
+    commit('addFiles', res.data)
   })
 }
 

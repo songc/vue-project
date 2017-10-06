@@ -10,16 +10,8 @@ export const datasetUrl = {
   base: '/dataset',
   addId: function(datasetId) {
     return '/dataset/' + datasetId
-  }
-}
-
-export const folderUrl = {
-  base: '/folder',
-  addId: folderid => '/folder/' + folderid,
-  subFolder: folderId => '/folder/' + folderId + '/subfolder',
-  subFile: folderId => '/folder/' + folderId + '/subfile',
-  singleFile: folderId => '/folder/' + folderId + '/singlefile',
-  mulFile: folderId => '/folder/' + folderId + '/mulfile'
+  },
+  opsFile: datasetId => '/dataset/' + datasetId + '/file'
 }
 
 export const fileUrl = {
