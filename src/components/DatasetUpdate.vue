@@ -59,7 +59,7 @@ export default {
       return this.$store.state.user.id
     },
     uploadUrl() {
-
+      return `/dataset/${this.$store.state.currentDataset.id}/file`
     }
   },
   methods: {

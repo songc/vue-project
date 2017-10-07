@@ -8,20 +8,10 @@ Vue.use(Vuex)
 
 const state = {
   isLogin: false,
-  user: {
-    // id: '',
-    // username: '',
-    // password: '',
-    // email: '',
-    // sex: '',
-    // address: ''
-  },
+  user: {},
+  currentDataset: {},
   datasets: [],
-  files: [
-    // id: '',
-    // name: '',
-    // data: {}
-  ]
+  files: []
 }
 
 export default new Vuex.Store({

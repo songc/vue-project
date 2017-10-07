@@ -74,6 +74,8 @@ export default {
     createDataset() {
       if (this.isLogin) {
         this.$router.push(`/user/${this.userId}/dataset/post`)
+      } else {
+        this.$emit('on-login')
       }
     },
     getDatasets(a) {

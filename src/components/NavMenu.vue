@@ -18,39 +18,28 @@
       </Input>
       </Col>
       <Col span="4">
-      <Button @click="login = true">Sign up</Button>
-      <Modal v-model="login" title="Login in" ok-text = '' cancel-text = ''>
-        <Login></Login>
-        <div slot="footer"></div>
-      </Modal>
+      <Button @click="login">Sign up</Button>
       or
-      <Button @click="register = true">Sign in</Button>
-      <Modal v-model="register" title="register" ok-text= '' cancel-text = ''>
-        <Register></Register>
-        <div slot="footer"></div>
-      </Modal>
+      <Button @click="register">Sign in</Button>
       </Col>
     </Row>
   </Menu>
 </template>
 
 <script>
-import Login from './Login'
-import Register from './Register'
 export default {
-  components: {
-    Login,
-    Register
-  },
   data() {
     return {
-      seachValue: '',
-      login: false,
-      register: false
+      seachValue: ''
     }
   },
   methods: {
-
+    login() {
+      this.$emit('on-login')
+    },
+    register() {
+      this.$emit('on-register')
+    }
   }
 }
 </script>
