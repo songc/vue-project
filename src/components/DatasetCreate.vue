@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <Step :current='1'>
+  <div class="content">
+    <Steps :current='1'>
       <!-- <Step title="Finished" content="dataset info"></Step> -->
       <Step title="Doing" content="dataset info"></Step>
       <Step title="Pending" content="Upload file"></Step> 
-    </Step>
+    </Steps>
     <Card v-show="card1">
       <p slot="title">dataset info</p>
       <Form>
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'datasetCreate',
+  name: 'DatasetCreate',
   data() {
     return {
       card1: true,
@@ -62,7 +62,7 @@ export default {
       })
     },
     finish() {
-      this.$router.push('/main')
+      this.$router.push('/user/' + this.userId + '/dataset')
     },
     uploadSuccess(response, file, fileList) {
       this.$store.commit('addFiles', response)
@@ -72,3 +72,8 @@ export default {
 }
 </script>
 
+<style scoped>
+.content {
+  padding: 120px;
+}
+</style>

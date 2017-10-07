@@ -25,3 +25,22 @@
     </Col>
   </Row>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      dataset: {
+        name: '',
+        author: '',
+        descript: ''
+      }
+    }
+  },
+  computed: {
+    files() {
+      return this.$store.state.files
+    }
+  }
+}
+</script>

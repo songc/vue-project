@@ -41,7 +41,7 @@
               this.$store.dispatch('login', this.user).then((user) => {
                 this.$store.dispatch('getDatasets', user.id)
               }).then(() => {
-                this.$router.push('/main')
+                this.$router.push('/user/' + this.$store.state.user.id + '/dataset')
                 this.$Message.success('Login success!')
               })
             } else {

@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'datasetManage',
+  name: 'DatasetManage',
   data() {
     return {
       files: [],

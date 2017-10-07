@@ -2,7 +2,7 @@
   <Menu mode="horizontal" theme="light" :active-name="menuItemName" @on-select="getDatasets">
     <Row type="flex" justify="space-between" align="middle">
       <Col span="2">
-      <img src="../../assets/logo1.png" class="menu-logo"/>
+      <img src="../assets/logo1.png" class="menu-logo"/>
       </Col>
       <Col span="12">
       <MenuItem name="private" v-show="isLogin"> You Dataset
@@ -18,7 +18,7 @@
       </div>
       </Col>
       <Col span="3">
-      <Button type="ghost" size="small" icon="plus-circled">New Dataset</Button>
+      <Button type="ghost" size="small" icon="plus-circled" @click="createDataset">New Dataset</Button>
       <Dropdown trigger="hover" placement="bottom" @on-click="resolveClick">
         <Avatar icon="person" class="menu-avatar">
         </Avatar>
@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import Login from '../../components/Login'
-import Register from '../../components/Register'
+import Login from './Login'
+import Register from './Register'
 export default {
   components: {
     Login,
@@ -59,6 +59,9 @@ export default {
     isLogin() {
       return this.$store.state.isLogin
     },
+    userId() {
+      this.$store.state.user.id
+    },
     menuItemName() {
       if (this.$store.state.isLogin) {
         return 'private'
@@ -68,6 +71,11 @@ export default {
     }
   },
   methods: {
+    createDataset() {
+      if (this.isLogin) {
+        this.$router.push(`/user/${this.userId}/dataset/post`)
+      }
+    },
     getDatasets(a) {
       if (a === 'private') {
         this.$store.dispatch('getDatasets', this.$store.state.user.id)
@@ -81,10 +89,10 @@ export default {
         this.$router.push({name: 'home'})
       }
       if (name === 'setting') {
-        this.$router.push('/main/setting')
+        this.$router.push(`/user/${this.userId}/setting`)
       }
       if (name === 'profile') {
-        this.$router.push('/main/profile')
+        this.$router.push('/user/profile')
       }
     }
   }

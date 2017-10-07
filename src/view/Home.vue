@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-menu></nav-menu>
+    <NavMenu></NavMenu>
     <div class="content">
       <Row type="flex" align="middle">
         <Col span="24">
@@ -94,7 +94,7 @@
         </Col>
       </Row>
     </div>
-    <footer-menu></footer-menu>
+    <FooterMenu></FooterMenu>
   </div>
 </template>
 

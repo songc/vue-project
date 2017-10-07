@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'mTable',
+  name: 'DatasetTable',
   data() {
     return {
       columnsTitle: [
@@ -76,7 +76,7 @@ export default {
     isLogin: function() {
       return this.$store.state.isLogin
     },
-    useId: function() {
+    userId: function() {
       this.$store.state.user.id
     }
   },
@@ -91,11 +91,11 @@ export default {
     },
     watchDataset(data) {
       this.$store.dispatch('getFile', data.id)
-      this.$router.push('/main/datadetial')
+      this.$router.push(`/user/${this.userId}/dataset/get`)
     },
     manageDataset(data) {
       this.$store.dispatch('getFile', data.id)
-      this.$router.push('/main/data')
+      this.$router.push(`/user/${this.userId}/dataset/update`)
     },
     downLoadDataset(data) {
 
@@ -105,7 +105,7 @@ export default {
     if (this.isLogin) {
       this.$store.dispatch('getPublicDatasets', this.page.number, this.page.size)
     } else {
-      this.$store.dispatch('getDatasets', this.useId)
+      this.$store.dispatch('getDatasets', this.userId)
     }
   }
 }
