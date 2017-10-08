@@ -50,17 +50,12 @@ export default {
       register: false
     }
   },
-  beforeCreate: function() {
-    if (!this.$store.state.isLogin) {
-      this.$store.dispatch('getPublicDatasets', 10, 10)
-    }
-  },
   computed: {
     isLogin() {
       return this.$store.state.isLogin
     },
     userId() {
-      this.$store.state.user.id
+      return this.$store.state.user.id
     },
     menuItemName() {
       if (this.$store.state.isLogin) {
@@ -80,9 +75,9 @@ export default {
     },
     getDatasets(a) {
       if (a === 'private') {
-        this.$store.dispatch('getDatasets', this.$store.state.user.id)
+        this.$router.push(`/user/${this.userId}/dataset`)
       } else if (a === 'public') {
-        this.$store.dispatch('getPublicDatasets', 10, 10)
+        this.$router.push(`/public/dataset`)
       }
     },
     resolveClick(name) {

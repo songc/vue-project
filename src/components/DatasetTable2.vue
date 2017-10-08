@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Table :columns="columnsTitle" :data="datasets"></Table>
+    <Table :columns="columnsTitle" :data="datasets" @on-click="browseDataset"></Table>
     <Page :total="page.total" :current="page.number" @on-change="changePageNum"></Page>
   </div>
 </template>
@@ -35,21 +35,6 @@ export default {
               }, 'Browse'),
               h('Button', {
                 props: {
-                  type: 'warning',
-                  size: 'small'
-                },
-                style: {
-                  display: this.isLogin ? 'inline-block' : 'none',
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.updateDataset(params.row)
-                  }
-                }
-              }, 'Modify'),
-              h('Button', {
-                props: {
                   type: 'error',
                   size: 'small'
                 },
@@ -72,34 +57,23 @@ export default {
   computed: {
     datasets: function() {
       return this.$store.state.datasets
-    },
-    isLogin: function() {
-      return this.$store.state.isLogin
-    },
-    userId: function() {
-      return this.isLogin ? this.$store.state.user.id : -1
     }
+  },
+  created: function() {
+    this.$store.dispatch('getPublicDatasets', this.page.number, this.page.size)
   },
   methods: {
     changePageNum(num) {
       this.page.number = num
-      this.$store.dispatch('getDatasets')
+      this.$store.dispatch('getPublicDatasets', this.page.number, this.page.size)
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push(`/user/${this.userId}/dataset/get`)
-    },
-    updateDataset(data) {
-      this.$store.commit('changeCurrentDataset', data)
-      this.$router.push(`/user/${this.userId}/dataset/update`)
+      this.$router.push('/public/dataset/get')
     },
     downLoadDataset(data) {
 
     }
-  },
-  created: function() {
-    this.$store.dispatch('getDatasets', this.userId)
   }
 }
 </script>
-

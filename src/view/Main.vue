@@ -2,7 +2,7 @@
   <div>
     <NavUser @on-login="login=true" @on-register="register=true"></NavUser>
     <Row class-name="content" type="flex" justify="center" align="middle">
-      <Col span="12">
+      <Col span="18">
       <router-view></router-view>
       </Col>
     </Row>

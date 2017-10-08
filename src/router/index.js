@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '../view/Home.vue'
 import Main from '../view/Main.vue'
 import DatasetTable from '../components/DatasetTable.vue'
+import DatasetTable2 from '../components/DatasetTable2.vue'
 import DatasetCreate from '../components/DatasetCreate.vue'
 import DatasetBrowse from '../components/DatasetBrowse.vue'
 import DatasetUpdate from '../components/DatasetUpdate.vue'
@@ -16,6 +17,20 @@ const routes = [
     name: 'home',
     component: Home,
     children: []
+  },
+  {
+    path: '/public',
+    name: 'public',
+    component: Main,
+    children: [{
+      path: 'dataset',
+      name: 'publicDataset',
+      component: DatasetTable2
+    }, {
+      path: 'dataset/get',
+      name: 'publicDatasetBrowse',
+      component: DatasetBrowse
+    }]
   },
   { path: '/user/:id',
     name: 'user',

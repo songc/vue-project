@@ -49,7 +49,7 @@ Mock.mock(/\/dataset\?/, 'get', {
       'id|+1': 1,
       name: Random.string(3, 10),
       author: Random.string(3, 10),
-      decription: Random.string(20, 40),
+      description: Random.string(20, 40),
       folderId: Random.integer(1, 20),
       userId: Random.integer(1, 50)
     }

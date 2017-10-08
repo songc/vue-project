@@ -29,8 +29,12 @@ export const getDatasets = ({ commit }, userId) => {
 }
 
 export const postDataset = ({ commit }, userId, dataset) => {
-  userApi.postDataset(userId, dataset).then(res => {
-    commit('addDataset', res.data)
+  return userApi.postDataset(userId, dataset).then(res => {
+    return new Promise((resolve, reject) => {
+      commit('addDataset', res.data)
+      commit('changeCurrentDataset', res.data)
+      resolve(res.data)
+    })
   })
 }
 
@@ -49,7 +53,7 @@ export const delDatasetById = ({ commit }, datasetId) => {
 
 export const getFiles = ({commit}, datasetId) => {
   datasetApi.getFiles(datasetId).then(res => {
-    commit('addFiles', res.data)
+    commit('addFiles', res.data.fileList)
   })
 }
 

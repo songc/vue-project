@@ -2,6 +2,9 @@ export default {
   changeLoginStatus(state, loginStatus) {
     state.isLogin = loginStatus
   },
+  changeCurrentDataset(state, dataset) {
+    state.currentDataset = dataset
+  },
   addUser(state, user) {
     state.user = user
   },
