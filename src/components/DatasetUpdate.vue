@@ -29,14 +29,32 @@
       <TabPane label="Upload File" name="upload">
         <Card>
           <p slot="title">Upload File</p>
-          <Upload multiple :action="uploadUrl" name="files" @on-success="uploadSuccess">
+          <Upload multiple name="files" 
+            :show-upload-list="false" 
+            :before-upload="handleUpload" 
+            :action="uploadUrl" 
+            @on-success="uploadSuccess">
             <Button type="ghost" icon="ios-cloud-upload-outline">Select the files</Button>
           </Upload>
-          <Button type="info" @click="finish">Finish</Button>
+          <div v-if="files != 0">
+            <Button type="text" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>
+            待上传文件：
+            <li v-for="(file, index) in files" :key="index">
+              {{ file.name }}
+            </li>
+          </div>
         </Card>
       </TabPane>
     </Tabs>
     </Col>
+    <Modal v-model="modal" title="Upload Status">
+      <p>Upload Success!</p>
+      <p>You can continue upload file or finish the upload</p>
+      <div slot="footer">
+        <Button type="success" @click="keepOn">Continue upload</Button>
+        <Button type="info" @click="finish">Finish</Button>
+      </div>
+    </Modal>
   </Row>
 </template>
 
@@ -45,6 +63,8 @@ export default {
   name: 'DatasetManage',
   data() {
     return {
+      modal: false,
+      loadingStatus: false,
       files: [],
       dataset: {
         id: 0,
@@ -58,8 +78,11 @@ export default {
     userId() {
       return this.$store.state.user.id
     },
+    datasetId() {
+      return this.$store.state.currentDataset.id
+    },
     uploadUrl() {
-      return `/dataset/${this.$store.state.currentDataset.id}/file`
+      return `/dataset/${this.datasetId}/file`
     }
   },
   methods: {
@@ -75,9 +98,20 @@ export default {
     cancle() {
 
     },
-    uploadSuccess(response, file, fileList) {
-      this.$store.commit('addFiles', response)
-      this.$Message.success('upload success')
+    handleUpload(file) {
+      this.files.push(file)
+      return false
+    },
+    upload() {
+      this.loadingStatus = true
+      this.$store.dispatch('postFiles', this.datasetId, this.files).then(() => {
+        this.loadingStatus = false
+        this.modal = true
+        this.files = []
+      })
+    },
+    keepOn() {
+      this.modal = false
     }
   }
 }

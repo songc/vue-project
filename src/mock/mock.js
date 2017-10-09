@@ -26,9 +26,9 @@ Mock.mock(/\/user\/\d+\/dataset/, 'get', {
   'datasetList|3-10': [
     {
       'id|+1': 1,
-      name: Random.string(3, 10),
-      author: Random.string(3, 10),
-      decription: Random.string(20, 40),
+      name: Random.ctitle(),
+      author: Random.name(),
+      description: Random.cparagraph(20, 40),
       folderId: Random.integer(1, 20),
       userId: Random.integer(1, 50)
     }
@@ -36,9 +36,9 @@ Mock.mock(/\/user\/\d+\/dataset/, 'get', {
 })
 Mock.mock(/\/user\/\d+\/dataset/, 'post', {
   'id|+1': 1,
-  name: Random.string(3, 10),
-  author: Random.string(3, 10),
-  decription: Random.string(20, 40),
+  name: Random.ctitle(),
+  author: Random.name(),
+  description: Random.cparagraph(20, 40),
   folderId: Random.integer(1, 20),
   userId: Random.integer(1, 50)
 })
@@ -47,9 +47,9 @@ Mock.mock(/\/dataset\?/, 'get', {
   'datasetList|3-10': [
     {
       'id|+1': 1,
-      name: Random.string(3, 10),
-      author: Random.string(3, 10),
-      description: Random.string(20, 40),
+      name: Random.ctitle(),
+      author: Random.name(),
+      description: Random.cparagraph(20, 40),
       folderId: Random.integer(1, 20),
       userId: Random.integer(1, 50)
     }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../view/Home.vue'
 import Main from '../view/Main.vue'
-import DatasetTable from '../components/DatasetTable.vue'
+import TheCard from '../components/TheCard.vue'
 import DatasetTable2 from '../components/DatasetTable2.vue'
 import DatasetCreate from '../components/DatasetCreate.vue'
 import DatasetBrowse from '../components/DatasetBrowse.vue'
@@ -38,7 +38,7 @@ const routes = [
     children: [{
       path: 'dataset',
       name: 'datasetList',
-      component: DatasetTable
+      component: TheCard
     }, {
       path: 'dataset/post',
       name: 'datasetCreate',

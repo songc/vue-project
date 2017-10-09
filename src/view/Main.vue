@@ -1,8 +1,8 @@
 <template>
   <div>
-    <NavUser @on-login="login=true" @on-register="register=true"></NavUser>
-    <Row class-name="content" type="flex" justify="center" align="middle">
-      <Col span="18">
+    <NavMenu @on-login="login=true" @on-register="register=true"></NavMenu>
+    <Row class-name="content">
+      <Col span="18" offset="3">
       <router-view></router-view>
       </Col>
     </Row>
@@ -23,13 +23,13 @@
 </template>
 
 <script>
-import NavUser from '../components/NavUser'
+import NavMenu from '../components/NavMenu'
 import FooterMenu from '../components/FooterMenu'
 import Login from '../components/Login'
 import Register from '../components/Register'
 export default {
   components: {
-    NavUser,
+    NavMenu,
     FooterMenu,
     Register,
     Login
@@ -47,6 +47,7 @@ export default {
 .content{
   min-height: 600px;
   background: #fff;
+  text-align: left;
   margin: 12px;
 }
 </style>

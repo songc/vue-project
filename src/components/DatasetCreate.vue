@@ -89,10 +89,6 @@ export default {
     finish() {
       this.$router.push('/user/' + this.userId + '/dataset')
     },
-    uploadSuccess(response, file, fileList) {
-      this.$store.commit('addFiles', fileList)
-      this.$Message.success('upload success')
-    },
     handleUpload(file) {
       this.files.push(file)
       return false
@@ -101,7 +97,6 @@ export default {
       this.loadingStatus = true
       this.$store.dispatch('postFiles', this.datasetId, this.files).then(() => {
         this.loadingStatus = false
-        // this.$Message.success('upload success')
         this.modal = true
         this.files = []
       })

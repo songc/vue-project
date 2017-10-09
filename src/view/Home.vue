@@ -137,6 +137,7 @@ export default {
   margin: 12px;
   min-height: 800px;
   background: #fff;
+  text-align: left;
 }
 .demo-carousel {
   background: #495060;
