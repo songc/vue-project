@@ -15,7 +15,7 @@
     </Col>
   </Row>
   <div class="thecard-page">
-    <Page :total="page.total" :current="page.number" @on-change="changePageNum"></Page>
+    <Page :total="page.total" :current="page.num" @on-change="changePageNum"></Page>
   </div>
 </div>
 </template>
@@ -38,7 +38,7 @@ export default {
     return {
       page: {
         total: 10,
-        number: 5,
+        num: 5,
         size: 9
       }
     }
@@ -48,13 +48,13 @@ export default {
       return this.$store.state.datasets
     }
   },
-  beforeCreate: function() {
-    this.$store.dispatch('getDatasets', this.$store.state.user.id)
+  created: function() {
+    this.$store.dispatch('getPublicDatasets', this.page.num, this.page.size)
   },
   methods: {
     changePageNum(num) {
-      this.page.number = num
-      this.$store.dispatch('getDatasets')
+      this.page.num = num
+      this.$store.dispatch('getPublicDatasets', this.page.num, this.page.size)
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)

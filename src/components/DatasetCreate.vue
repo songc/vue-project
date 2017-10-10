@@ -1,10 +1,10 @@
 <template>
   <div class="content">
-    <Steps :current='1'>
-      <!-- <Step title="Finished" content="dataset info"></Step> -->
+    <!-- <Steps :current='1'>
+      <Step title="Finished" content="dataset info"></Step>
       <Step title="Doing" content="dataset info"></Step>
       <Step title="Pending" content="Upload file"></Step>
-    </Steps>
+    </Steps> -->
     <Card v-show="card1">
       <p slot="title">dataset info</p>
       <Form>
@@ -110,6 +110,6 @@ export default {
 
 <style scoped>
 .content {
-  padding: 120px;
+  padding: 12px;
 }
 </style>
