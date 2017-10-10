@@ -1,15 +1,15 @@
 <template>
-  <Menu mode="horizontal" theme="light">
-    <Row type="flex" justify="space-between" align="middle">
+  <Menu mode="horizontal" theme="light" :active-name="menuItemName" @on-select="go">
+    <Row type="flex" justify="space-between" align="middle" :gutter="16">
       <Col span="10">
-        <Row>
-          <Col span="4">
+        <Row :gutter="16">
+          <Col span="8">
             <img class="menu-logo" src="../assets/logo1.png" @click="goHome"> 
           </Col>
-          <Col span="12">
-            <MenuItem name="Dashboard" v-show="isLogin"> BashBoard
+          <Col span="16">
+            <MenuItem name="dashBoard" v-show="isLogin"> BashBoard
             </MenuItem>
-            <MenuItem name="Dataset">Dataset</MenuItem>
+            <MenuItem name="dataset">Dataset</MenuItem>
             <Submenu name="about">
               <template slot="title">
                 About
@@ -25,7 +25,7 @@
         </Row>
       </Col>
       <Col span="12">
-        <Row type="flex" justify="end">
+        <Row type="flex" justify="end" :gutter="16">
         <Col span="8">
         <Input v-model="seachValue" placeholder="search dataset ... ">
         </Input>
@@ -68,6 +68,13 @@ export default {
     },
     userId() {
       return this.$store.state.user.id
+    },
+    menuItemName() {
+      if (this.$store.state.isLogin) {
+        return 'dashBoard'
+      } else {
+        return 'dataset'
+      }
     }
   },
   methods: {
@@ -83,20 +90,19 @@ export default {
       this.$router.push('/home')
     },
     go(name) {
-      this.$router.push(`/${name}`)
+      if (name === 'dashBoard') {
+        this.$router.push(`/user/${this.userId}/dataset`)
+      } else if (name === 'dataset') {
+        this.$router.push(`/public/dataset`)
+      } else {
+        this.$router.push(`/${name}`)
+      }
     },
     createDataset() {
       if (this.isLogin) {
         this.$router.push(`/user/${this.userId}/dataset/post`)
       } else {
         this.$emit('on-login')
-      }
-    },
-    getDatasets(a) {
-      if (a === 'private') {
-        this.$router.push(`/user/${this.userId}/dataset`)
-      } else if (a === 'public') {
-        this.$router.push(`/public/dataset`)
       }
     },
     resolveClick(name) {

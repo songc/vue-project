@@ -39,9 +39,8 @@
           this.$refs[name].validate((valid) => {
             if (valid) {
               this.$store.dispatch('login', this.user).then((user) => {
-                this.$store.dispatch('getDatasets', user.id)
-              }).then(() => {
                 this.$router.push('/user/' + this.$store.state.user.id + '/dataset')
+                this.$emit('on-success')
                 this.$Message.success('Login success!')
               })
             } else {

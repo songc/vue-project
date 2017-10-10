@@ -8,13 +8,13 @@
     </Row>
     <FooterMenu></FooterMenu>
     <Modal v-model="login" title="Login in" ok-text='' cancel-text=''>
-      <Login></Login>
+      <Login @on-success="login=false"></Login>
       <div slot="footer">
         <Button type="primary" long @click="login=false,register=true">New to The Site? Create Accout</Button>
       </div>
     </Modal>
     <Modal v-model="register" title="register" ok-text='' cancel-text=''>
-      <Register></Register>
+      <Register @on-success="register=false"></Register>
       <div slot="footer">
         <Button type="primary" long @click="register=false,login=true">Have Account? Sign Up</Button>
       </div>
