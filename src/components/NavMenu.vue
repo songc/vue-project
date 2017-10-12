@@ -1,25 +1,26 @@
 <template>
-  <Menu mode="horizontal" theme="light" :active-name="menuItemName" @on-select="go">
+  <Menu mode="horizontal" theme="light" @on-select="go">
     <Row type="flex" justify="space-between" align="middle" :gutter="16">
       <Col span="10">
         <Row :gutter="16">
-          <Col span="8">
+          <Col span="6">
             <img class="menu-logo" src="../assets/logo1.png" @click="goHome"> 
           </Col>
-          <Col span="16">
-            <MenuItem name="dashBoard" v-show="isLogin"> BashBoard
+          <Col span="18" class-name="navmenu">
+            <MenuItem name="dashBoard" v-show="isLogin">DashBoard
             </MenuItem>
             <MenuItem name="dataset">Dataset</MenuItem>
+            <MenuItem name="project">Project</MenuItem>
+            <MenuItem name="paper">Paper</MenuItem>
             <Submenu name="about">
               <template slot="title">
-                About
+                People
               </template>
-              <MenuItem name="project"> Project
-              </MenuItem>
-              <MenuItem name="people"> People
-              </MenuItem>             
-              <MenuItem name="paper"> Paper
-              </MenuItem>
+              <MenuItem name="teacher">Teacher</MenuItem>
+              <MenuGroup title="Student">
+                <MenuItem name="phd">Ph.D.</MenuItem>             
+                <MenuItem name="master">Master</MenuItem>                          
+              </MenuGroup>           
             </Submenu>
           </Col>
         </Row>
@@ -68,13 +69,6 @@ export default {
     },
     userId() {
       return this.$store.state.user.id
-    },
-    menuItemName() {
-      if (this.$store.state.isLogin) {
-        return 'dashBoard'
-      } else {
-        return 'dataset'
-      }
     }
   },
   methods: {
@@ -90,17 +84,11 @@ export default {
       this.$router.push('/home')
     },
     go(name) {
-      if (name === 'dashBoard') {
-        this.$router.push(`/user/${this.userId}/dataset`)
-      } else if (name === 'dataset') {
-        this.$router.push(`/public/dataset`)
-      } else {
-        this.$router.push(`/${name}`)
-      }
+      this.$router.push(`/${name}`)
     },
     createDataset() {
       if (this.isLogin) {
-        this.$router.push(`/user/${this.userId}/dataset/post`)
+        this.$router.push('/dashBoard')
       } else {
         this.$emit('on-login')
       }
@@ -111,7 +99,7 @@ export default {
         this.$router.push({name: 'home'})
       }
       if (name === 'setting') {
-        this.$router.push(`/user/${this.userId}/setting`)
+        this.$router.push(`/user/setting`)
       }
       if (name === 'profile') {
         this.$router.push('/user/profile')
@@ -122,6 +110,9 @@ export default {
 </script>
 
 <style scoped>
+.navmenu {
+  text-align: left;
+}
 .menu-logo {
   display: inline;
   vertical-align: middle;

@@ -2,97 +2,7 @@
   <div>
     <NavMenu @on-login="login=true" @on-register="register=true"></NavMenu>
     <div class="content">
-      <Row type="flex" align="middle">
-        <Col span="24">
-        <Carousel v-model="value1">
-          <CarouselItem>
-            <div class="demo-carousel">1</div>
-          </CarouselItem>
-          <CarouselItem>
-            <div class="demo-carousel">2</div>
-          </CarouselItem>
-          <CarouselItem>
-            <div class="demo-carousel">3</div>
-          </CarouselItem>
-        </Carousel>
-        </Col>
-      </Row>
-      <Row :gutter="16">
-        <Col span="6" offset="3">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col>
-        <Col span="6">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col>
-        <Col span="6">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col>
-        <!-- <Col span="4">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col> -->
-      </Row>
-      <Row :gutter="16">
-        <Col span="6" offset="3">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col>
-        <Col span="6">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col>
-        <Col span="6">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col>
-        <!-- <Col span="4">
-        <Card>
-          <p slot="title">Card</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </Card>
-        </Col> -->
-      </Row>
+      <router-view></router-view>
     </div>
     <FooterMenu></FooterMenu>
     <Modal v-model="login" title="Login in" ok-text='' cancel-text=''>
@@ -124,7 +34,6 @@ export default {
   },
   data() {
     return {
-      value1: 0,
       login: false,
       register: false
     }
@@ -134,9 +43,7 @@ export default {
 
 <style scoped>
 .content {
-  margin: 12px;
-  min-height: 800px;
-  background: #fff;
+  background: #EEE;
   text-align: left;
 }
 .demo-carousel {

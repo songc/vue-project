@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Row :gutter="20">
+  <Row :gutter="20" class-name="thecard-row">
     <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
       <Card class="thecard-card">
         <p slot="title">{{ dataset.name }}</p>
@@ -58,11 +58,11 @@ export default {
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push(`/user/${this.userId}/dataset/get`)
+      this.$router.push(`/dataset/get`)
     },
     updateDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push(`/user/${this.userId}/dataset/update`)
+      this.$router.push(`/dataset/update`)
     },
     downLoadDataset(data) {
 
@@ -72,6 +72,9 @@ export default {
 </script>
 
 <style scoped>
+.thecard-row {
+  padding: 12px;
+}
 .thecard-page {
   text-align: center;
   margin: 12px;

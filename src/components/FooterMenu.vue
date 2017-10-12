@@ -1,5 +1,5 @@
 <template>
-  <Row type="flex" justify="space-around" align="top" class="layout-footer">
+  <Row type="flex" justify="space-around" align="top" class-name="layout-footer">
     <Col span="6">
     <h4>About us</h4>
     <ul>
