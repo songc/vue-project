@@ -10,6 +10,7 @@ const state = {
   isLogin: false,
   user: {},
   currentDataset: {},
+  currentFile: {},
   datasets: [],
   files: []
 }

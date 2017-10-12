@@ -5,6 +5,9 @@ export default {
   changeCurrentDataset(state, dataset) {
     state.currentDataset = dataset
   },
+  changeCurrentFile(state, file) {
+    state.currentFile = file
+  },
   addUser(state, user) {
     state.user = user
   },

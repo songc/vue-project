@@ -11,8 +11,8 @@
     </FormItem>
     <FormItem label="Sex" prop="sex">
       <RadioGroup v-model="user.sex">
-        <Radio label="man">Man</Radio>
-        <Radio label="woman">Woman</Radio>
+        <Radio label="MAN">Man</Radio>
+        <Radio label="WOMAN">Woman</Radio>
       </RadioGroup>
     </FormItem>
     <FormItem label="Address">
@@ -32,7 +32,7 @@ export default {
         username: '',
         password: '',
         email: '',
-        sex: 'man',
+        sex: 'MAN',
         address: ''
       },
       rules: {
