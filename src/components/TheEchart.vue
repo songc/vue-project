@@ -23,39 +23,30 @@ export default {
     }
   },
   computed: {
-    splitContent: function() {
-      return this.$store.state.currentFile.content.split('\n')
-    },
-    removeHead: function() {
-      let index = this.splitContent.findIndex(string => {
-        return string.startsWith('0')
-      })
-      return this.splitContent.slice(index)
+    optionsData: function() {
+      return this.$store.getters.getData
     }
   },
   watch: {
     optionsData: {
       handler: function () {
-        const dataArray = this.removeHead.forEach(string => {
-          return string.split(',')
-        })
-        const dataArrayTranspose = []
-        for (let i = 0; i < dataArray[0].length; i++) {
-          for (let j = 0; j < dataArray.length; j++) {
-            dataArrayTranspose[i][j] = dataArray[j][i]
+        if (this.optionsData === undefined) {
+          return false
+        } else {
+          let options = {
+            xAxis: {
+              data: this.optionsData.xAxis
+            },
+            series: Array.from(this.optionsData.data, x => {
+              return {
+                name: 'number',
+                type: 'line',
+                data: x
+              }
+            })
           }
+          this.chart.setOption(options)
         }
-        let optionsData = {
-          xAxis: dataArrayTranspose[0],
-          series: dataArrayTranspose.slice(1).forEach(numArray => {
-            return {
-              name: 'number',
-              type: 'line',
-              data: numArray
-            }
-          })
-        }
-        this.chart.setOption(optionsData)
       },
       deep: true
     }
@@ -64,32 +55,6 @@ export default {
     return this.$store.dispatch('getFileByRowKey', '23')
   },
   mounted() {
-    const dataArray = []
-    const syz = this.removeHead
-    for (let k = 0; k < syz.length; k++) {
-      dataArray[k] = syz[k].split(',')
-    }
-    const dataArrayTranspose = []
-    for (let i = 0; i < dataArray[0].length; i++) {
-      let temp = []
-      for (let j = 0; j < dataArray.length; j++) {
-        temp[j] = dataArray[j][i]
-      }
-      dataArrayTranspose[i] = temp
-    }
-    this.test = dataArrayTranspose
-    const series = []
-    for (let i = 1; i < dataArrayTranspose.length; i++) {
-      series[i - 1] = {
-        name: 'number',
-        type: 'line',
-        data: dataArrayTranspose[i]
-      }
-    }
-    let optionsData = {
-      xAxis: dataArrayTranspose[0],
-      series: series
-    }
     this.chart = echarts.init(this.$refs.theEchart)
     this.chart.setOption({
       title: {text: 'example'},
@@ -100,7 +65,6 @@ export default {
       yAxis: {},
       series: []
     })
-    this.chart.setOption(optionsData)
     let _this = this
     this.chart.on('click', function(params) {
       _this.modal = true

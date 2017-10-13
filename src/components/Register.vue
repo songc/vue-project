@@ -54,7 +54,7 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$store.dispatch('register', this.user).then(() => {
-            this.$router.push(`/user/${this.$store.state.user.id}/dataset`)
+            this.$router.push('/dashborad')
             this.$emit('on-success')
             this.$Message.success('Register Success')
           })

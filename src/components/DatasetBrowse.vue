@@ -4,8 +4,8 @@
     <Card :bordered="false">
       <p slot="title">files</p>
       <RadioGroup v-model="selectedFile" vertical>
-        <Radio v-for="(file, index) in files" :label="index" :key="index" >{{ file.name }}</Radio>
-    </RadioGroup>
+        <Radio v-for="(file, index) in files" :label="file.rowKey" :key="index" >{{ file.name }}</Radio>
+      </RadioGroup>
     </Card>
     </Col>
     <Col span="20">
@@ -58,8 +58,14 @@ export default {
       })
     }
   },
+  watch: {
+    selectedFile: function() {
+      this.$store.dispatch('getFileByRowKey', this.selectedFile)
+    }
+  },
   created() {
-    return this.$store.dispatch('getFiles', this.$store.state.currentDataset.id)
+    this.$store.dispatch('getFiles', this.$store.state.currentDataset.id).then(() => {
+    })
   }
 }
 </script>
@@ -69,6 +75,6 @@ export default {
   overflow: auto;
 }
 .dataset-browse-tabs{
-  margin: 14px;
+  margin: 12px;
 }
 </style>

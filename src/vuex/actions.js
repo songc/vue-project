@@ -18,7 +18,7 @@ export const login = ({ commit }, user) => {
 }
 
 export const getDatasets = ({ commit }, userId) => {
-  userApi.getDataset(userId).then(res => {
+  return userApi.getDataset(userId).then(res => {
     commit('addDatasets', res.data.datasetList)
   })
 }
@@ -32,36 +32,36 @@ export const postDataset = ({ commit }, userId, dataset) => {
 
 // action about dataset
 export const getPublicDatasets = ({ commit }, page, size) => {
-  datasetApi.getPage(page, size).then(res => {
+  return datasetApi.getPage(page, size).then(res => {
     commit('addDatasets', res.data.datasetList)
   })
 }
 export const delDatasetById = ({ commit }, datasetId) => {
-  datasetApi.deleteById(datasetId).then(res => {
+  return datasetApi.deleteById(datasetId).then(res => {
     commit('delDataset', datasetId)
   })
 }
 
 export const getFiles = ({commit}, datasetId) => {
-  datasetApi.getFiles(datasetId).then(res => {
+  return datasetApi.getFiles(datasetId).then(res => {
     commit('addFiles', res.data.fileList)
   })
 }
 
 export const postFiles = ({commit}, datasetId, files) => {
-  datasetApi.postFile(datasetId, files).then(res => {
+  return datasetApi.postFile(datasetId, files).then(res => {
     commit('addFiles', res.data)
   })
 }
 
 // operation file
 export const getFileByRowKey = ({commit}, rowKey) => {
-  fileApi.getByRowKey(rowKey).then(res => {
+  return fileApi.getByRowKey(rowKey).then(res => {
     commit('changeCurrentFile', res.data)
   })
 }
 export const delFile = ({commit}, rowKey) => {
-  fileApi.deleteByRowKey(rowKey).then(res => {
+  return fileApi.deleteByRowKey(rowKey).then(res => {
     commit('delFile', rowKey)
   })
 }

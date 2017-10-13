@@ -1,10 +1,11 @@
 import Vue from 'vue'
+import {Spin} from 'iview'
 import Router from 'vue-router'
 import Home from '../view/Home.vue'
 import TheCard from '../components/TheCard.vue'
 import TheCard2 from '../components/TheCard2.vue'
 import DatasetCreate from '../components/DatasetCreate.vue'
-import DatasetBrowse from '../components/DatasetBrowse.vue'
+// import DatasetBrowse from '../components/DatasetBrowse.vue'
 import DatasetUpdate from '../components/DatasetUpdate.vue'
 import TheHome from '../components/TheHome.vue'
 import TheTeacher from '../components/TheTeacher.vue'
@@ -12,6 +13,12 @@ import ThePhd from '../components/ThePhd.vue'
 import ThePaper from '../components/ThePaper.vue'
 import TheProject from '../components/TheProject.vue'
 import TheMaster from '../components/TheMaster.vue'
+const DatasetBrowse = () => ({
+  component: import('../components/DatasetBrowse.vue'),
+  loading: Spin,
+  delay: 200,
+  timeout: 3000
+})
 
 Vue.use(Router)
 const routes = [

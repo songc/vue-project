@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'TheCard',
+  name: 'TheCard2',
   filters: {
     formatDescription: function(value) {
       let limitnum = 97

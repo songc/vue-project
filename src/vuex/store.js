@@ -8,9 +8,25 @@ Vue.use(Vuex)
 
 const state = {
   isLogin: false,
-  user: {},
-  currentDataset: {},
-  currentFile: {},
+  user: {
+    id: 0,
+    username: '',
+    email: '',
+    sex: '',
+    address: ''
+  },
+  currentDataset: {
+    id: 0,
+    name: '',
+    author: '',
+    userId: ''
+  },
+  currentFile: {
+    rowKey: '',
+    parentId: 0,
+    name: '',
+    content: ''
+  },
   datasets: [],
   files: []
 }
