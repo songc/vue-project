@@ -19,44 +19,88 @@ export default {
       modal: false,
       comment: '',
       chart: null,
-      option: {
-        title: {text: 'example'},
-        tooltip: {},
-        xAxis: {
-          data: ['ss', 'ww', 'cc', 'dd']
-        },
-        yAxis: {},
-        series: [{
-          name: 'number',
-          type: 'line',
-          data: [5, 40, 30, 10],
-          markPoint: {
-            label: 'content',
-            data: [{
-              name: 'max',
-              type: 'max'
-            },
-            {
-              name: 'something',
-              coord: ['ss', 10]
-            }
-            ]
-          }
-        }]
-      }
+      test: null
+    }
+  },
+  computed: {
+    splitContent: function() {
+      return this.$store.state.currentFile.content.split('\n')
+    },
+    removeHead: function() {
+      let index = this.splitContent.findIndex(string => {
+        return string.startsWith('0')
+      })
+      return this.splitContent.slice(index)
     }
   },
   watch: {
-    option: {
+    optionsData: {
       handler: function () {
-        this.chart.setOption(this.option)
+        const dataArray = this.removeHead.forEach(string => {
+          return string.split(',')
+        })
+        const dataArrayTranspose = []
+        for (let i = 0; i < dataArray[0].length; i++) {
+          for (let j = 0; j < dataArray.length; j++) {
+            dataArrayTranspose[i][j] = dataArray[j][i]
+          }
+        }
+        let optionsData = {
+          xAxis: dataArrayTranspose[0],
+          series: dataArrayTranspose.slice(1).forEach(numArray => {
+            return {
+              name: 'number',
+              type: 'line',
+              data: numArray
+            }
+          })
+        }
+        this.chart.setOption(optionsData)
       },
       deep: true
     }
   },
+  beforeCreate() {
+    return this.$store.dispatch('getFileByRowKey', '23')
+  },
   mounted() {
+    const dataArray = []
+    const syz = this.removeHead
+    for (let k = 0; k < syz.length; k++) {
+      dataArray[k] = syz[k].split(',')
+    }
+    const dataArrayTranspose = []
+    for (let i = 0; i < dataArray[0].length; i++) {
+      let temp = []
+      for (let j = 0; j < dataArray.length; j++) {
+        temp[j] = dataArray[j][i]
+      }
+      dataArrayTranspose[i] = temp
+    }
+    this.test = dataArrayTranspose
+    const series = []
+    for (let i = 1; i < dataArrayTranspose.length; i++) {
+      series[i - 1] = {
+        name: 'number',
+        type: 'line',
+        data: dataArrayTranspose[i]
+      }
+    }
+    let optionsData = {
+      xAxis: dataArrayTranspose[0],
+      series: series
+    }
     this.chart = echarts.init(this.$refs.theEchart)
-    this.chart.setOption(this.option)
+    this.chart.setOption({
+      title: {text: 'example'},
+      tooltip: {},
+      xAxis: {
+        data: []
+      },
+      yAxis: {},
+      series: []
+    })
+    this.chart.setOption(optionsData)
     let _this = this
     this.chart.on('click', function(params) {
       _this.modal = true
@@ -65,11 +109,6 @@ export default {
   },
   methods: {
     updateData() {
-      var a = []
-      for (let i = 0; i < 4; i++) {
-        a.push(Math.random() * 40)
-      }
-      this.option.series[0].data = a
     },
     addMark(yname, seriesIndex, value) {
       this.option.series[seriesIndex].markPoint.data.push({
