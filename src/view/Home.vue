@@ -46,10 +46,5 @@ export default {
   background: #EEE;
   text-align: left;
 }
-.demo-carousel {
-  background: #495060;
-  width: auto;
-  height: 400px;
-}
 </style>
 

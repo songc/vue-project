@@ -1,9 +1,9 @@
 <template>
   <div v-once>
-    <Row type="flex" justify="center" :gutter="16">
+    <Row type="flex" justify="center" class-name="project-row">
       <Col span="18">
         <Card>
-          <h3>Project Lists</h3>
+          <h3 slot="title">Project Lists</h3>
           <h4>基于新型SIET的植物电活动离子机理研究(2015年)</h4>
           <h4>INVESTIGATION ON ION MECHANISM OF PLANT BIOELECTRICAL ACTIVITY USING NOVEL SIET(YEAR 2015)</h4>
           <p>植物电信号是植物体对外界刺激的最初反应，而细胞膜电位变化是高等植物电信号的信息 表达形式。
@@ -107,3 +107,22 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h3, h4, p {
+  margin: 12px;
+}
+
+.project-row {
+  padding: 12px;
+}
+
+img {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 650px;
+}
+</style>

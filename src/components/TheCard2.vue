@@ -1,6 +1,6 @@
 <template>
-<div>
-  <Row :gutter="16" class-name="thecard-row">
+<div class="thecard">
+  <Row class-name="thecard-row">
     <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
       <Card class="thecard-card">
         <p slot="title">{{ dataset.name }}</p>
@@ -72,6 +72,11 @@ export default {
 </script>
 
 <style scoped>
+.thecard {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .thecard-page {
   text-align: center;
   padding: 12px;

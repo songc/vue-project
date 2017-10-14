@@ -142,10 +142,10 @@ export default {
 }
 .thepaper-year {
   font-size: 18px;
-  margin: 10px;
+  margin: 12px;
 }
-p {
-  margin: 10px;
+h3, p {
+  margin: 12px;
 }
 </style>
 

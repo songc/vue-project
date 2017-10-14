@@ -92,4 +92,14 @@ export default {}
 .theteacher {
   padding: 12px;
 }
+p, h4{
+  margin: 12px;
+}
+img {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>

@@ -149,7 +149,6 @@ img {
   margin-left: auto;
   margin-right: auto;
   max-width: 650px;
-  text-align: center;
 }
 </style>
 

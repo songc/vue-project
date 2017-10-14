@@ -1,14 +1,16 @@
 <template>
-  <Row>
-    <Col span="4">
-    <ButtonGroup size="small">
-      <Button type="warning" @click="rename">Rename</Button>
-      <Button type="error" @click="delFile">Delete</Button>
-    </ButtonGroup>
-    <Tree :data="files"></Tree>
+<div class="data-update">
+  <Row type="flex" justify="center" class-name="data-update-row">
+    <Col span="6" class-name="dataset-browse-tree">
+    <Card :bordered="false" dis-hover>
+      <p slot="title">files</p>
+      <RadioGroup v-model="selectedFile" vertical>
+        <Radio v-for="(file, index) in files" :label="file.rowKey" :key="index">{{ file.name }}</Radio>
+      </RadioGroup>
+    </Card>
     </Col>
-    <Col span="20">
-    <Tabs value="info">
+    <Col span="18">
+    <Tabs value="info" class="data-update-tabs">
       <TabPane label="Dataset Info" name="info">
         <Form>
           <FormItem prop="dataset.name" label="name">
@@ -56,6 +58,7 @@
       </div>
     </Modal>
   </Row>
+</div>
 </template>
 
 <script>
@@ -116,3 +119,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.data-update {
+  width:75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px;
+}
+.data-update-row {
+  padding: 12px;
+  background-color: #fff;
+  min-height: 800px;
+}
+.data-update-tabs {
+  margin: 14px;
+}
+</style>

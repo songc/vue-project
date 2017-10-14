@@ -1,14 +1,15 @@
 <template>
-  <Row>
+<div>
+  <Row type="flex" justify="center" class-name="dataset-browse-row">
     <Col span="4" class-name="dataset-browse-tree">
-    <Card :bordered="false">
+    <Card :bordered="false" dis-hovar>
       <p slot="title">files</p>
       <RadioGroup v-model="selectedFile" vertical>
         <Radio v-for="(file, index) in files" :label="file.rowKey" :key="index" >{{ file.name }}</Radio>
       </RadioGroup>
     </Card>
     </Col>
-    <Col span="20">
+    <Col span="14">
     <Tabs value="info" class="dataset-browse-tabs">
       <TabPane label="Dataset Info" name="info">
         <Form>
@@ -29,6 +30,7 @@
     </Tabs>
     </Col>
   </Row>
+</div>
 </template>
 
 <script>
@@ -71,10 +73,16 @@ export default {
 </script>
 
 <style scoped>
+.dataset-browse-row{
+  padding: 12px;
+  background-color: #fff;
+}
 .dataset-browse-tree{
+  max-height: 800px;
   overflow: auto;
 }
 .dataset-browse-tabs{
-  margin: 12px;
+  background-color: #fff;
+  margin: 14px 12px;
 }
 </style>
