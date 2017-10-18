@@ -13,6 +13,7 @@ import ThePhd from '../components/ThePhd.vue'
 import ThePaper from '../components/ThePaper.vue'
 import TheProject from '../components/TheProject.vue'
 import TheMaster from '../components/TheMaster.vue'
+import Page404 from '../components/Page404.vue'
 const DatasetBrowse = () => ({
   component: import('../components/DatasetBrowse.vue'),
   loading: Spin,
@@ -62,7 +63,7 @@ const routes = [
       },
       {
         path: 'dataset',
-        name: 'publicDataset',
+        name: 'dataset',
         component: TheCard2
       },
       {
@@ -86,6 +87,11 @@ const routes = [
         component: DatasetUpdate
       }
     ]
+  },
+  {
+    path: '/*',
+    name: 'error',
+    component: Page404
   }
 ]
 export default new Router({
