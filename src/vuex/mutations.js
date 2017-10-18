@@ -3,24 +3,24 @@ export default {
     state.isLogin = loginStatus
   },
   changeCurrentDataset(state, dataset) {
-    state.currentDataset = dataset
+    state.currentDataset = {...dataset}
   },
   changeCurrentFile(state, file) {
-    state.currentFile = file
+    state.currentFile = {...file}
   },
-  addUser(state, user) {
-    state.user = user
+  changeUser(state, user) {
+    state.user = {...user}
   },
   addDataset(state, dataset) {
     state.datasets.push(dataset)
   },
-  addFile(state, file) {
-    state.files.push(file)
+  addFile(state, files) {
+    state.files.push(...files)
   },
-  addDatasets(state, datasets) {
+  changeDatasets(state, datasets) {
     state.datasets = datasets
   },
-  addFiles(state, files) {
+  changeFiles(state, files) {
     state.files = files
   },
   delDataset(state, id) {
@@ -32,10 +32,29 @@ export default {
     state.files.splice(index, 1)
   },
   logout(state) {
-    state.isLogin = false
-    state.user = {}
-    state.datasets = []
-    state.folders = []
-    state.files = []
+    state = {
+      isLogin: false,
+      user: {
+        id: 0,
+        username: '',
+        email: '',
+        sex: '',
+        address: ''
+      },
+      currentDataset: {
+        id: 0,
+        name: '',
+        author: '',
+        userId: ''
+      },
+      currentFile: {
+        rowKey: '',
+        parentId: 0,
+        name: '',
+        content: ''
+      },
+      datasets: [],
+      files: []
+    }
   }
 }

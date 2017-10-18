@@ -6,20 +6,20 @@ import fileApi from '../api/file'
 export const register = ({ commit }, user) => {
   return userApi.register(user).then(res => {
     commit('changeLoginStatus', true)
-    commit('addUser', res.data)
+    commit('changeUser', res.data)
   })
 }
 
 export const login = ({ commit }, user) => {
   return userApi.login(user.username, user.password).then(res => {
     commit('changeLoginStatus', true)
-    commit('addUser', res.data)
+    commit('changeUser', res.data)
   })
 }
 
 export const getDatasets = ({ commit }, userId) => {
   return userApi.getDataset(userId).then(res => {
-    commit('addDatasets', res.data.datasetList)
+    commit('changeDatasets', res.data.datasetList)
   })
 }
 
@@ -33,7 +33,7 @@ export const postDataset = ({ commit }, userId, dataset) => {
 // action about dataset
 export const getPublicDatasets = ({ commit }, page, size) => {
   return datasetApi.getPage(page, size).then(res => {
-    commit('addDatasets', res.data.datasetList)
+    commit('changeDatasets', res.data.datasetList)
   })
 }
 export const delDatasetById = ({ commit }, datasetId) => {
@@ -44,13 +44,13 @@ export const delDatasetById = ({ commit }, datasetId) => {
 
 export const getFiles = ({commit}, datasetId) => {
   return datasetApi.getFiles(datasetId).then(res => {
-    commit('addFiles', res.data.fileList)
+    commit('changeFiles', res.data.fileList)
   })
 }
 
 export const postFiles = ({commit}, datasetId, files) => {
   return datasetApi.postFile(datasetId, files).then(res => {
-    commit('addFiles', res.data)
+    commit('addFile', res.data.fileList)
   })
 }
 
