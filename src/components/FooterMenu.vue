@@ -39,7 +39,7 @@ export default {
 <style scoped>
 .layout-footer {
   background-color: #fff;
-  border: 1px solid #d7dde4;
+  /* border: 1px solid #d7dde4; */
   min-height: 120px;
   padding: 12px;
 }

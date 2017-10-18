@@ -66,11 +66,9 @@ export default {
   methods: {
     login() {
       this.$emit('on-login')
-      this.login = false
     },
     register() {
       this.$emit('on-register')
-      this.register = false
     },
     goHome() {
       this.$router.push('/home')
@@ -80,7 +78,7 @@ export default {
     },
     createDataset() {
       if (this.isLogin) {
-        this.$router.push('/dashBoard')
+        this.$router.push({name: 'datasetCreate'})
       } else {
         this.$emit('on-login')
       }

@@ -48,8 +48,8 @@ export default {
       return this.$store.state.datasets
     }
   },
-  created: function() {
-    this.$store.dispatch('getPublicDatasets', this.page.num, this.page.size)
+  beforeCreate: function() {
+    this.$store.dispatch('getPublicDatasets', 1, 9)
   },
   methods: {
     changePageNum(num) {
