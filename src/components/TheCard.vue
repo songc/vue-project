@@ -49,12 +49,18 @@ export default {
     }
   },
   beforeCreate: function() {
-    this.$store.dispatch('getDatasets', this.$store.state.user.id)
+    this.$Spin.show()
+    this.$store.dispatch('getDatasets', this.$store.state.user.id).then(() => {
+      this.$Spin.hide()
+    })
   },
   methods: {
     changePageNum(num) {
       this.page.number = num
-      this.$store.dispatch('getDatasets')
+      this.$Spin.show()
+      this.$store.dispatch('getDatasets').then(() => {
+        this.$Spin.hide()
+      })
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)

@@ -51,9 +51,6 @@ export default {
       deep: true
     }
   },
-  beforeCreate() {
-    return this.$store.dispatch('getFileByRowKey', '23')
-  },
   mounted() {
     this.chart = echarts.init(this.$refs.theEchart)
     this.chart.setOption({

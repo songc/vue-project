@@ -1,11 +1,7 @@
 <template>
   <div class="content">
-    <!-- <Steps :current='1'>
-      <Step title="Finished" content="dataset info"></Step>
-      <Step title="Doing" content="dataset info"></Step>
-      <Step title="Pending" content="Upload file"></Step>
-    </Steps> -->
-    <Card v-show="card1">
+    <div>
+    <Card v-show="card1" class="dataset-create-card">
       <p slot="title">dataset info</p>
       <Form>
         <FormItem prop="dataset.name" label="name">
@@ -22,23 +18,45 @@
         </FormItem>
       </Form>
     </Card>
-    <Card v-show="card2">
+    <Card v-show="card2" class="dataset-create-card">
       <p slot="title">Upload File</p>
-      <Upload multiple
-        name="files"
-        :show-upload-list="false"
-        :before-upload="handleUpload" 
-        :action="uploadUrl" 
-        @on-success="uploadSuccess">
-        <Button type="ghost" icon="ios-cloud-upload-outline">Select the files</Button>
-      </Upload>
-      <div v-if="files != 0">
-         <Button type="text" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>
-         待上传文件：
-        <li v-for="(file, index) in files" :key="index">
-          {{ file.name }} 
-        </li> 
-      </div>
+      <Row type="flex" justify="center">
+        <Col span="4">
+          <Card :bordered="false" dis-hover class="dataset-create-filelist">
+            <p slot="title">Dataset Files</p>
+            <ul>
+              <li
+                v-for="(file, index) in filesUploaded"
+                :key="index">
+                {{ file.name }}
+                </li>
+            </ul>
+            <p v-if="filesUploaded==0">No files yet uploaded</p>
+          </Card>
+        </Col>
+        <Col span="16">
+          <Card class="dataset-create-upload" dis-hover :bordered="false">
+            <Upload multiple
+              name="files"
+              slot="title"
+              :show-upload-list="false"
+              :before-upload="handleUpload" 
+              :action="uploadUrl">
+              <Button type="ghost" icon="ios-cloud-upload-outline">Select the files</Button>
+            </Upload>
+            <Button v-show="files !=0" slot="extra" type="primary" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>
+            <div v-if="files != 0">
+               待上传文件：
+              <li 
+                v-for="(file, index) in files" 
+                :key="file.name">
+                {{ file.name }} 
+                <Button type="error" shape="circle" icon="close-round" @click="files.splice(index,1)" size="small"></Button>
+              </li> 
+            </div>
+          </Card>
+        </Col>
+      </Row>
     </Card>
     <Modal v-model="modal" title="Upload Status">
       <p>Upload Success!</p>
@@ -48,6 +66,7 @@
       <Button type="info" @click="finish">Finish</Button>
       </div>
     </Modal>
+    </div>
   </div>
 </template>
 
@@ -75,6 +94,9 @@ export default {
     datasetId() {
       return this.$store.state.currentDataset.id
     },
+    filesUploaded() {
+      return this.$store.state.files
+    },
     uploadUrl() {
       return `/dataset/${this.datasetId}/file`
     }
@@ -87,7 +109,7 @@ export default {
       })
     },
     finish() {
-      this.$router.push('/user/' + this.userId + '/dataset')
+      this.$router.push({name: 'dashBoard'})
     },
     handleUpload(file) {
       this.files.push(file)
@@ -109,7 +131,25 @@ export default {
 </script>
 
 <style scoped>
+li {
+  margin: 10px;
+}
 .content {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
   padding: 12px;
+}
+.dataset-create-card {
+  min-height: 800px;
+}
+.dataset-create-upload {
+  /* width: 75%;
+  margin-left: auto;
+  margin-right: auto; */
+  text-align: center;
+}
+.dataset-create-filelist {
+  margin: 10px;
 }
 </style>

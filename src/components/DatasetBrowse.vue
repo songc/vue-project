@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      selectedFile: 0
+      selectedFile: ''
     }
   },
   computed: {
@@ -62,12 +62,14 @@ export default {
   },
   watch: {
     selectedFile: function() {
-      this.$store.dispatch('getFileByRowKey', this.selectedFile)
+      this.$Spin.show()
+      this.$store.dispatch('getFileByRowKey', this.selectedFile).then(() => {
+        this.$Spin.hide()
+      })
     }
   },
   created() {
-    this.$store.dispatch('getFiles', this.$store.state.currentDataset.id).then(() => {
-    })
+    this.$store.dispatch('getFiles', this.$store.state.currentDataset.id)
   }
 }
 </script>

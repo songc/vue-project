@@ -8,7 +8,6 @@
         <p>{{ dataset.description | formatDescription }}</p>
         <div class="thecard-card-div">
           <Button type="info" @click="browseDataset(dataset)">Browse</Button>
-          <Button type="ghost" @click="updateDataset(dataset)">Modify</Button>
           <Button type="ghost" @click="downLoadDataset(dataset)">DownLoad</Button>
         </div>
       </Card>
@@ -49,7 +48,10 @@ export default {
     }
   },
   beforeCreate: function() {
-    this.$store.dispatch('getPublicDatasets', 1, 9)
+    this.$Spin.show()
+    this.$store.dispatch('getPublicDatasets', 1, 9).then(() => {
+      this.$Spin.hide()
+    })
   },
   methods: {
     changePageNum(num) {
@@ -59,10 +61,6 @@ export default {
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
       this.$router.push(`/dataset/get`)
-    },
-    updateDataset(data) {
-      this.$store.commit('changeCurrentDataset', data)
-      this.$router.push(`/dataset/update`)
     },
     downLoadDataset(data) {
 
