@@ -17,7 +17,7 @@ export const login = ({ commit }, user) => {
   })
 }
 
-export const getDatasets = ({ commit }, userId) => {
+export const getDatasets = ({ commit }, {userId, page, size}) => {
   return userApi.getDataset(userId).then(res => {
     commit('changeDatasets', res.data)
   })

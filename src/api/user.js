@@ -18,8 +18,15 @@ const userApi = {
   getUser(userId) {
     return axios.get(userUrl.addId(userId))
   },
-  getDataset(userId) {
-    return axios.get(userUrl.opsDataset(userId))
+  getDataset(userId, pageNumber, pageSize) {
+    return axios({
+      method: 'get',
+      url: userUrl.opsDataset(userId),
+      params: {
+        number: pageNumber,
+        size: pageSize
+      }
+    })
   },
   postDataset(userId, dataset) {
     return axios.post(userUrl.opsDataset(userId), dataset)
