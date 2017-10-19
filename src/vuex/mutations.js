@@ -30,31 +30,5 @@ export default {
   delFile (state, rowKey) {
     let index = state.files.findindex(f => f.rowKey === rowKey)
     state.files.splice(index, 1)
-  },
-  logout(state) {
-    state = {
-      isLogin: false,
-      user: {
-        id: 0,
-        username: '',
-        email: '',
-        sex: '',
-        address: ''
-      },
-      currentDataset: {
-        id: 0,
-        name: '',
-        author: '',
-        userId: ''
-      },
-      currentFile: {
-        rowKey: '',
-        parentId: 0,
-        name: '',
-        content: ''
-      },
-      datasets: [],
-      files: []
-    }
   }
 }

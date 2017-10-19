@@ -1,25 +1,18 @@
 import Vue from 'vue'
-import {Spin} from 'iview'
 import Router from 'vue-router'
-import Home from '../view/Home.vue'
-import TheCard from '../components/TheCard.vue'
-import TheCard2 from '../components/TheCard2.vue'
-import DatasetCreate from '../components/DatasetCreate.vue'
-// import DatasetBrowse from '../components/DatasetBrowse.vue'
-import DatasetUpdate from '../components/DatasetUpdate.vue'
-import TheHome from '../components/TheHome.vue'
-import TheTeacher from '../components/TheTeacher.vue'
-import ThePhd from '../components/ThePhd.vue'
-import ThePaper from '../components/ThePaper.vue'
-import TheProject from '../components/TheProject.vue'
-import TheMaster from '../components/TheMaster.vue'
-import Page404 from '../components/Page404.vue'
-const DatasetBrowse = () => ({
-  component: import('../components/DatasetBrowse.vue'),
-  loading: Spin,
-  delay: 200,
-  timeout: 3000
-})
+const Home = () => import('../view/Home.vue')
+const TheCard = () => import('../components/TheCard.vue')
+const TheCard2 = () => import('../components/TheCard2.vue')
+const DatasetCreate = () => import('../components/DatasetCreate.vue')
+const DatasetUpdate = () => import('../components/DatasetUpdate.vue')
+const TheHome = () => import('../components/TheHome.vue')
+const TheTeacher = () => import('../components/TheTeacher.vue')
+const ThePhd = () => import('../components/ThePhd.vue')
+const ThePaper = () => import('../components/ThePaper.vue')
+const TheProject = () => import('../components/TheProject.vue')
+const TheMaster = () => import('../components/TheMaster.vue')
+const Page404 = () => import('../components/Page404.vue')
+const DatasetBrowse = () => import('../components/DatasetBrowse.vue')
 
 Vue.use(Router)
 const routes = [
@@ -67,22 +60,22 @@ const routes = [
         component: TheCard2
       },
       {
-        path: 'dashboard',
+        path: 'user/:id/dashboard',
         name: 'dashBoard',
         component: TheCard
       },
       {
-        path: 'dataset/post',
+        path: 'dataset/:id/post',
         name: 'datasetCreate',
         component: DatasetCreate
       },
       {
-        path: 'dataset/get',
+        path: 'dataset/:id/get',
         name: 'datasetBrowse',
         component: DatasetBrowse
       },
       {
-        path: 'dataset/update',
+        path: 'dataset/:id/update',
         name: 'datasetUpdate',
         component: DatasetUpdate
       }
