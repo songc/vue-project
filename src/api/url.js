@@ -1,20 +1,20 @@
 
 export const userUrl = {
-  base: '/user',
-  login: '/user/login',
-  addId: userId => '/user/' + userId,
-  opsDataset: userId => '/user/' + userId + '/dataset'
+  base: '/api/user',
+  login: '/api/user/login',
+  addId: userId => '/api/user/' + userId,
+  opsDataset: userId => '/api/user/' + userId + '/dataset'
 }
 
 export const datasetUrl = {
-  base: '/dataset',
+  base: '/api/dataset',
   addId: function(datasetId) {
-    return '/dataset/' + datasetId
+    return '/api/dataset/' + datasetId
   },
-  opsFile: datasetId => '/dataset/' + datasetId + '/file'
+  opsFile: datasetId => '/api/dataset/' + datasetId + '/file'
 }
 
 export const fileUrl = {
-  base: '/hbase',
-  addId: rowKey => '/hbase/' + rowKey
+  base: '/api/hbase',
+  addId: rowKey => '/api/hbase/' + rowKey
 }
