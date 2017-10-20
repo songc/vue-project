@@ -14,7 +14,7 @@
     </Col>
   </Row>
   <div class="thecard-page">
-    <Page :total="page.total" :current="page.num" @on-change="changePageNum"></Page>
+    <Page :total="total" :page-size='size' @on-change="changePageNum" show-total></Page>
   </div>
 </div>
 </template>
@@ -35,11 +35,9 @@ export default {
   },
   data() {
     return {
-      page: {
-        total: 10,
-        num: 5,
-        size: 9
-      }
+      total: 10,
+      number: 1,
+      size: 9
     }
   },
   computed: {
@@ -47,23 +45,40 @@ export default {
       return this.$store.state.datasets
     }
   },
-  beforeCreate: function() {
-    this.$Spin.show()
-    this.$store.dispatch('getPublicDatasets', 1, 9).then(() => {
-      this.$Spin.hide()
-    })
+  watch: {
+    '$route': 'fetchData',
+    'number': 'fetchData'
+  },
+  created: function() {
+    this.fetchData()
   },
   methods: {
     changePageNum(num) {
-      this.page.num = num
-      this.$store.dispatch('getPublicDatasets', this.page.num, this.page.size)
+      this.number = num
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push(`/dataset/get`)
+      this.$router.push({name: 'datasetBrowse', params: {id: data.id}})
     },
     downLoadDataset(data) {
 
+    },
+    fetchData() {
+      let payload = {
+        pageNumber: this.number - 1,
+        pageSize: this.size
+      }
+      this.$Spin.show()
+      this.$store.dispatch('getPublicDatasets', payload).then((res) => {
+        this.total = res.totalElements
+        this.$Spin.hide()
+      }).catch(res => {
+        this.$Spin.hide()
+        this.$Notice.error({
+          title: 'GetDatasets Fail',
+          desc: res
+        })
+      })
     }
   }
 }

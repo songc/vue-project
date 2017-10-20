@@ -17,9 +17,10 @@ export const login = ({ commit }, user) => {
   })
 }
 
-export const getDatasets = ({ commit }, {userId, page, size}) => {
-  return userApi.getDataset(userId).then(res => {
-    commit('changeDatasets', res.data)
+export const getDatasets = ({ commit }, {userId, pageNumber, pageSize}) => {
+  return userApi.getDataset(userId, pageNumber, pageSize).then(res => {
+    commit('changeDatasets', res.data.content)
+    return res.data
   })
 }
 
@@ -31,9 +32,10 @@ export const postDataset = ({ commit }, {userId, dataset}) => {
 }
 
 // action about dataset
-export const getPublicDatasets = ({ commit }, {page, size}) => {
-  return datasetApi.getPage(page, size).then(res => {
-    commit('changeDatasets', res.data)
+export const getPublicDatasets = ({ commit }, {pageNumber, pageSize}) => {
+  return datasetApi.getPage(pageNumber, pageSize).then(res => {
+    commit('changeDatasets', res.data.content)
+    return res.data
   })
 }
 export const delDatasetById = ({ commit }, datasetId) => {

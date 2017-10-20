@@ -5,11 +5,13 @@ const datasetApi = {
   postDataset(dataset) {
     return axios.post(datasetUrl.base, dataset)
   },
-  getPage(page, size) {
-    return axios.get(datasetUrl.base, {
+  getPage(pageNumber, pageSize) {
+    return axios({
+      method: 'get',
+      url: datasetUrl.base,
       params: {
-        page: page,
-        size: size
+        number: pageNumber,
+        size: pageSize
       }
     })
   },
