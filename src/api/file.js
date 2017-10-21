@@ -7,6 +7,9 @@ const fileApi = {
   },
   deleteByRowKey(rowKey) {
     return axios.delete(fileUrl.addId(rowKey))
+  },
+  deleteByRowListRowKey(listRowKey) {
+    return axios.delete(fileUrl.base, listRowKey)
   }
 }
 

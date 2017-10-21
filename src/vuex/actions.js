@@ -38,6 +38,11 @@ export const getPublicDatasets = ({ commit }, {pageNumber, pageSize}) => {
     return res.data
   })
 }
+export const getDatasetById = ({commit}, datasetId) => {
+  return datasetApi.getById(datasetId).then(res => {
+    commit('changeCurrentDataset', res.data)
+  })
+}
 export const delDatasetById = ({ commit }, datasetId) => {
   return datasetApi.deleteById(datasetId).then(res => {
     commit('delDataset', datasetId)
@@ -62,8 +67,7 @@ export const getFileByRowKey = ({commit}, rowKey) => {
     commit('changeCurrentFile', res.data)
   })
 }
-export const delFile = ({commit}, rowKey) => {
-  return fileApi.deleteByRowKey(rowKey).then(res => {
-    commit('delFile', rowKey)
-  })
+export const delFile = ({commit}, listRowKey) => {
+  return fileApi.deleteByListRowKey(listRowKey)
 }
+
