@@ -2,7 +2,6 @@
 <div>
   <div id="the-echart" ref="theEchart">
   </div>
-  <Button type="ghost" @click="updateData"> update</Button>
   <Modal title="add comment" v-model="modal" @on-cancel="false">
     <Input v-model="comment"></Input>
   </Modal>
@@ -18,8 +17,7 @@ export default {
     return {
       modal: false,
       comment: '',
-      chart: null,
-      test: null
+      chart: null
     }
   },
   computed: {
@@ -34,9 +32,12 @@ export default {
           return false
         } else {
           let options = {
+            title: {text: 'example'},
+            tooltip: {},
             xAxis: {
               data: this.optionsData.xAxis
             },
+            yAxis: {},
             series: Array.from(this.optionsData.data, x => {
               return {
                 name: 'number',
@@ -45,7 +46,7 @@ export default {
               }
             })
           }
-          this.chart.setOption(options)
+          this.chart.setOption(options, true)
         }
       },
       deep: true
@@ -69,8 +70,6 @@ export default {
     })
   },
   methods: {
-    updateData() {
-    },
     addMark(yname, seriesIndex, value) {
       this.option.series[seriesIndex].markPoint.data.push({
         name: this.comment,

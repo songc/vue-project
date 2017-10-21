@@ -86,22 +86,43 @@ export default {
       return this.$store.state.files
     }
   },
+  watch: {
+    '$route': 'fetchData'
+  },
+  created() {
+    this.fetchData()
+  },
   methods: {
     rename() {
 
     },
     delFile() {
-      this.$store.dispatch('delFile', this.selectedFiles).then(() => {
+      this.$Spin.show()
+      this.$store.dispatch('delFile', this.selectedFiles).then((res) => {
         this.$Message.info('Delete Success')
+        this.$Message.info('Update File')
+        return this.$store.dispatch('getFiles', this.$route.params.id)
+      }).then(() => {
+        this.$Message.info('Update Success')
+        this.$Spin.hide()
+        this.selectedFiles = []
+      }).catch(res => {
+        this.$Spin.hide()
+        this.$Message.error(res)
       })
     },
     saveChange() {
       this.$store.dispatch('putDataset', this.dataset).then(() => {
         this.$Message.info('Save Success')
+      }).catch(res => {
+        this.$Notice.error({
+          title: 'Error',
+          desc: res.message
+        })
       })
     },
     cancle() {
-      // this.dataset = this.$store.state.currentDataset
+      this.$router.go(-1)
     },
     handleUpload(file) {
       this.files.push(file)
@@ -109,17 +130,38 @@ export default {
     },
     upload() {
       this.loadingStatus = true
-      this.$store.dispatch('postFiles', this.datasetId, this.files).then(() => {
+      let formData = new FormData()
+      this.files.forEach(function(element, index) {
+        formData.append('files', element)
+      })
+      this.$store.dispatch('postFiles', {datasetId: this.$route.params.id, files: formData}).then(() => {
         this.loadingStatus = false
         this.modal = true
         this.files = []
+      }).catch((res) => {
+        this.loadingStatus = false
+        this.$Message.error(res.message)
       })
     },
     keepOn() {
       this.modal = false
     },
     finish() {
-      this.$router.push({name: 'dashBoard'})
+      this.$router.push({name: 'dashBoard', params: {id: this.dataset.userId}})
+    },
+    fetchData() {
+      this.$Spin.show()
+      this.$store.dispatch('getDatasetById', this.$route.params.id).then((res) => {
+        return this.$store.dispatch('getFiles', this.$route.params.id)
+      }).then(res => {
+        this.$Spin.hide()
+      }).catch((res) => {
+        this.$Spin.hide()
+        this.$Notice({
+          title: 'Fail to get Dataset info',
+          desc: res
+        })
+      })
     }
   }
 }

@@ -74,25 +74,25 @@ export default {
       this.$router.push('/home')
     },
     go(name) {
-      this.$router.push(`/${name}`)
+      this.$router.push({name: name, params: {id: this.userId}})
     },
     createDataset() {
       if (this.isLogin) {
-        this.$router.push({name: 'datasetCreate'})
+        this.$router.push({name: 'datasetCreate', params: {id: this.userId}})
       } else {
         this.$emit('on-login')
       }
     },
     resolveClick(name) {
       if (name === 'logout') {
-        this.$store.commit('logout')
+        this.$store.commit('changeLoginStatus', false)
         this.$router.push({ name: 'home' })
       }
       if (name === 'setting') {
-        this.$router.push(`/user/setting`)
+        this.$router.push(`/user/${this.userId}/setting`)
       }
       if (name === 'profile') {
-        this.$router.push('/user/profile')
+        this.$router.push(`/user/${this.userId}/profile`)
       }
     }
   }

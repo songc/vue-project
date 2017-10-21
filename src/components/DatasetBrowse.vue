@@ -2,7 +2,7 @@
 <div>
   <Row type="flex" justify="center" class-name="dataset-browse-row">
     <Col span="4" class-name="dataset-browse-tree">
-    <Card :bordered="false" dis-hovar>
+    <Card :bordered="false" dis-hover>
       <p slot="title">files</p>
       <RadioGroup v-model="selectedFile" vertical>
         <Radio v-for="(file, index) in files" :label="file.rowKey" :key="index" >{{ file.name }}</Radio>
@@ -61,15 +61,39 @@ export default {
     }
   },
   watch: {
-    selectedFile: function() {
+    selectedFile: 'fetchFile',
+    $route: 'fetchDataset'
+  },
+  created() {
+    this.fetchDataset()
+  },
+  methods: {
+    fetchDataset() {
+      this.$Spin.show()
+      this.$store.dispatch('getDatasetById', this.$route.params.id).then((res) => {
+        return this.$store.dispatch('getFiles', this.$route.params.id)
+      }).then((res) => {
+        this.$Spin.hide()
+      }).catch((res) => {
+        this.$Spin.hide()
+        this.$Notice.error({
+          title: 'Fail to get Dataset info',
+          desc: res
+        })
+      })
+    },
+    fetchFile() {
       this.$Spin.show()
       this.$store.dispatch('getFileByRowKey', this.selectedFile).then(() => {
         this.$Spin.hide()
+      }).catch((res) => {
+        this.$Spin.hide()
+        this.$Notice.error({
+          title: 'Fail to get File info',
+          desc: res
+        })
       })
     }
-  },
-  created() {
-    this.$store.dispatch('getFiles', this.$store.state.currentDataset.id)
   }
 }
 </script>

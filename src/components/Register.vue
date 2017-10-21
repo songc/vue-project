@@ -36,28 +36,42 @@ export default {
         address: ''
       },
       rules: {
-        username: [{required: true, message: "Username can't be null", trigger: 'blur'}],
+        username: [
+          { required: true, message: "Username can't be null", trigger: 'blur' }
+        ],
         password: [
-          {required: true, message: "This can't be null", trigger: 'blur'},
-          {type: 'string', min: 6, message: 'At least 6 characters', trigger: 'blur'}
+          { required: true, message: "This can't be null", trigger: 'blur' },
+          {
+            type: 'string',
+            min: 6,
+            message: 'At least 6 characters',
+            trigger: 'blur'
+          }
         ],
         email: [
-          {required: true, message: "Email can't be null", trigger: 'blur'},
-          {type: 'email', message: 'The format is error', trigger: 'blur'}
+          { required: true, message: "Email can't be null", trigger: 'blur' },
+          { type: 'email', message: 'The format is error', trigger: 'blur' }
         ]
       }
-
     }
   },
   methods: {
     handleSubmit(name) {
-      this.$refs[name].validate((valid) => {
+      this.$refs[name].validate(valid => {
         if (valid) {
-          this.$store.dispatch('register', this.user).then(() => {
-            this.$router.push('/dashboard')
-            this.$emit('on-success')
-            this.$Message.success('Register Success')
-          })
+          this.$store
+            .dispatch('register', this.user)
+            .then(() => {
+              this.$router.push('/dashboard')
+              this.$emit('on-success')
+              this.$Message.success('Register Success')
+            })
+            .catch(res => {
+              this.$Notice.error({
+                title: 'Register Fail',
+                desc: res
+              })
+            })
         } else {
           this.$Message.error('valid fail')
         }

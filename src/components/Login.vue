@@ -16,39 +16,55 @@
     </Form>
 </template>
 <script>
-    export default {
-      data () {
-        return {
-          user: {
-            username: '',
-            password: ''
-          },
-          ruleInline: {
-            username: [
-              { required: true, message: "This can't be null", trigger: 'blur' }
-            ],
-            password: [
-              { required: true, message: "This can't be null", trigger: 'blur' },
-              { type: 'string', min: 6, message: 'at least 6 characters', trigger: 'blur' }
-            ]
-          }
-        }
+export default {
+  data() {
+    return {
+      user: {
+        username: '',
+        password: ''
       },
-      methods: {
-        handleSubmit(name) {
-          this.$refs[name].validate((valid) => {
-            if (valid) {
-              this.$store.dispatch('login', this.user).then((user) => {
-                this.$router.push('/dashBoard')
-                this.$emit('on-success')
-                this.$Message.success('Login success!')
-              })
-            } else {
-              this.$Message.error('Something error!')
-            }
-          })
-        }
+      ruleInline: {
+        username: [
+          { required: true, message: "This can't be null", trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: "This can't be null", trigger: 'blur' },
+          {
+            type: 'string',
+            min: 6,
+            message: 'at least 6 characters',
+            trigger: 'blur'
+          }
+        ]
       }
     }
+  },
+  methods: {
+    handleSubmit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$store
+            .dispatch('login', this.user)
+            .then(user => {
+              this.$router.push({
+                name: 'dashBoard',
+                params: { id: this.$store.state.user.id }
+              })
+              this.$emit('on-success')
+              this.$Message.success('Login success!')
+            })
+            .catch(res => {
+              this.$Notice.error({
+                title: 'Login Fail',
+                desc: res
+              })
+            })
+        } else {
+          this.$Message.error('Something error!')
+        }
+      })
+    }
+  }
+}
 </script>
 

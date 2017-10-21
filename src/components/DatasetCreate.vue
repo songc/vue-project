@@ -83,7 +83,7 @@ export default {
       dataset: {
         name: '',
         author: '',
-        descript: ''
+        description: ''
       }
     }
   },
@@ -103,13 +103,15 @@ export default {
   },
   methods: {
     next() {
-      this.$store.dispatch('postDataset', this.userId).then(() => {
+      this.$store.dispatch('postDataset', {userId: this.$route.params.id, dataset: this.dataset}).then(() => {
         this.card1 = false
         this.card2 = true
+      }).catch(res => {
+        this.$Message.error(res.message)
       })
     },
     finish() {
-      this.$router.push({name: 'dashBoard'})
+      this.$router.push({name: 'dashBoard', params: {id: this.userId}})
     },
     handleUpload(file) {
       this.files.push(file)
@@ -117,10 +119,17 @@ export default {
     },
     upload() {
       this.loadingStatus = true
-      this.$store.dispatch('postFiles', this.datasetId, this.files).then(() => {
+      let formData = new FormData()
+      this.files.forEach(function(element, index) {
+        formData.append('files', element)
+      })
+      this.$store.dispatch('postFiles', {datasetId: this.datasetId, files: formData}).then(() => {
         this.loadingStatus = false
         this.modal = true
         this.files = []
+      }).catch((res) => {
+        this.loadingStatus = false
+        this.$Message.info(res.message)
       })
     },
     keepOn() {
