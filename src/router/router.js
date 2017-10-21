@@ -65,7 +65,7 @@ const routes = [
         component: TheCard
       },
       {
-        path: 'dataset/:id/post',
+        path: 'user/:id/dataset',
         name: 'datasetCreate',
         component: DatasetCreate
       },
