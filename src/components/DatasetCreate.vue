@@ -95,7 +95,7 @@ export default {
       return this.$store.state.currentDataset.id
     },
     filesUploaded() {
-      return this.$store.state.files
+      return this.$store.getters.getFilesByDatasetId(this.datasetId)
     },
     uploadUrl() {
       return `/dataset/${this.datasetId}/file`
@@ -129,7 +129,7 @@ export default {
         this.files = []
       }).catch((res) => {
         this.loadingStatus = false
-        this.$Message.info(res.message)
+        this.$Message.error(res.message)
       })
     },
     keepOn() {

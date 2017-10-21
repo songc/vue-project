@@ -29,6 +29,9 @@ const getters = {
         data: dataArrayTranspose.slice(1)
       }
     }
+  },
+  getFilesByDatasetId: (state, getters) => (id) => {
+    return state.files.filter(file => file.parentId === id)
   }
 }
 
