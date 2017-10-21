@@ -13,13 +13,18 @@ const state = {
     username: '',
     email: '',
     sex: '',
-    address: ''
+    address: '',
+    createdAt: 0,
+    updatedAt: 0
   },
   currentDataset: {
     id: 0,
     name: '',
     author: '',
-    userId: ''
+    state: '',
+    createdAt: 0,
+    updatedAt: 0,
+    userId: 0
   },
   currentFile: {
     rowKey: '',

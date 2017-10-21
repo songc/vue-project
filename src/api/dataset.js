@@ -15,6 +15,9 @@ const datasetApi = {
       }
     })
   },
+  putDataset(dataset) {
+    return axios.put(datasetUrl.base, dataset)
+  },
   getById(id) {
     return axios.get(datasetUrl.addId(id))
   },

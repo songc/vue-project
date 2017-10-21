@@ -28,7 +28,7 @@
             </FormItem>
             <FormItem>
               <Button type="primary" @click="saveChange">Save Change</Button>
-              <!-- <Button type="ghost" @click="cancle">Cancle</Button> -->
+              <Button type="ghost" @click="cancle">Cancle</Button>
             </FormItem>
           </Form>
         </TabPane>
@@ -112,9 +112,12 @@ export default {
       })
     },
     saveChange() {
+      this.$Spin.show()
       this.$store.dispatch('putDataset', this.dataset).then(() => {
+        this.$Spin.hide()
         this.$Message.info('Save Success')
       }).catch(res => {
+        this.$Spin.hide()
         this.$Notice.error({
           title: 'Error',
           desc: res.message

@@ -31,6 +31,12 @@ export const postDataset = ({ commit }, {userId, dataset}) => {
   })
 }
 
+export const putDataset = ({commit}, dataset) => {
+  return datasetApi.putDataset(dataset).then(res => {
+    commit('changeCurrentDataset', res.data)
+  })
+}
+
 // action about dataset
 export const getPublicDatasets = ({ commit }, {pageNumber, pageSize}) => {
   return datasetApi.getPage(pageNumber, pageSize).then(res => {
