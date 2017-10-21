@@ -1,5 +1,5 @@
 <template>
-  <Menu mode="horizontal" theme="light" @on-select="go">
+  <Menu mode="horizontal" theme="light" @on-select="go" :active-name="$route.name">
     <Row type="flex" justify="space-between" align="middle">
       <Col span="3">
       <img class="menu-logo" src="../assets/logo1.png" @click="goHome">
