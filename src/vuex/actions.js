@@ -50,9 +50,7 @@ export const getDatasetById = ({commit}, datasetId) => {
   })
 }
 export const delDatasetById = ({ commit }, datasetId) => {
-  return datasetApi.deleteById(datasetId).then(res => {
-    commit('delDataset', datasetId)
-  })
+  return datasetApi.deleteById(datasetId)
 }
 
 export const getFiles = ({commit}, datasetId) => {

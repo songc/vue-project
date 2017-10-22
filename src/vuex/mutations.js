@@ -22,13 +22,5 @@ export default {
   },
   changeFiles(state, files) {
     state.files = files
-  },
-  delDataset(state, id) {
-    let index = state.datasets.findindex(dataset => dataset.id === id)
-    state.datasets.splice(index, 1)
-  },
-  delFile (state, rowKey) {
-    let index = state.files.findindex(f => f.rowKey === rowKey)
-    state.files.splice(index, 1)
   }
 }

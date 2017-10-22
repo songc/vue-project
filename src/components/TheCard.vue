@@ -10,6 +10,7 @@
           <Button type="info" @click="browseDataset(dataset)">Browse</Button>
           <Button type="ghost" @click="updateDataset(dataset)">Modify</Button>
           <Button type="ghost" @click="downLoadDataset(dataset)">DownLoad</Button>
+          <Button type="warning" @click="deleteDataset(dataset)">Delete</Button>
         </div>
       </Card>
     </Col>
@@ -17,6 +18,7 @@
   <div class="thecard-page">
     <Page :total="total" :page-size="size" @on-change="changePageNum" show-total></Page>
   </div>
+  </Modal>
 </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
   },
   data() {
     return {
+      modal: false,
       total: 0,
       number: 1,
       size: 9
@@ -67,6 +70,31 @@ export default {
     },
     downLoadDataset(data) {
 
+    },
+    deleteDataset(data) {
+      let _this = this
+      let confirm = function () {
+        _this.$Spin.show()
+        _this.$store.dispatch('delDatasetById', data.id).then(res => {
+          _this.$Spin.hide()
+          _this.$Message.info('delete success')
+        }).catch(res => {
+          _this.$Spin.hide()
+          _this.$Notice.error({
+            title: 'Fail to Delete Dataset' + data.name,
+            desc: res
+          })
+        }).then(res => {
+          _this.fetchData()
+        })
+      }
+      this.$Modal.confirm({
+        title: 'Delete',
+        content: 'Do you really want to delete the dataset?',
+        okText: 'Yes',
+        cancelText: 'Cancle',
+        onOk: confirm
+      })
     },
     fetchData() {
       let payload = {
