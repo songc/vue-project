@@ -32,6 +32,9 @@ const getters = {
   },
   getFilesByDatasetId: (state, getters) => (id) => {
     return state.files.filter(file => file.parentId === id)
+  },
+  getDatasetByUserId: (state, getters) => (id) => {
+    return state.datasets.filter(dataset => dataset.userId === id)
   }
 }
 

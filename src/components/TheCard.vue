@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     datasets() {
-      return this.$store.state.datasets
+      return this.$store.getters.getDatasetByUserId(parseInt(this.$route.params.id))
     }
   },
   watch: {
