@@ -69,7 +69,15 @@ export default {
       this.$router.push({name: 'datasetUpdate', params: {id: data.id}})
     },
     downLoadDataset(data) {
-
+      const linkElement = document.createElement('a')
+      linkElement.setAttribute('href', `/api/dataset/${data.id}/zip`)
+      linkElement.setAttribute('download', data.name + '.zip')
+      var clickEvent = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: false
+      })
+      linkElement.dispatchEvent(clickEvent)
     },
     deleteDataset(data) {
       const _this = this
