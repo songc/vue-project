@@ -16,7 +16,7 @@
     </Col>
   </Row>
   <div class="thecard-page">
-    <Page :total="total" :page-size="size" @on-change="changePageNum" show-total></Page>
+    <Page :current="number" :total="total" :page-size="size" @on-change="changePageNum" show-total></Page>
   </div>
   </Modal>
 </div>
@@ -72,12 +72,13 @@ export default {
 
     },
     deleteDataset(data) {
-      let _this = this
+      const _this = this
       let confirm = function () {
         _this.$Spin.show()
         _this.$store.dispatch('delDatasetById', data.id).then(res => {
           _this.$Spin.hide()
           _this.$Message.info('delete success')
+          _this.number = 1
         }).catch(res => {
           _this.$Spin.hide()
           _this.$Notice.error({

@@ -34,7 +34,11 @@
         </TabPane>
         <TabPane label="Upload File" name="upload">
           <Card class="dataset-create-upload" dis-hover :bordered="false">
-            <Upload multiple name="files" slot="title" :show-upload-list="false" :before-upload="handleUpload" :action="uploadUrl">
+            <Upload multiple name="files" slot="title" 
+              accept=".csv"
+              :show-upload-list="false" 
+              :before-upload="handleUpload" 
+              :action="uploadUrl">
               <Button type="ghost" icon="ios-cloud-upload-outline">Select the files</Button>
             </Upload>
             <Button v-show="files !=0" slot="extra" type="primary" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>

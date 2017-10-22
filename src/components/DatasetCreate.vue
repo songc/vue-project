@@ -39,6 +39,7 @@
             <Upload multiple
               name="files"
               slot="title"
+              accept=".csv"
               :show-upload-list="false"
               :before-upload="handleUpload" 
               :action="uploadUrl">
