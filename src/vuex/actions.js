@@ -38,12 +38,20 @@ export const putDataset = ({commit}, dataset) => {
 }
 
 // action about dataset
-export const getPublicDatasets = ({ commit }, {pageNumber, pageSize}) => {
-  return datasetApi.getPage(pageNumber, pageSize).then(res => {
-    commit('changeDatasets', res.data.content)
-    return res.data
-  })
+export const getPublicDatasets = ({ commit }, {seachKeyWord, pageNumber, pageSize}) => {
+  if (seachKeyWord) {
+    return datasetApi.seach(seachKeyWord, pageNumber, pageSize).then(res => {
+      commit('changeDatasets', res.data.content)
+      return res.data
+    })
+  } else {
+    return datasetApi.getPage(pageNumber, pageSize).then(res => {
+      commit('changeDatasets', res.data.content)
+      return res.data
+    })
+  }
 }
+
 export const getDatasetById = ({commit}, datasetId) => {
   return datasetApi.getById(datasetId).then(res => {
     commit('changeCurrentDataset', res.data)

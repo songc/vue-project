@@ -22,7 +22,8 @@
       </Submenu>
       </Col>
       <Col span="4" offset="5">
-      <Input v-model="seachValue" placeholder="search dataset ... ">
+      <Input v-model="seachKeyWord"  @keyup.enter="search" placeholder="search dataset ... ">
+        <Button @click="search" slot="append" icon="ios-search"></Button>
       </Input>
       </Col>
       <Col span="3">
@@ -52,7 +53,7 @@
 export default {
   data() {
     return {
-      seachValue: ''
+      seachKeyWord: ''
     }
   },
   computed: {
@@ -75,6 +76,9 @@ export default {
     },
     go(name) {
       this.$router.push({name: name, params: {id: this.userId}})
+    },
+    search() {
+      this.$router.push(`/dataset?search=${this.seachKeyWord}`)
     },
     createDataset() {
       if (this.isLogin) {

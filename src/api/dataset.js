@@ -15,6 +15,17 @@ const datasetApi = {
       }
     })
   },
+  seach(keyWord, pageNumber, pageSize) {
+    return axios({
+      method: 'get',
+      url: datasetUrl.query,
+      params: {
+        keyWord: keyWord,
+        number: pageNumber,
+        size: pageSize
+      }
+    })
+  },
   putDataset(dataset) {
     return axios.put(datasetUrl.base, dataset)
   },

@@ -22,6 +22,7 @@
 <script>
 export default {
   name: 'TheCard2',
+  props: ['searchKeyWord'],
   filters: {
     formatDescription: function(value) {
       let limitnum = 97
@@ -73,6 +74,7 @@ export default {
     },
     fetchData() {
       let payload = {
+        seachKeyWord: this.searchKeyWord,
         pageNumber: this.number - 1,
         pageSize: this.size
       }

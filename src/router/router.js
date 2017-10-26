@@ -57,7 +57,12 @@ const routes = [
       {
         path: 'dataset',
         name: 'dataset',
-        component: TheCard2
+        component: TheCard2,
+        props: route => {
+          return {
+            searchKeyWord: route.query.search
+          }
+        }
       },
       {
         path: 'user/:id/dashboard',

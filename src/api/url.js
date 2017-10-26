@@ -8,6 +8,7 @@ export const userUrl = {
 
 export const datasetUrl = {
   base: '/api/dataset',
+  query: '/api/dataset/query',
   addId: function(datasetId) {
     return '/api/dataset/' + datasetId
   },
