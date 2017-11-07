@@ -62,7 +62,10 @@ export default {
           this.$store
             .dispatch('register', this.user)
             .then(() => {
-              this.$router.push('/dashboard')
+              this.$router.push({
+                name: 'dashBoard',
+                params: { id: this.$store.state.user.id }
+              })
               this.$emit('on-success')
               this.$Message.success('Register Success')
             })
