@@ -2,6 +2,7 @@
 <div>
   <div id="the-echart" ref="theEchart">
   </div>
+  <Button @click="smooth(10,optionsData)">Smooth</Button>
   <Modal title="add comment" v-model="modal" @on-cancel="false" @on-ok="addMark(params)">
     <Input v-model="comment"></Input>
   </Modal>
@@ -10,7 +11,7 @@
 </template>
 
 <script>
-// import analysisApi from '../api/analysis'
+import analysisApi from '../api/analysis'
 import echarts from 'echarts'
 export default {
   name: 'theEchart',
@@ -29,8 +30,8 @@ export default {
   },
   watch: {
     optionsData: {
-      handler: function() {
-        this.updateChart()
+      handler: function(val, oldVal) {
+        this.updateChart(val)
       },
       deep: true
     }
@@ -63,7 +64,20 @@ export default {
         series: mySeries
       })
     },
-    updateChart() {
+    smooth(windowsWidth, optionsData) {
+      let data = optionsData
+      analysisApi.postSmooth(windowsWidth, optionsData.data).then(res => {
+        data.data = res.data
+      }).then(() => {
+        this.updateChart(data)
+      }).catch(res => {
+        this.$Notice.error({
+          title: 'Fail smooth',
+          desc: res
+        })
+      })
+    },
+    updateChart(optionsData) {
       function createLegend(data) {
         let res = []
         for (let index = 0; index < data.length; index++) {
@@ -71,13 +85,13 @@ export default {
         }
         return res
       }
-      if (this.optionsData === undefined) {
+      if (optionsData === undefined) {
         return false
       } else {
         let options = {
           title: {text: 'example'},
           legend: {
-            data: createLegend(this.optionsData.data)
+            data: createLegend(optionsData.data)
           },
           toolbox: {
             show: true,
@@ -93,10 +107,10 @@ export default {
           },
           tooltip: {},
           xAxis: {
-            data: this.optionsData.xAxis
+            data: optionsData.xAxis
           },
           yAxis: {},
-          series: this.optionsData.data.map((x, index) => {
+          series: optionsData.data.map((x, index) => {
             return {
               name: 'channl' + index,
               type: 'line',

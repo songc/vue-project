@@ -19,3 +19,12 @@ export const fileUrl = {
   base: '/api/hbase',
   addId: rowKey => '/api/hbase/' + rowKey
 }
+
+export const analysisUrl = {
+  base: '/api/analysis',
+  smooth: function(windowsWidth) {
+    return `${this.base}/smooth/${windowsWidth}`
+  },
+  extraction: rate => `${this.base}/extraction/${rate}`,
+  judgement: rate => `${this.base}/judgement/${rate}`
+}
