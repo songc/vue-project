@@ -35,6 +35,9 @@ const getters = {
   },
   getDatasetByUserId: (state, getters) => (id) => {
     return state.datasets.filter(dataset => dataset.userId === id)
+  },
+  getPngUrl: state => {
+    return `api/hbase/png/${state.currentFile.rowKey}`
   }
 }
 
