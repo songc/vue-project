@@ -35,7 +35,7 @@
         <TabPane label="Upload File" name="upload">
           <Card class="dataset-create-upload" dis-hover :bordered="false">
             <Upload multiple name="files" slot="title" 
-              accept=".csv"
+              :accept="dataset.type==='CSV'? '.csv':'image/*'"
               :show-upload-list="false" 
               :before-upload="handleUpload" 
               :action="uploadUrl">

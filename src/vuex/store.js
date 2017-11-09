@@ -22,6 +22,7 @@ const state = {
     name: '',
     author: '',
     state: '',
+    type: '',
     createdAt: 0,
     updatedAt: 0,
     userId: 0

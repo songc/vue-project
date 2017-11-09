@@ -25,7 +25,8 @@
         </Form>
       </TabPane>
       <TabPane label="Content" name="content">
-        <TheEchart></TheEchart>
+        <TheEchart v-if="dataset.type==='CSV'"></TheEchart>
+        <ImageShow v-else-if="dataset.type==='IMAGE'"></ImageShow>
       </TabPane>
     </Tabs>
     </Col>
@@ -34,10 +35,12 @@
 </template>
 
 <script>
+import ImageShow from './ImageShow'
 import TheEchart from './TheEchart'
 export default {
   components: {
-    TheEchart
+    TheEchart,
+    ImageShow
   },
   data() {
     return {

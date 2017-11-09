@@ -10,6 +10,12 @@
         <FormItem prop="dataset.author" label="author">
           <Input type="text" v-model="dataset.author" placeholder="dataset author"></Input>
         </FormItem>
+        <FormItem prop="dataset.type" label="type">
+          <RadioGroup v-model="dataset.type">
+            <Radio label="CSV">CSV</Radio>
+            <Radio label="IMAGE">IMAGE</Radio>
+          </RadioGroup>
+        </FormItem>
         <FormItem prop="dataset.description" label="descript">
           <Input type="textarea" v-model="dataset.description" placeholder="dataset description"></Input>
         </FormItem>
@@ -39,7 +45,7 @@
             <Upload multiple
               name="files"
               slot="title"
-              accept=".csv"
+              :accept="dataset.type==='CSV'? '.csv':'image/*'"
               :show-upload-list="false"
               :before-upload="handleUpload" 
               :action="uploadUrl">
@@ -84,6 +90,7 @@ export default {
       dataset: {
         name: '',
         author: '',
+        type: 'CSV',
         description: ''
       }
     }
