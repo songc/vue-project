@@ -37,7 +37,11 @@ const getters = {
     return state.datasets.filter(dataset => dataset.userId === id)
   },
   getPngUrl: state => {
-    return `api/hbase/png/${state.currentFile.rowKey}`
+    if (state.currentFile.rowKey === '') {
+      return ''
+    } else {
+      return `api/hbase/png/${state.currentFile.rowKey}`
+    }
   }
 }
 
