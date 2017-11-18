@@ -9,7 +9,7 @@
       <p>width:{{imageInfo.width}}</p>
       <p>height:{{imageInfo.height}}</p>     
       <Card :padding="0" dis-hover>
-          <canvas ref="canvas" width="800px" height="600px" class="base"></canvas>
+          <canvas ref="canvas" width="800px" height="600px" class="base" style="display:none"></canvas>
           <canvas ref="canvas2" width="800px" height="600px" class="base"></canvas>
           <canvas ref="clip" width="800px" height="600px"></canvas>
       </Card>
@@ -29,10 +29,10 @@ export default {
         height: 600
       },
       region: {
-        startX: 0,
-        startY: 0,
-        width: 1,
-        height: 1
+        startX: 50,
+        startY: 50,
+        width: 50,
+        height: 50
       }
     }
   },
@@ -74,16 +74,10 @@ export default {
       deep: true
     }
   },
-  mounted() {
-    const ctx = this.$refs.canvas.getContext('2d')
-    ctx.globalAlpha = 0.5
-  },
   methods: {
     getImage() {
       const _this = this
       _this.img = new Image()
-      const ctx = _this.$refs.canvas.getContext('2d')
-      const ctx2 = _this.$refs.canvas.getContext('2d')
       _this.img.onload = function() {
         let naturalWidth = this.naturalWidth
         let naturalHeight = this.naturalHeight
@@ -91,8 +85,13 @@ export default {
         _this.imageInfo.height = naturalHeight
         let times = scaleing(naturalWidth, naturalHeight, 800, 600)
         _this.times = times
+        const ctx = _this.$refs.canvas.getContext('2d')
         ctx.drawImage(_this.img, 0, 0, naturalWidth / times, naturalHeight / times)
+        const ctx2 = _this.$refs.canvas2.getContext('2d')
+        ctx2.save()
+        ctx2.globalAlpha = 0.5
         ctx2.drawImage(_this.img, 0, 0, naturalWidth / times, naturalHeight / times)
+        ctx2.restore()
         _this.clipPattern()
       }
       _this.img.src = _this.pngUrl
