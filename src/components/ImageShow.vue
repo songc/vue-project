@@ -13,13 +13,20 @@
           <canvas ref="canvas2" width="800px" height="600px" class="base"></canvas>
           <canvas ref="clip" width="800px" height="600px"></canvas>
       </Card>
+      <Button type="primary" @click="getRegionResult">get</Button>
+      <SignalChart :xData="xData" :yData="yData" :width="500" :height="400"> </SignalChart>
   </div>
 </template>
 
 <script>
-import {scaleing} from '../util/imageUtil'
+import {scaleing, getX} from '../util/imageUtil'
+import SignalChart from './SignalChart'
+import analysisApi from '../api/analysis.js'
 export default {
   name: 'imageShow',
+  components: {
+    SignalChart
+  },
   data() {
     return {
       img: null,
@@ -33,7 +40,9 @@ export default {
         startY: 50,
         width: 50,
         height: 50
-      }
+      },
+      xData: [],
+      yData: []
     }
   },
   computed: {
@@ -88,10 +97,9 @@ export default {
         const ctx = _this.$refs.canvas.getContext('2d')
         ctx.drawImage(_this.img, 0, 0, naturalWidth / times, naturalHeight / times)
         const ctx2 = _this.$refs.canvas2.getContext('2d')
-        ctx2.save()
+        ctx2.clearRect(0, 0, 800, 600)
         ctx2.globalAlpha = 0.5
         ctx2.drawImage(_this.img, 0, 0, naturalWidth / times, naturalHeight / times)
-        ctx2.restore()
         _this.clipPattern()
       }
       _this.img.src = _this.pngUrl
@@ -105,6 +113,12 @@ export default {
         ctx.clearRect(0, 0, 800, 600)
         ctx.drawImage(canvas, region.startX / times, region.startY / times, region.width / times, region.height / times, region.startX / times, region.startY / times, region.width / times, region.height / times)
       }
+    },
+    getRegionResult() {
+      analysisApi.getSingleRegionGrayAver(this.$route.params.id, this.region).then(res => {
+        this.yData[0] = res.data.f
+        this.xData = getX(this.yData[0].length, 1)
+      })
     }
   }
 }

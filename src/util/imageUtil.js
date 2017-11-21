@@ -5,4 +5,11 @@ function scaleing(imgWidth, imgHeight, canvasWidth, canvasHeight) {
     return Math.max(imgHeight / canvasHeight, imgWidth / canvasWidth)
   }
 }
-export {scaleing}
+function getX(len, start) {
+  var result = new Array(len)
+  for (let i = 0; i < len; i++) {
+    result[i] = i + start
+  }
+  return result
+}
+export {scaleing, getX}

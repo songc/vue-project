@@ -10,6 +10,20 @@ const analysisApi = {
   },
   postJudgement(rate, signal) {
     return axios.post(analysisUrl.judgement(rate), signal)
+  },
+  getAllRegionGrayAver(datasetId, width, height) {
+    return axios.get(analysisUrl.allRegionGrayAver(datasetId), {params: {
+      width: width,
+      height: height
+    }})
+  },
+  getSingleRegionGrayAver(datasetId, {startX, startY, width, height}) {
+    return axios.get(analysisUrl.singleRegionGrayAver(datasetId), {params: {
+      startX: startX,
+      startY: startY,
+      width: width,
+      height: height
+    }})
   }
 }
 
