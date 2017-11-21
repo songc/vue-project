@@ -14,12 +14,16 @@
           <canvas ref="clip" width="800px" height="600px"></canvas>
       </Card>
       <Button type="primary" @click="getRegionResult">get</Button>
-      <SignalChart :xData="xData" :yData="yData" :width="500" :height="400"> </SignalChart>
+      <SignalChart :xData="xData" :yData="f" :width="500" :height="400" :single="true"> </SignalChart>
+      <SignalChart :xData="xData" :yData="f0" :width="500" :height="400" :single="true"> </SignalChart>
+      <SignalChart :xData="xData" :yData="f0DivF" :width="500" :height="400" :single="true"> </SignalChart>
+      <SignalChart :xData="xData" :yData="negF0DivF" :width="500" :height="400" :single="true"> </SignalChart>
+      
   </div>
 </template>
 
 <script>
-import {scaleing, getX} from '../util/imageUtil'
+import {scaleing, getX, getDived, getNeg} from '../util/imageUtil'
 import SignalChart from './SignalChart'
 import analysisApi from '../api/analysis.js'
 export default {
@@ -42,7 +46,8 @@ export default {
         height: 50
       },
       xData: [],
-      yData: []
+      f: [],
+      f0: []
     }
   },
   computed: {
@@ -56,6 +61,12 @@ export default {
         width: this.imageInfo.width - this.region.startX,
         height: this.imageInfo.height - this.region.startY
       }
+    },
+    f0DivF() {
+      return getDived(this.f, this.f0) || []
+    },
+    negF0DivF() {
+      return getNeg(this.f0DivF) || []
     },
     xAxis: {
       get: function() {
@@ -116,8 +127,9 @@ export default {
     },
     getRegionResult() {
       analysisApi.getSingleRegionGrayAver(this.$route.params.id, this.region).then(res => {
-        this.yData[0] = res.data.f
-        this.xData = getX(this.yData[0].length, 1)
+        this.f = res.data.f
+        this.f0 = res.data.f0
+        this.xData = getX(res.data.f.length, 1)
       })
     }
   }

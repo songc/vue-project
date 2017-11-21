@@ -1,3 +1,4 @@
+import mathjs from 'mathjs'
 function scaleing(imgWidth, imgHeight, canvasWidth, canvasHeight) {
   if (imgHeight <= canvasHeight && imgWidth <= canvasWidth) {
     return 1
@@ -12,4 +13,17 @@ function getX(len, start) {
   }
   return result
 }
-export {scaleing, getX}
+
+function getDived(f, f0) {
+  var theF = mathjs.matrix(f)
+  var theF0 = mathjs.matrix(f0)
+  var b = mathjs.dotDivide(theF, theF0)
+  return b.valueOf()
+}
+
+function getNeg(f) {
+  var theF = mathjs.matrix(f)
+  var negF = mathjs.map(theF, x => -x)
+  return negF.valueOf()
+}
+export {scaleing, getX, getDived, getNeg}

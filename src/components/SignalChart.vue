@@ -12,7 +12,8 @@ export default {
     xData: Array,
     yData: Array,
     width: Number,
-    height: Number
+    height: Number,
+    single: Boolean
   },
   data() {
     return {
@@ -30,7 +31,7 @@ export default {
       return {
         title: {text: 'example'},
         legend: {
-          data: this.createLegend(this.yData)
+          data: this.single ? ['channl'] : this.createLegend(this.yData)
         },
         toolbox: {
           show: true,
@@ -49,7 +50,11 @@ export default {
           data: this.xData
         },
         yAxis: {},
-        series: this.yData.map((x, index) => {
+        series: this.single ? {
+          name: 'channl',
+          type: 'line',
+          data: this.yData
+        } : this.yData.map((x, index) => {
           return {
             name: 'channl' + index,
             type: 'line',
