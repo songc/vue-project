@@ -8,16 +8,18 @@
       <InputNumber v-model="region.height" :max="maxValue.height" :min="1"></InputNumber>
       <p>width:{{imageInfo.width}}</p>
       <p>height:{{imageInfo.height}}</p>     
-      <Card :padding="0" dis-hover>
+      <Card :padding="0"
+            :bordered="false" 
+            dis-hover style="text-align: center;">
           <canvas ref="canvas" width="800px" height="600px" class="base" style="display:none"></canvas>
           <canvas ref="canvas2" width="800px" height="600px" class="base"></canvas>
           <canvas ref="clip" width="800px" height="600px"></canvas>
       </Card>
       <Button type="primary" @click="getRegionResult">get</Button>
-      <SignalChart :xData="xData" :yData="f" :width="500" :height="400" :single="true"> </SignalChart>
-      <SignalChart :xData="xData" :yData="f0" :width="500" :height="400" :single="true"> </SignalChart>
-      <SignalChart :xData="xData" :yData="f0DivF" :width="500" :height="400" :single="true"> </SignalChart>
-      <SignalChart :xData="xData" :yData="negF0DivF" :width="500" :height="400" :single="true"> </SignalChart>
+      <SignalChart :xData="xData" :yData="f" :width="800" :height="400" :single="true" title="f"> </SignalChart>
+      <SignalChart :xData="xData" :yData="f0" :width="800" :height="400" :single="true" title="f0"> </SignalChart>
+      <SignalChart :xData="xData" :yData="f0DivF" :width="800" :height="400" :single="true" title="f0/f"> </SignalChart>
+      <SignalChart :xData="xData" :yData="negF0DivF" :width="800" :height="400" :single="true" title="-f0/f"> </SignalChart>
       
   </div>
 </template>

@@ -9,7 +9,7 @@
       </RadioGroup>
     </Card>
     </Col>
-    <Col span="14">
+    <Col span="16">
     <Tabs value="info" class="dataset-browse-tabs">
       <TabPane label="Dataset Info" name="info">
         <Form>
@@ -28,6 +28,9 @@
         <TheEchart v-if="dataset.type==='CSV'"></TheEchart>
         <ImageShow v-else-if="dataset.type==='IMAGE'"></ImageShow>
       </TabPane>
+      <TabPane v-if="dataset.type==='IMAGE'" label="MultiRegion" name="multiRegion">
+        <MultiRegion></MultiRegion>
+      </TabPane>
     </Tabs>
     </Col>
   </Row>
@@ -37,10 +40,12 @@
 <script>
 import ImageShow from './ImageShow'
 import TheEchart from './TheEchart'
+import MultiRegion from './MultiRegion'
 export default {
   components: {
     TheEchart,
-    ImageShow
+    ImageShow,
+    MultiRegion
   },
   data() {
     return {

@@ -13,7 +13,8 @@ export default {
     yData: Array,
     width: Number,
     height: Number,
-    single: Boolean
+    single: Boolean,
+    title: String
   },
   data() {
     return {
@@ -29,9 +30,9 @@ export default {
     },
     option() {
       return {
-        title: {text: 'example'},
+        title: {text: this.title || 'example'},
         legend: {
-          data: this.single ? ['channl'] : this.createLegend(this.yData)
+          data: this.single ? ['channl'] : this.yData.length > 4 ? [] : this.createLegend(this.yData)
         },
         toolbox: {
           show: true,
@@ -40,7 +41,6 @@ export default {
               yAxisIndex: 'none'
             },
             dataView: {readOnly: false},
-            magicType: {type: ['line', 'bar']},
             restore: {},
             saveAsImage: {}
           }
