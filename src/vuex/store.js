@@ -34,7 +34,23 @@ const state = {
     content: ''
   },
   datasets: [],
-  files: []
+  files: [],
+  singleRegion: {
+    startX: 0,
+    startY: 0,
+    width: 0,
+    height: 0,
+    f: [],
+    f0: []
+  },
+  multiRegion: {
+    width: 0,
+    height: 0,
+    naturalWidth: 0,
+    naturalHeight: 0,
+    f: [],
+    f0: []
+  }
 }
 
 export default new Vuex.Store({

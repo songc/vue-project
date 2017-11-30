@@ -1,3 +1,4 @@
+import {getDived, getNeg, getTranspose} from '../util/imageUtil'
 const getters = {
   splitContent: state => {
     return state.currentFile.content.split('\n')
@@ -42,7 +43,20 @@ const getters = {
     } else {
       return `api/hbase/png/${state.currentFile.rowKey}`
     }
-  }
+  },
+  getF0DivF: state => {
+    return getDived(state.multiRegion.f, state.multiRegion.f0) || []
+  },
+  getNegF0DivF: (state, getters) => {
+    return getNeg(getters.getF0DivF) || []
+  },
+  getTranspose: state => {
+    return getTranspose(state.multiRegion.f) || []
+  },
+  getXData: state => (yAxis) => yAxis ? Array.from({length: Math.floor(state.multiRegion.naturealHeight / state.multiRegion.height)}, (v, k) =>
+    k * state.multiRegion.height) : Array.from({length: Math.floor(state.multiRegion.naturealWidth / state.multiRegion.width)}, (v, k) =>
+      k * state.multiRegion.width)
+
 }
 
 export default getters

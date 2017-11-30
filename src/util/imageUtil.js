@@ -7,11 +7,7 @@ function scaleing(imgWidth, imgHeight, canvasWidth, canvasHeight) {
   }
 }
 function getX(len, start) {
-  var result = new Array(len)
-  for (let i = 0; i < len; i++) {
-    result[i] = i + start
-  }
-  return result
+  return Array.from({length: len}, (u, i) => i + start)
 }
 
 function getDived(f, f0) {
@@ -26,4 +22,11 @@ function getNeg(f) {
   var negF = mathjs.map(theF, x => -x)
   return negF.valueOf()
 }
-export {scaleing, getX, getDived, getNeg}
+
+function getTranspose(f) {
+  var theF = mathjs.matrix(f)
+  var transpose = mathjs.transpose(theF)
+  return transpose.valueOf()
+}
+
+export {scaleing, getX, getDived, getNeg, getTranspose}

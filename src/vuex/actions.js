@@ -1,6 +1,7 @@
 import userApi from '../api/user'
 import datasetApi from '../api/dataset'
 import fileApi from '../api/file'
+import analysisApi from '../api/analysis'
 
 // action about user
 export const register = ({ commit }, user) => {
@@ -81,5 +82,17 @@ export const getFileByRowKey = ({commit}, rowKey) => {
 }
 export const delFile = ({commit}, listRowKey) => {
   return fileApi.deleteByListRowKey(listRowKey)
+}
+
+// action about image analysis
+export const getSingleRegion = ({commit}, {datasetId, singleRegion}) => {
+  return analysisApi.getSingleRegionGrayAver(datasetId, singleRegion).then(res => {
+    commit('getSingleRegionFAndF0', res.data)
+  })
+}
+export const getAllRegion = ({commit}, {datasetId, multiRegion}) => {
+  return analysisApi.getAllRegionGrayAver(datasetId, multiRegion).then(res => {
+    commit('getMultiRegionFAndF0', res.data)
+  })
 }
 
