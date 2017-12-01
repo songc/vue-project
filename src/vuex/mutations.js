@@ -30,14 +30,6 @@ export default {
       name: '',
       content: ''
     }
-    let singleRegion = {
-      startX: 0,
-      startY: 0,
-      width: 0,
-      height: 0,
-      f: [],
-      f0: []
-    }
     let multiRegion = {
       width: 0,
       height: 0,
@@ -47,21 +39,9 @@ export default {
       f0: []
     }
     state.currentFile = {...currentFile}
-    state.singleRegion = {...singleRegion}
     state.multiRegion = {...multiRegion}
   },
-  getSingleRegionFAndF0(state, fAndF0) {
-    state.singleRegion.f = fAndF0.f
-    state.singleRegion.f0 = fAndF0.f0
-  },
-  getMultiRegionFAndF0(state, fAndF0) {
-    state.multiRegion.f = fAndF0.f
-    state.multiRegion.f0 = fAndF0.f0
-  },
-  changeSingleRegion(state, regionInfo) {
-    state.singleRegion = {...regionInfo}
-  },
-  changeMultiRegion(state, regionInfo) {
-    state.multiRegion = {...regionInfo}
+  changeMultiRegion(state, info) {
+    state.multiRegion = {...info}
   }
 }

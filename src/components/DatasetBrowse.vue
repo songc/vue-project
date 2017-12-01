@@ -31,6 +31,10 @@
       <TabPane v-if="dataset.type==='IMAGE'" label="MultiRegion" name="multiRegion">
         <MultiRegion></MultiRegion>
       </TabPane>
+      <TabPane v-if="f[0]" label="HeatMap" name="heatMap">
+        <HeatMap  :xData="getAxis(false)" :yData="getAxis(true)" :data="signalData" :width="800" :height="500"></HeatMap>
+        <HeatMap  :xData="getData(5,1)" :yData="getData(5,1)" :data="getData(25,1)" :width="800" :height="500"></HeatMap>
+      </TabPane>
     </Tabs>
     </Col>
   </Row>
@@ -41,11 +45,14 @@
 import ImageShow from './ImageShow'
 import TheEchart from './TheEchart'
 import MultiRegion from './MultiRegion'
+import HeatMap from './HeatMap'
+import {getX} from '../util/imageUtil'
 export default {
   components: {
     TheEchart,
     ImageShow,
-    MultiRegion
+    MultiRegion,
+    HeatMap
   },
   data() {
     return {
@@ -66,6 +73,15 @@ export default {
         newFile.title = file.name
         return newFile
       })
+    },
+    selectedFileIndex() {
+      return this.files.findIndex(file => file.rowKey === this.selectedFile)
+    },
+    f() {
+      return this.$store.getters.getTranspose
+    },
+    signalData() {
+      return this.f[this.selectedFileIndex]
     }
   },
   watch: {
@@ -101,6 +117,12 @@ export default {
           desc: res
         })
       })
+    },
+    getAxis(isYAxis) {
+      return this.$store.getters.getAxis(isYAxis)
+    },
+    getData(len, start) {
+      return getX(len, start)
     }
   }
 }

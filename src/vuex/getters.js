@@ -1,34 +1,21 @@
-import {getDived, getNeg, getTranspose} from '../util/imageUtil'
+import {getDived, getNeg, getTranspose, getX} from '../util/imageUtil'
 const getters = {
-  splitContent: state => {
-    return state.currentFile.content.split('\n')
-  },
-  removeHead: (state, getters) => {
-    let index = getters.splitContent.findIndex(string => {
-      return string.startsWith('0')
-    })
-    if (index === -1) {
-      return []
+  getData: (state) => (rate) => {
+    let splitContent = state.currentFile.content.split('\n')
+    let index = splitContent.findIndex(s => s.startsWith('0'))
+    let removeHead = splitContent.slice(index)
+    const dataArray = Array.from(removeHead, x => x.split(','))
+    const dataArrayTranspose = []
+    for (let i = 0; i < dataArray[0].length; i++) {
+      let temp = []
+      for (let j = 0; j < dataArray.length; j = j + rate) {
+        temp[j] = dataArray[j][i]
+      }
+      dataArrayTranspose[i] = temp
     }
-    return getters.splitContent.slice(index)
-  },
-  getData: (state, getters) => {
-    if (getters.removeHead.length === 0) {
-      return undefined
-    } else {
-      const dataArray = Array.from(getters.removeHead, x => x.split(','))
-      const dataArrayTranspose = []
-      for (let i = 0; i < dataArray[0].length; i++) {
-        let temp = []
-        for (let j = 0; j < dataArray.length; j++) {
-          temp[j] = dataArray[j][i]
-        }
-        dataArrayTranspose[i] = temp
-      }
-      return {
-        xAxis: dataArrayTranspose[0],
-        data: dataArrayTranspose.slice(1)
-      }
+    return {
+      xAxis: dataArrayTranspose[0],
+      data: dataArrayTranspose.slice(1)
     }
   },
   getFilesByDatasetId: (state, getters) => (id) => {
@@ -44,19 +31,23 @@ const getters = {
       return `api/hbase/png/${state.currentFile.rowKey}`
     }
   },
-  getF0DivF: state => {
+  f0DivF: state => {
     return getDived(state.multiRegion.f, state.multiRegion.f0) || []
   },
-  getNegF0DivF: (state, getters) => {
-    return getNeg(getters.getF0DivF) || []
+  negF0DivF: (state, getters) => {
+    return getNeg(getters.f0DivF) || []
   },
   getTranspose: state => {
     return getTranspose(state.multiRegion.f) || []
   },
-  getXData: state => (yAxis) => yAxis ? Array.from({length: Math.floor(state.multiRegion.naturealHeight / state.multiRegion.height)}, (v, k) =>
-    k * state.multiRegion.height) : Array.from({length: Math.floor(state.multiRegion.naturealWidth / state.multiRegion.width)}, (v, k) =>
-      k * state.multiRegion.width)
-
+  getDataByIndex: (state, getters) => (index) => {
+    return getters.getTranspose[index] || []
+  },
+  getAxis: state => (yAxis) => {
+    let xLen = Math.floor(state.multiRegion.naturalWidth / state.multiRegion.width)
+    let ylen = Math.floor(state.multiRegion.naturalHeight / state.multiRegion.height)
+    return yAxis ? getX(ylen, 1, state.multiRegion.height) : getX(xLen, 1, state.multiRegion.width)
+  }
 }
 
 export default getters

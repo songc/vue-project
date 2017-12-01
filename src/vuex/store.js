@@ -35,14 +35,6 @@ const state = {
   },
   datasets: [],
   files: [],
-  singleRegion: {
-    startX: 0,
-    startY: 0,
-    width: 0,
-    height: 0,
-    f: [],
-    f0: []
-  },
   multiRegion: {
     width: 0,
     height: 0,

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <InputNumber v-model="region.width" :max="imageInfo.width" :min="50"></InputNumber>
-    <InputNumber v-model="region.height" :max="imageInfo.height" :min="50"></InputNumber>
+    <InputNumber v-model="region.width" :max="Math.floor(imageInfo.width/2)" :min="50"></InputNumber>
+    <InputNumber v-model="region.height" :max="Math.floor(imageInfo.height/2)" :min="50"></InputNumber>
     <p>width:{{imageInfo.width}}</p>
     <p>height:{{imageInfo.height}}</p>     
     <Card :padding="0"
@@ -75,10 +75,17 @@ export default {
       _this.img.src = _this.pngUrl
     },
     getRegionResult() {
+      let region = {
+        width: this.region.width,
+        height: this.region.height,
+        naturalWidth: this.imageInfo.width,
+        naturalHeight: this.imageInfo.height
+      }
       analysisApi.getAllRegionGrayAver(this.$route.params.id, this.region).then(res => {
         this.f = res.data.f
         this.f0 = res.data.f0
         this.xData = getX(res.data.f[0].length, 1)
+        this.$store.commit('changeMultiRegion', {...region, ...res.data})
       })
     }
   }

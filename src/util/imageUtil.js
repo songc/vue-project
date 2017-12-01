@@ -6,8 +6,9 @@ function scaleing(imgWidth, imgHeight, canvasWidth, canvasHeight) {
     return Math.max(imgHeight / canvasHeight, imgWidth / canvasWidth)
   }
 }
-function getX(len, start) {
-  return Array.from({length: len}, (u, i) => i + start)
+function getX(len, start, step) {
+  let space = step || 1
+  return Array.from({length: len}, (u, i) => (i + start) * space)
 }
 
 function getDived(f, f0) {
