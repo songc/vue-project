@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     optionsData: function() {
-      return this.$store.getters.getData
+      return this.$store.getters.getData(1)
     }
   },
   watch: {
