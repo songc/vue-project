@@ -115,6 +115,7 @@ export default {
               name: 'channl' + index,
               type: 'line',
               data: x,
+              showSymbol: false,
               markPoint: {
                 symbol: 'pin',
                 symbolSize: '30',
@@ -147,7 +148,7 @@ export default {
 
 <style scoped>
 #the-echart {
-  width: 700px;
+  width: 800px;
   height: 500px;
 }
 </style>

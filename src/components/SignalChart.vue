@@ -7,7 +7,7 @@
 <script>
 import echarts from 'echarts'
 export default {
-  name: 'theEchart',
+  name: 'SignalChart',
   props: {
     xData: Array,
     yData: Array,

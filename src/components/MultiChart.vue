@@ -68,7 +68,14 @@ export default {
             type: 'line',
             xAxisIndex: index,
             yAxisIndex: index,
-            data: value.map((x, index) => [index, x])
+            showSymbol: false,
+            smooth: true,
+            data: value.map((x, index) => [index, x]),
+            lineStyle: {
+              normal: {
+                color: 'red'
+              }
+            }
           }
         })
       }

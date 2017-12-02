@@ -33,7 +33,6 @@
       </TabPane>
       <TabPane v-if="f[0]" label="HeatMap" name="heatMap">
         <HeatMap  :xData="getAxis(false)" :yData="getAxis(true)" :data="signalData" :width="800" :height="500"></HeatMap>
-        <HeatMap  :xData="getData(5,1)" :yData="getData(5,1)" :data="getData(25,1)" :width="800" :height="500"></HeatMap>
       </TabPane>
     </Tabs>
     </Col>
@@ -89,6 +88,7 @@ export default {
     $route: 'fetchDataset'
   },
   created() {
+    this.$store.commit('initAnalysis')
     this.fetchDataset()
   },
   methods: {
