@@ -32,6 +32,13 @@ export default {
       return {
         title: {text: this.title || 'example'},
         tooltip: {},
+        toolbox: {
+          show: true,
+          feature: {
+            dataView: {readOnly: false},
+            saveAsImage: {}
+          }
+        },
         gird: {
           right: 10,
           left: 150

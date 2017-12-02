@@ -105,7 +105,9 @@ export default {
               saveAsImage: {}
             }
           },
-          tooltip: {},
+          tooltip: {
+            trigger: 'axis'
+          },
           xAxis: {
             data: optionsData.xAxis
           },

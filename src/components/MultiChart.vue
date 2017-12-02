@@ -31,6 +31,9 @@ export default {
     },
     option() {
       return {
+        tooltip: {
+          trigger: 'axis'
+        },
         grid: this.data.map((value, index) => {
           let xIndex = index % this.xData.length
           let yIndex = Math.floor(index / this.xData.length)
