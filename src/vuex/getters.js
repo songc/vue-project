@@ -1,4 +1,4 @@
-import {getDived, getNeg, getTranspose, getX} from '../util/imageUtil'
+import {getDived, getNeg, getTranspose, generateData} from '../util/imageUtil'
 const getters = {
   getData: (state) => (rate) => {
     let splitContent = state.currentFile.content.split('\n')
@@ -46,7 +46,7 @@ const getters = {
   getAxis: state => (yAxis) => {
     let xLen = Math.floor(state.multiRegion.naturalWidth / state.multiRegion.width)
     let ylen = Math.floor(state.multiRegion.naturalHeight / state.multiRegion.height)
-    return yAxis ? getX(ylen, 1, state.multiRegion.height) : getX(xLen, 1, state.multiRegion.width)
+    return yAxis ? generateData(ylen, 1, state.multiRegion.height) : generateData(xLen, 1, state.multiRegion.width)
   }
 }
 

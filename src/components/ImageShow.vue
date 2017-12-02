@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {scaleing, getX, getDived, getNeg} from '../util/imageUtil'
+import {scaleing, generateData, getDived, getNeg} from '../util/imageUtil'
 import SignalChart from './SignalChart'
 import analysisApi from '../api/analysis.js'
 export default {
@@ -131,7 +131,7 @@ export default {
       analysisApi.getSingleRegionGrayAver(this.$route.params.id, this.region).then(res => {
         this.f = res.data.f
         this.f0 = res.data.f0
-        this.xData = getX(res.data.f.length, 1)
+        this.xData = generateData(res.data.f.length, 1)
       })
     }
   }

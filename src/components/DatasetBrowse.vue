@@ -46,7 +46,7 @@ import ImageShow from './ImageShow'
 import TheEchart from './TheEchart'
 import MultiRegion from './MultiRegion'
 import HeatMap from './HeatMap'
-import {getX} from '../util/imageUtil'
+import {generateData} from '../util/imageUtil'
 export default {
   components: {
     TheEchart,
@@ -122,7 +122,7 @@ export default {
       return this.$store.getters.getAxis(isYAxis)
     },
     getData(len, start) {
-      return getX(len, start)
+      return generateData(len, start)
     }
   }
 }

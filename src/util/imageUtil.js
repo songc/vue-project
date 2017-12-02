@@ -6,7 +6,7 @@ function scaleing(imgWidth, imgHeight, canvasWidth, canvasHeight) {
     return Math.max(imgHeight / canvasHeight, imgWidth / canvasWidth)
   }
 }
-function getX(len, start, step) {
+function generateData(len, start, step) {
   let space = step || 1
   return Array.from({length: len}, (u, i) => (i + start) * space)
 }
@@ -30,4 +30,4 @@ function getTranspose(f) {
   return transpose.valueOf()
 }
 
-export {scaleing, getX, getDived, getNeg, getTranspose}
+export {scaleing, generateData, getDived, getNeg, getTranspose}

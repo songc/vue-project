@@ -9,6 +9,14 @@
            dis-hover style="text-align: center;">
         <canvas ref="canvas" width="800px" height="600px" class="base"></canvas>
         <!-- <canvas ref="clip" width="800px" height="600px"></canvas> -->
+        <MultiChart  
+          v-if="f!==[]"
+          :scale="times" 
+          :xData="getAxis(false)" 
+          :yData="getAxis(true)" 
+          :data="f" 
+          :width="800" 
+          :height="600"></MultiChart>
     </Card>
     <Button type="primary" @click="getRegionResult">get</Button>
     <SignalChart :xData="xData" :yData="f" :width="800" :height="400" :single="false" title="f"> </SignalChart>
@@ -19,13 +27,15 @@
 </template>
 
 <script>
-import { scaleing, getX, getDived, getNeg } from '../util/imageUtil'
+import { scaleing, generateData, getDived, getNeg } from '../util/imageUtil'
 import SignalChart from './SignalChart'
+import MultiChart from './MultiChart'
 import analysisApi from '../api/analysis.js'
 export default {
   name: 'MultiRegion',
   components: {
-    SignalChart
+    SignalChart,
+    MultiChart
   },
   data() {
     return {
@@ -84,9 +94,12 @@ export default {
       analysisApi.getAllRegionGrayAver(this.$route.params.id, this.region).then(res => {
         this.f = res.data.f
         this.f0 = res.data.f0
-        this.xData = getX(res.data.f[0].length, 1)
+        this.xData = generateData(res.data.f[0].length, 1)
         this.$store.commit('changeMultiRegion', {...region, ...res.data})
       })
+    },
+    getAxis(isYAxis) {
+      return this.$store.getters.getAxis(isYAxis)
     }
   }
 }
