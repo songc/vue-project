@@ -6,7 +6,7 @@
     <p>height:{{imageInfo.height}}</p>     
     <Card :padding="0"
           :bordered="false"
-           dis-hover style="text-align: center;">
+           dis-hover style="text-align: center; position:relative;">
         <canvas ref="canvas" width="800px" height="600px" class="base"></canvas>
         <!-- <canvas ref="clip" width="800px" height="600px"></canvas> -->
         <MultiChart  
@@ -105,3 +105,9 @@ export default {
 }
 </script>
 
+<style scoped>
+.base{
+  position: absolute;
+  left: 0px;
+}
+</style>
