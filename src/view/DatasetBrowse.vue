@@ -41,10 +41,10 @@
 </template>
 
 <script>
-import ImageShow from './ImageShow'
-import TheEchart from './TheEchart'
-import MultiRegion from './MultiRegion'
-import HeatMap from './HeatMap'
+import ImageShow from '../components/ImageShow'
+import TheEchart from '../components/TheEchart'
+import MultiRegion from '../components/MultiRegion'
+import HeatMap from '../components/HeatMap'
 import {generateData} from '../util/imageUtil'
 export default {
   components: {
