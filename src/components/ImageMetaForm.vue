@@ -36,6 +36,8 @@
       <FormItem label="Format">
         <Input v-model="imageMeta.format" type="text"></Input>
       </FormItem>
+    <Button type="primary" @click="save">Save</Button>
+    <Button type="glory">Cancel</Button>
   </Form>
 </template>
 
@@ -43,7 +45,28 @@
 export default {
   name: 'ImageMetaForm',
   props: {
-    imageMeta: Object
+    imageMeta1: Object
+  },
+  data() {
+    return {
+      imageMeta: {
+        name: '',
+        startAt: 0,
+        duration: 0,
+        frameRate: 0,
+        recordPositon: null,
+        recordArea: null,
+        signalType: null,
+        stimulateType: null,
+        stimulateMaterial: null,
+        format: null
+      }
+    }
+  },
+  methods: {
+    save() {
+      this.$store.dispatch('postImageMeta', {userId: this.$route.params.id, datasetMeta: this.imageMeta})
+    }
   }
 }
 </script>

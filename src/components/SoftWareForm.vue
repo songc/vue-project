@@ -9,6 +9,8 @@
     <FormItem label="">
       <Input v-model="software.period" type="text"></Input>
     </FormItem>
+    <Button type="primary" @click="save">Save</Button>
+    <Button type="glory">Cancel</Button>
   </Form>
 </template>
 
@@ -16,7 +18,20 @@
 export default {
   name: 'SoftwareForm',
   props: {
-    software: Object
+    software1: Object
+  },
+  data() {
+    return {
+      software: {
+        name: null,
+        version: null
+      }
+    }
+  },
+  methods: {
+    save() {
+      this.$store.dispatch('postSoftware', {userId: this.$route.params.id, datasetMeta: this.software})
+    }
   }
 }
 </script>

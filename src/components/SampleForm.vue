@@ -9,6 +9,8 @@
     <FormItem label="Period">
       <Input v-model="sample.period" type="text"></Input>
     </FormItem>
+    <Button type="primary" @click="save">Save</Button>
+    <Button type="glory">Cancel</Button>
   </Form>
 </template>
 
@@ -16,7 +18,21 @@
 export default {
   name: 'SampleForm',
   props: {
-    sample: Object
+    sample1: Object
+  },
+  data() {
+    return {
+      sample: {
+        name: null,
+        growth: null,
+        period: null
+      }
+    }
+  },
+  methods: {
+    save() {
+      this.$store.dispatch('postSample', {userId: this.$route.params.id, datasetMeta: this.sample})
+    }
   }
 }
 </script>

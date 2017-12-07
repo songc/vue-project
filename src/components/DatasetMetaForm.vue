@@ -24,6 +24,8 @@
     <FormItem label="Paper">
       <Input v-model="datasetMeta.paper" type="text"></Input>
     </FormItem>
+    <Button type="primary" @click="save">Save</Button>
+    <Button type="glory">Cancel</Button>
   </Form>
 </template>
 
@@ -31,7 +33,27 @@
 export default {
   name: 'DatasetMetaForm',
   props: {
-    datasetMeta: Object
+    datasetMeta1: Object
+  },
+  data() {
+    return {
+      datasetMeta: {
+        name: '',
+        goal: '',
+        operators: '',
+        sample: '',
+        postion: '',
+        stimulus: '',
+        signalType: '',
+        detail: '',
+        paper: ''
+      }
+    }
+  },
+  methods: {
+    save() {
+      this.$store.dispatch('postDatasetMeta', {userId: this.$route.params.id, datasetMeta: this.datasetMeta})
+    }
   }
 }
 </script>

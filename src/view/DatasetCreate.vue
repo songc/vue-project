@@ -16,6 +16,17 @@
             <Radio label="IMAGE">IMAGE</Radio>
           </RadioGroup>
         </FormItem>
+        <FormItem>
+          <Select v-if="dataset.equipments" v-model="selectedEquipmentId">
+            <Option v-for="equipment in dataset.equipments" :value="equipment.id" :key="equipment.id">{{ equipment.name }}</Option>
+          </Select>
+          <Button type="primary">Create New</Button> 
+        </FormItem>
+        <FormItem>
+          <Select v-if="dataset.equipments" v-model="selectedDatasetMetaId">
+            <Option v-for="datasetMeta in dataset.datasetMetas" :value="datasetMeta.id" :key="datasetMeta.id">{{ datasetMeta.name }}</Option>
+          </Select>
+        </FormItem>
         <FormItem prop="dataset.description" label="descript">
           <Input type="textarea" v-model="dataset.description" placeholder="dataset description"></Input>
         </FormItem>
@@ -78,6 +89,7 @@
 </template>
 
 <script>
+import {equipmentApi, softwareApi, datasetApi} from '../api/metaData'
 export default {
   name: 'DatasetCreate',
   data() {
@@ -91,7 +103,9 @@ export default {
         name: '',
         author: '',
         type: 'CSV',
-        description: ''
+        description: '',
+        equipments: null,
+        datasetMetas: null
       }
     }
   },
@@ -108,6 +122,14 @@ export default {
     uploadUrl() {
       return `/dataset/${this.datasetId}/file`
     }
+  },
+  created() {
+    datasetApi.getAll(this.$route.params.id).then(res => {
+      this.dataset.datasetMetas = res.data
+    })
+    equipmentApi.getAll(this.$route.params.id).then(res => {
+      this.dataset.equipments = res.data
+    })
   },
   methods: {
     next() {

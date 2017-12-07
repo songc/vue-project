@@ -12,6 +12,8 @@
     <FormItem label="pressure">
       <InputNumber v-model="environment.pressure"></InputNumber>
     </FormItem>
+      <Button type="primary" @click="save">Save</Button>
+      <Button type="glory">Cancel</Button>
   </Form>
 </template>
 
@@ -19,7 +21,23 @@
 export default {
   name: 'EnvironmentFrom',
   props: {
-    'environment': Object
+    environment1: Object
+  },
+  data() {
+    return {
+      environment: {
+        name: '',
+        light: 0,
+        temperature: 0,
+        humidity: 0,
+        pressure: 0
+      }
+    }
+  },
+  methods: {
+    save() {
+      this.$store.dispatch('postEnvionment', {userId: this.$route.params.id, datasetMeta: this.environment})
+    }
   }
 }
 </script>
