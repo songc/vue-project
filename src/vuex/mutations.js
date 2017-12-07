@@ -43,5 +43,26 @@ export default {
   },
   changeMultiRegion(state, info) {
     state.multiRegion = {...info}
+  },
+  changeIecMetas(state, iecMetas) {
+    state.iecMetas = iecMetas
+  },
+  changeImageMetas(state, imageMetas) {
+    state.imageMetas = imageMetas
+  },
+  changeDatasetMetas(state, datasetMetas) {
+    state.datasetMetas = datasetMetas
+  },
+  changeEnvironments(state, environments) {
+    state.environments = environments
+  },
+  changeSoftwares(state, softwares) {
+    state.softwares = softwares
+  },
+  changeSamples(state, samples) {
+    state.samples = samples
+  },
+  changeEquipments(state, equipments) {
+    state.equipments = equipments
   }
 }

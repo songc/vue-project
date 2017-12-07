@@ -42,7 +42,14 @@ const state = {
     naturalHeight: 0,
     f: [],
     f0: []
-  }
+  },
+  dataMetas: [],
+  iecMetas: [],
+  imageMetas: [],
+  environments: [],
+  samples: [],
+  softwares: [],
+  equipments: []
 }
 
 export default new Vuex.Store({

@@ -30,3 +30,19 @@ export const analysisUrl = {
   allRegionGrayAver: datasetId => `/api/analysis/image/multiple/${datasetId}`,
   singleRegionGrayAver: datasetId => `/api/analysis/image/single/${datasetId}`
 }
+
+export const metaUrl = {
+  base: '/api/user',
+  dataset: userId => `${this.base}/${userId}/datasetMeta`,
+  datasetAddId: (userId, id) => `${this.base}/${userId}/datasetMeta/${id}`,
+  equipment: userId => `${this.base}/${userId}/equipment`,
+  equipmentAddId: (userId, id) => `${this.base}/${userId}/equipment/${id}`,
+  image: userId => `${this.base}/${userId}/imageMeta`,
+  imageAddId: (userId, id) => `${this.base}/${userId}/imageMeta/${id}`,
+  iec: userId => `${this.base}/${userId}/cellularRecordingMeta`,
+  iecAddId: (userId, id) => `${this.base}/${userId}/cellularRecordingMeta/${id}`,
+  software: userId => `${this.base}/${userId}/software`,
+  softwareAddId: (userId, id) => `${this.base}/${userId}/software/${id}`,
+  environment: userId => `${this.base}/${userId}/environment`,
+  environmentAddId: (userId, id) => `${this.base}/${userId}/environment/${id}`
+}

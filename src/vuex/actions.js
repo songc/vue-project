@@ -1,6 +1,7 @@
 import userApi from '../api/user'
 import datasetApi from '../api/dataset'
 import fileApi from '../api/file'
+import {iecMetaApi, imageMetaApi, environmentApi, equipmentApi, sampleApi, softwareApi, datasetMetaApi} from '../api/metaData'
 
 // action about user
 export const register = ({ commit }, user) => {
@@ -83,5 +84,79 @@ export const delFile = ({commit}, listRowKey) => {
   return fileApi.deleteByListRowKey(listRowKey)
 }
 
-// action about image analysis
+export const postDatasetMeta = ({commit, dispatch}, {userId, datasetMeta}) => {
+  return datasetMetaApi.save(userId, datasetMeta).then(res => {
+    dispatch('getDatasetMetas', userId)
+  })
+}
+export const getDatasetMetas = ({commit}, userId) => {
+  return datasetMetaApi.getAll(userId).then(res => {
+    commit('changeDatasetMetas', res.data)
+  })
+}
 
+export const postImageMeta = ({commit, dispatch}, {userId, imageMeta}) => {
+  return imageMetaApi.save(userId, imageMeta).then(res => {
+    dispatch('getImageMetas', userId)
+  })
+}
+export const getImageMetas = ({commit}, userId) => {
+  return imageMetaApi.getAll(userId).then(res => {
+    commit('changeImageMetas', res.data)
+  })
+}
+
+export const postIecMeta = ({commit, dispatch}, {userId, iecMeta}) => {
+  return iecMetaApi.save(userId, iecMeta).then(res => {
+    dispatch('getIecMetas', userId)
+  })
+}
+export const getIecMetas = ({commit}, userId) => {
+  return iecMetaApi.getAll(userId).then(res => {
+    commit('changeIecMetas', res.data)
+  })
+}
+
+export const postSoftware = ({commit, dispatch}, {userId, software}) => {
+  return softwareApi.save(userId, software).then(res => {
+    dispatch('getSoftwares', userId)
+  })
+}
+export const getSoftwares = ({commit}, userId) => {
+  return softwareApi.getAll(userId).then(res => {
+    commit('changeSoftwares', res.data)
+  })
+}
+
+export const postEquipment = ({commit, dispatch}, {userId, equipment}) => {
+  return equipmentApi.save(userId, equipment).then(res => {
+    dispatch('getEquipments', userId)
+  })
+}
+export const getEquipments = ({commit}, userId) => {
+  return equipmentApi.getAll(userId).then(res => {
+    commit('changeEquipments', res.data)
+  })
+}
+
+export const postEnvironment = ({commit, dispatch}, {userId, environment}) => {
+  return environmentApi.save(userId, environment).then(res => {
+    dispatch('getEnvironments', userId)
+  })
+}
+export const getEnvironments = ({commit}, userId) => {
+  return environmentApi.getAll(userId).then(res => {
+    commit('changeEnvironments', res.data)
+  })
+}
+
+export const postSample = ({commit, dispatch}, {userId, sample}) => {
+  return sampleApi.save(userId, sample).then(res => {
+    dispatch('getSamples', userId)
+  })
+}
+export const getSamples = ({commit}, userId) => {
+  return sampleApi.getAll(userId).then(res => {
+    commit('changeSamples', res.data)
+  })
+}
