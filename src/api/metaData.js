@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './axios'
 import {metaUrl} from './url'
 
 export const softwareApi = {
