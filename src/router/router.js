@@ -3,7 +3,8 @@ import Router from 'vue-router'
 const Home = () => import('../view/Home.vue')
 const TheCard = () => import('../view/TheCard.vue')
 const TheCard2 = () => import('../view/TheCard2.vue')
-const DatasetCreate = () => import('../view/DatasetCreate.vue')
+const TheDatasetInfo = () => import('../view/TheDatasetInfo.vue')
+const TheFileInfo = () => import('../view/TheFileInfo.vue')
 const DatasetUpdate = () => import('../view/DatasetUpdate.vue')
 const TheHome = () => import('../view/TheHome.vue')
 const TheTeacher = () => import('../view/TheTeacher.vue')
@@ -72,15 +73,20 @@ const routes = [
       {
         path: 'user/:id/dataset',
         name: 'datasetCreate',
-        component: DatasetCreate
+        component: TheDatasetInfo
       },
       {
-        path: 'dataset/:id/get',
+        path: 'user/:id/dataset/:datasetId/file',
+        name: 'FileUpload',
+        component: TheFileInfo
+      },
+      {
+        path: 'user/:id/dataset/:datasetId/get',
         name: 'datasetBrowse',
         component: DatasetBrowse
       },
       {
-        path: 'dataset/:id/update',
+        path: 'user/:id/dataset/:datasetId/update',
         name: 'datasetUpdate',
         component: DatasetUpdate
       }

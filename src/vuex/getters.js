@@ -47,6 +47,27 @@ const getters = {
     let xLen = Math.floor(state.multiRegion.naturalWidth / state.multiRegion.width)
     let ylen = Math.floor(state.multiRegion.naturalHeight / state.multiRegion.height)
     return yAxis ? generateData(ylen, 1, state.multiRegion.height) : generateData(xLen, 1, state.multiRegion.width)
+  },
+  getDatasetMetaById: state => (id) => {
+    return state.datasetMetas.find(datasetMeta => datasetMeta.id === id)
+  },
+  getEquipmentById: state => (id) => {
+    return state.equipments.find(equipment => equipment.id === id)
+  },
+  getImageMetaById: state => (id) => {
+    return state.imageMetas.find(imageMeta => imageMeta.id === id)
+  },
+  getIecMetaById: state => (id) => {
+    return state.iecMetas.find(iecMeta => iecMeta.id === id)
+  },
+  getEnvironmentById: state => (id) => {
+    return state.environments.find(environment => environment.id === id)
+  },
+  getSampleById: state => (id) => {
+    return state.samples.find(sample => sample.id === id)
+  },
+  getSoftwareById: state => (id) => {
+    return state.softwares.find(software => software.id === id)
   }
 }
 

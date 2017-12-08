@@ -33,16 +33,16 @@ export const analysisUrl = {
 
 export const metaUrl = {
   base: '/api/user',
-  dataset: userId => `${this.base}/${userId}/datasetMeta`,
-  datasetAddId: (userId, id) => `${this.base}/${userId}/datasetMeta/${id}`,
-  equipment: userId => `${this.base}/${userId}/equipment`,
-  equipmentAddId: (userId, id) => `${this.base}/${userId}/equipment/${id}`,
-  image: userId => `${this.base}/${userId}/imageMeta`,
-  imageAddId: (userId, id) => `${this.base}/${userId}/imageMeta/${id}`,
-  iec: userId => `${this.base}/${userId}/cellularRecordingMeta`,
-  iecAddId: (userId, id) => `${this.base}/${userId}/cellularRecordingMeta/${id}`,
-  software: userId => `${this.base}/${userId}/software`,
-  softwareAddId: (userId, id) => `${this.base}/${userId}/software/${id}`,
-  environment: userId => `${this.base}/${userId}/environment`,
-  environmentAddId: (userId, id) => `${this.base}/${userId}/environment/${id}`
+  dataset: userId => `/api/user/${userId}/datasetMeta`,
+  datasetAddId: (userId, id) => `/api/user/${userId}/datasetMeta/${id}`,
+  equipment: userId => `/api/user/${userId}/equipment`,
+  equipmentAddId: (userId, id) => `/api/user/${userId}/equipment/${id}`,
+  image: userId => `/api/user/${userId}/imageMeta`,
+  imageAddId: (userId, id) => `/api/user/${userId}/imageMeta/${id}`,
+  iec: userId => `/api/user/${userId}/cellularRecordingMeta`,
+  iecAddId: (userId, id) => `/api/user/${userId}/cellularRecordingMeta/${id}`,
+  software: userId => `/api/user/${userId}/software`,
+  softwareAddId: (userId, id) => `/api/user/${userId}/software/${id}`,
+  environment: userId => `/api/user/${userId}/environment`,
+  environmentAddId: (userId, id) => `/api/user/${userId}/environment/${id}`
 }
