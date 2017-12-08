@@ -1,5 +1,5 @@
 <template>
-  <Form :model="sample">
+  <Form :model="sample" :label-width="80" label-position="left">
     <FormItem label="Name">
       <Input v-model="sample.name" type="text"></Input>
     </FormItem>
@@ -10,16 +10,13 @@
       <Input v-model="sample.period" type="text"></Input>
     </FormItem>
     <Button type="primary" @click="save">Save</Button>
-    <Button type="glory">Cancel</Button>
+    <Button type="ghost">Cancel</Button>
   </Form>
 </template>
 
 <script>
 export default {
   name: 'SampleForm',
-  props: {
-    sample1: Object
-  },
   data() {
     return {
       sample: {
@@ -31,7 +28,7 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch('postSample', {userId: this.$route.params.id, datasetMeta: this.sample})
+      this.$store.dispatch('postSample', {userId: this.$route.params.id, sample: this.sample})
     }
   }
 }

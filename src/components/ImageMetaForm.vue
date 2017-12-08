@@ -1,5 +1,5 @@
 <template>
-  <Form :model="imageMeta">
+  <Form :model="imageMeta" :label-width="80" label-position="left">
       <FormItem label="Name">
         <Input v-model="imageMeta.name" type="text"></Input>
       </FormItem>
@@ -37,16 +37,13 @@
         <Input v-model="imageMeta.format" type="text"></Input>
       </FormItem>
     <Button type="primary" @click="save">Save</Button>
-    <Button type="glory">Cancel</Button>
+    <Button type="ghost">Cancel</Button>
   </Form>
 </template>
 
 <script>
 export default {
   name: 'ImageMetaForm',
-  props: {
-    imageMeta1: Object
-  },
   data() {
     return {
       imageMeta: {
@@ -65,7 +62,7 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch('postImageMeta', {userId: this.$route.params.id, datasetMeta: this.imageMeta})
+      this.$store.dispatch('postImageMeta', {userId: this.$route.params.id, imageMeta: this.imageMeta})
     }
   }
 }

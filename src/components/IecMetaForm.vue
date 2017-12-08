@@ -1,5 +1,5 @@
 <template>
-  <Form :model="iecMeta">
+  <Form :model="iecMeta" :label-width="80" label-position="left">
       <FormItem label="Name">
         <Input v-model="iecMeta.name" type="text"></Input>
       </FormItem>
@@ -31,16 +31,13 @@
         <Input v-model="iecMeta.stimulateDetail" type="textarea"></Input>
       </FormItem>
       <Button type="primary" @click="save">Save</Button>
-      <Button type="glory">Cancel</Button>
+      <Button type="ghost">Cancel</Button>
   </Form>
 </template>
 
 <script>
 export default {
   name: 'IecMetaForm',
-  props: {
-    iecMeta1: Object
-  },
   data: {
     iecMeta: {
       name: '',

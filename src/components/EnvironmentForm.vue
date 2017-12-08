@@ -1,19 +1,22 @@
 <template>
-  <Form :model="environment">
-    <FormItem label="name">
+  <Form :model="environment" :label-width="80" label-position="left">
+    <FormItem label="Name" prop="name">
       <Input v-model="environment.name" type="text"></Input>
     </FormItem>
-    <FormItem label="light">
+    <FormItem label="Light" prop="light">
       <InputNumber v-model="environment.light" :min="0"></InputNumber>
     </FormItem>
-    <FormItem label="temperature">
+    <FormItem label="Temperature" prop="temperature">
+      <InputNumber v-model="environment.temperature"></InputNumber>
+    </FormItem>
+    <FormItem label="Humidity" prop="humidity">
       <InputNumber v-model="environment.humidity"></InputNumber>
     </FormItem>
-    <FormItem label="pressure">
+    <FormItem label="Pressure" prop="pressure">
       <InputNumber v-model="environment.pressure"></InputNumber>
     </FormItem>
       <Button type="primary" @click="save">Save</Button>
-      <Button type="glory">Cancel</Button>
+      <Button type="ghost">Cancel</Button>
   </Form>
 </template>
 
