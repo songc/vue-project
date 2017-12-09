@@ -44,5 +44,7 @@ export const metaUrl = {
   software: userId => `/api/user/${userId}/software`,
   softwareAddId: (userId, id) => `/api/user/${userId}/software/${id}`,
   environment: userId => `/api/user/${userId}/environment`,
-  environmentAddId: (userId, id) => `/api/user/${userId}/environment/${id}`
+  environmentAddId: (userId, id) => `/api/user/${userId}/environment/${id}`,
+  sample: userId => `/api/user/${userId}/sample`,
+  sampleAddId: (userId, id) => `/api/user/${userId}/sample/${id}`
 }
