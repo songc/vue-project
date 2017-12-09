@@ -23,9 +23,6 @@
 <script>
 export default {
   name: 'EnvironmentFrom',
-  props: {
-    environment1: Object
-  },
   data() {
     return {
       environment: {
@@ -39,7 +36,7 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch('postEnvionment', {userId: this.$route.params.id, datasetMeta: this.environment})
+      this.$store.dispatch('postEnvironment', {userId: this.$route.params.id, environment: this.environment})
     }
   }
 }

@@ -38,19 +38,21 @@
 <script>
 export default {
   name: 'IecMetaForm',
-  data: {
-    iecMeta: {
-      name: '',
-      startAt: 0,
-      duration: 0,
-      rate: 0,
-      channelNum: 0,
-      recordPositon: '',
-      samplingRate: 0,
-      signalType: '',
-      stimulateType: '',
-      stimulateMaterial: '',
-      stimulateDetail: ''
+  data() {
+    return {
+      iecMeta: {
+        name: '',
+        startAt: 0,
+        duration: 0,
+        rate: 0,
+        channelNum: 0,
+        recordPositon: '',
+        samplingRate: 0,
+        signalType: '',
+        stimulateType: '',
+        stimulateMaterial: '',
+        stimulateDetail: ''
+      }
     }
   },
   methods: {

@@ -7,7 +7,7 @@
       <Input v-model="software.version" type="text"></Input>
     </FormItem>
     <Button type="primary" @click="save">Save</Button>
-    <Button type="glory">Cancel</Button>
+    <Button type="ghost">Cancel</Button>
   </Form>
 </template>
 
