@@ -59,7 +59,7 @@ export default {
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push({name: 'datasetBrowse', params: {id: data.id}})
+      this.$router.push({name: 'datasetBrowse', params: {id: this.$route.params.id, datasetId: data.id}})
     },
     downLoadDataset(data) {
       const linkElement = document.createElement('a')
@@ -78,16 +78,8 @@ export default {
         pageNumber: this.number - 1,
         pageSize: this.size
       }
-      this.$Spin.show()
       this.$store.dispatch('getPublicDatasets', payload).then((res) => {
         this.total = res.totalElements
-        this.$Spin.hide()
-      }).catch(res => {
-        this.$Spin.hide()
-        this.$Notice.error({
-          title: 'GetDatasets Fail',
-          desc: res
-        })
       })
     }
   }

@@ -33,23 +33,7 @@
           </Form>
         </TabPane>
         <TabPane label="Upload File" name="upload">
-          <Card class="dataset-create-upload" dis-hover :bordered="false">
-            <Upload multiple name="files" slot="title" 
-              :accept="dataset.type==='CSV'? '.csv':'image/*'"
-              :show-upload-list="false" 
-              :before-upload="handleUpload" 
-              :action="uploadUrl">
-              <Button type="ghost" icon="ios-cloud-upload-outline">Select the files</Button>
-            </Upload>
-            <Button v-show="files !=0" slot="extra" type="primary" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>
-            <div v-if="files != 0">
-              待上传文件：
-              <li v-for="(file, index) in files" :key="file.name">
-                {{ file.name }}
-                <Button type="error" shape="circle" icon="close-round" @click="files.splice(index,1)" size="small"></Button>
-              </li>
-            </div>
-          </Card>
+          <FileUpload></FileUpload>
         </TabPane>
       </Tabs>
       </Col>
@@ -66,8 +50,12 @@
 </template>
 
 <script>
+import FileUpload from '../components/FileUpload'
 export default {
   name: 'DatasetManage',
+  components: {
+    FileUpload
+  },
   data() {
     return {
       modal: false,
@@ -78,7 +66,7 @@ export default {
   },
   computed: {
     userId() {
-      return this.$store.state.user.id
+      return this.$route.params.id
     },
     dataset() {
       return this.$store.state.currentDataset
@@ -97,57 +85,22 @@ export default {
     this.fetchData()
   },
   methods: {
-    rename() {
-
-    },
-    delFile() {
-      this.$Spin.show()
-      this.$store.dispatch('delFile', this.selectedFiles).then((res) => {
-        this.$Message.info('Delete Success')
-        this.$Message.info('Update File')
-        return this.$store.dispatch('getFiles', this.$route.params.id)
-      }).then(() => {
-        this.$Message.info('Update Success')
-        this.$Spin.hide()
-        this.selectedFiles = []
-      }).catch(res => {
-        this.$Spin.hide()
-        this.$Message.error(res)
-      })
-    },
-    saveChange() {
-      this.$Spin.show()
-      this.$store.dispatch('putDataset', this.dataset).then(() => {
-        this.$Spin.hide()
-        this.$Message.info('Save Success')
-      }).catch(res => {
-        this.$Spin.hide()
-        this.$Notice.error({
-          title: 'Error',
-          desc: res.message
-        })
-      })
-    },
     cancle() {
       this.$router.go(-1)
     },
-    handleUpload(file) {
-      this.files.push(file)
-      return false
-    },
-    upload() {
-      this.loadingStatus = true
-      let formData = new FormData()
-      this.files.forEach(function(element, index) {
-        formData.append('files', element)
+    delFile() {
+      this.$store.dispatch('delFile', this.selectedFiles).then((res) => {
+        this.$Message.info('Delete Success')
+        this.$Message.info('Update File')
+        return this.$store.dispatch('getFiles', this.$route.params.datasetId)
+      }).then(() => {
+        this.$Message.info('Update Success')
+        this.selectedFiles = []
       })
-      this.$store.dispatch('postFiles', {datasetId: this.$route.params.id, files: formData}).then(() => {
-        this.loadingStatus = false
-        this.modal = true
-        this.files = []
-      }).catch((res) => {
-        this.loadingStatus = false
-        this.$Message.error(res.message)
+    },
+    saveChange() {
+      this.$store.dispatch('putDataset', this.dataset).then(() => {
+        this.$Message.info('Save Success')
       })
     },
     keepOn() {
@@ -157,17 +110,8 @@ export default {
       this.$router.push({name: 'dashBoard', params: {id: this.dataset.userId}})
     },
     fetchData() {
-      this.$Spin.show()
-      this.$store.dispatch('getDatasetById', this.$route.params.id).then((res) => {
-        return this.$store.dispatch('getFiles', this.$route.params.id)
-      }).then(res => {
-        this.$Spin.hide()
-      }).catch((res) => {
-        this.$Spin.hide()
-        this.$Notice({
-          title: 'Fail to get Dataset info',
-          desc: res
-        })
+      this.$store.dispatch('getDatasetById', this.$route.params.datasetId).then((res) => {
+        return this.$store.dispatch('getFiles', this.$route.params.datasetId)
       })
     }
   }

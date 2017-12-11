@@ -62,11 +62,11 @@ export default {
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push({name: 'datasetBrowse', params: {id: data.id}})
+      this.$router.push({name: 'datasetBrowse', params: {id: this.$route.params.id, datasetId: data.id}})
     },
     updateDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push({name: 'datasetUpdate', params: {id: data.id}})
+      this.$router.push({name: 'datasetUpdate', params: {id: this.$route.params.id, datasetId: data.id}})
     },
     downLoadDataset(data) {
       const linkElement = document.createElement('a')
@@ -82,13 +82,10 @@ export default {
     deleteDataset(data) {
       const _this = this
       let confirm = function () {
-        _this.$Spin.show()
         _this.$store.dispatch('delDatasetById', data.id).then(res => {
-          _this.$Spin.hide()
           _this.$Message.info('delete success')
           _this.number = 1
         }).catch(res => {
-          _this.$Spin.hide()
           _this.$Notice.error({
             title: 'Fail to Delete Dataset' + data.name,
             desc: res

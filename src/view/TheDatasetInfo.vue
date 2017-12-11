@@ -2,40 +2,44 @@
   <div>
     <Card class="main" dis-hover>
       <p slot="title">dataset info</p>
-      <Form :model="dataset" label-position="right" :label-width="100">
-        <FormItem prop="name" label="Name">
-          <Input type="text" v-model="dataset.name" placeholder="dataset name" style="width: 300px"></Input>
-        </FormItem>
-        <FormItem prop="author" label="Author">
-          <Input type="text" v-model="dataset.author" placeholder="dataset author" style="width: 300px"></Input>
-        </FormItem>
-        <FormItem prop="type" label="Type">
-          <RadioGroup v-model="dataset.type">
-            <Radio label="CSV">CSV</Radio>
-            <Radio label="IMAGE">IMAGE</Radio>
-          </RadioGroup>
-        </FormItem>
-        <FormItem prop="description" label="Descript">
-          <Input type="textarea" v-model="dataset.description" :autosize="{minRows: 4, maxRows: 10}" placeholder="dataset description" style="width: 300px"></Input>
-        </FormItem>
-        <FormItem prop="equipmentId" label="Equipment">
-          <p v-if="equipments.length===0">You hasn't any template, Go to Create</p>
-          <Select v-else v-model="dataset.equipmentId" style="width: 300px">
-            <Option v-for="equipment in equipments" :value="equipment.id" :key="equipment.id">{{ equipment.name }}</Option>
-          </Select>
-          <Button type="primary" @click="equipmentModal=true">Create New</Button>
-          <InfoShow v-if="getEquipmentById" :info="getEquipmentById"></InfoShow> 
-        </FormItem>
-        <FormItem prop="datasetMetaId" label="DatasetMeta">
-          <p v-if="datasetMetas.length===0">You hasn't any template, Go to Create</p>
-          <Select v-else v-model="dataset.datasetMetaId" style="width: 300px">
-            <Option v-for="datasetMeta in datasetMetas" :value="datasetMeta.id" :key="datasetMeta.id">{{ datasetMeta.name }}</Option>
-          </Select>
-          <Button type="primary" @click="datasetMetaModal=true">Create New</Button>
-          <InfoShow v-if="getDatasetMetaById" :info="getDatasetMetaById"></InfoShow>
-        </FormItem>
-      </Form>
-      <Button slot="extra" type="primary" @click="save">Create Dataset</Button>      
+      <Button slot="extra" type="primary" @click="save">Create Dataset</Button>
+      <Row>
+        <Col span="12" offset="6">
+          <Form :model="dataset" label-position="left" :label-width="100">
+            <FormItem prop="name" label="Name">
+              <Input type="text" v-model="dataset.name" placeholder="dataset name" style="width: 300px"></Input>
+            </FormItem>
+            <FormItem prop="author" label="Author">
+              <Input type="text" v-model="dataset.author" placeholder="dataset author" style="width: 300px"></Input>
+            </FormItem>
+            <FormItem prop="type" label="Type">
+              <RadioGroup v-model="dataset.type">
+                <Radio label="CSV">CSV</Radio>
+                <Radio label="IMAGE">IMAGE</Radio>
+              </RadioGroup>
+            </FormItem>
+            <FormItem prop="description" label="Descript">
+              <Input type="textarea" v-model="dataset.description" :autosize="{minRows: 4, maxRows: 10}" placeholder="dataset description" style="width: 300px"></Input>
+            </FormItem>
+            <FormItem prop="equipmentId" label="Equipment">
+              <p v-if="equipments.length===0">You hasn't any template, Go to Create</p>
+              <Select v-else v-model="dataset.equipmentId" style="width: 300px">
+                <Option v-for="equipment in equipments" :value="equipment.id" :key="equipment.id">{{ equipment.name }}</Option>
+              </Select>
+              <Button type="primary" @click="equipmentModal=true">Create New</Button>
+              <InfoShow v-if="getEquipmentById" :info="getEquipmentById"></InfoShow> 
+            </FormItem>
+            <FormItem prop="datasetMetaId" label="DatasetMeta">
+              <p v-if="datasetMetas.length===0">You hasn't any template, Go to Create</p>
+              <Select v-else v-model="dataset.datasetMetaId" style="width: 300px">
+                <Option v-for="datasetMeta in datasetMetas" :value="datasetMeta.id" :key="datasetMeta.id">{{ datasetMeta.name }}</Option>
+              </Select>
+              <Button type="primary" @click="datasetMetaModal=true">Create New</Button>
+              <InfoShow v-if="getDatasetMetaById" :info="getDatasetMetaById"></InfoShow>
+            </FormItem>
+          </Form>       
+        </Col>
+      </Row>    
     </Card>
       <Modal v-model="equipmentModal">
         <Equipment></Equipment>
@@ -106,9 +110,10 @@ export default {
 
 <style scoped>
 .main {
-  width: 80%;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 12px;
   min-height: 800px;
 }
 </style>
