@@ -5,24 +5,28 @@ const iecUtil = {
   calMeanValue(array) {
     return array.reduce((a, b) => a + b, 0) / array.length
   },
-  calDeviation(array, meanValue) {
+  calSubMean(array, meanValue) {
     return array.map(x => x - meanValue)
-      .reduce((a, b) => a * b, 1) / (array.length - 1)
   },
-  calSkewness(array, meanValue, deviation) {
-    let sumCube = array.map(x => Math.pow(x - meanValue, 3)).reduce((a, b) => a + b, 0)
-    return sumCube / ((array.length - 1) * Math.pow(deviation, 3))
+  calDeviation(subMean) {
+    return subMean.map((value, index, array) => {
+      return index === array.length - 1 ? 0 : array[index + 1] * value
+    }).reduce((a, b) => a + b, 0) / (subMean.length - 1)
   },
-  calKurtosis(array, meanValue, deviation) {
-    let sum = array.map(x => x - meanValue).map(x => Math.pow(x, 4)).reduce((a, b) => a + b, 0)
-    return sum / ((array.length - 1) * Math.pow(deviation, 4))
+  calSkewness(subMean, deviation) {
+    let sumCube = subMean.map(x => Math.pow(x, 3)).reduce((a, b) => a + b, 0)
+    return sumCube / ((subMean.length - 1) * Math.pow(deviation, 3))
+  },
+  calKurtosis(subMean, deviation) {
+    let sum = subMean.map(x => Math.pow(x, 4)).reduce((a, b) => a + b, 0)
+    return sum / ((subMean.length - 1) * Math.pow(deviation, 4))
   },
   calActivity(array) {
     return array.map(x => Math.pow(x, 2)).reduce((a, b) => a + b, 0) / array.length
   },
   calDiff(array) {
     let diff = array.map((value, index, array) => {
-      return index === array.length ? 0 : (array[index + 1] - value) * value
+      return index === array.length - 1 ? 0 : (array[index + 1] - value) * value
     })
     diff.pop()
     return diff
@@ -31,7 +35,8 @@ const iecUtil = {
     return this.calMeanValue(diff) / activity
   },
   calComplexity(diff, mobility) {
-    return this.calMeanValue(this.diff(diff)) / (diff - mobility)
+    let result = (this.calMeanValue(diff)) / (this.calMeanValue(diff) - mobility)
+    return Math.sqrt(Math.abs(result))
   },
   calTime(array, rate) {
     return array.length / rate
