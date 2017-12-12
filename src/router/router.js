@@ -71,11 +71,6 @@ const routes = [
         component: TheCard
       },
       {
-        path: 'user/:id/dataset',
-        name: 'datasetCreate',
-        component: TheDatasetInfo
-      },
-      {
         path: 'user/:id/dataset/:datasetId/file',
         name: 'FileUpload',
         component: TheFileInfo
@@ -89,6 +84,11 @@ const routes = [
         path: 'user/:id/dataset/:datasetId/update',
         name: 'datasetUpdate',
         component: DatasetUpdate
+      },
+      {
+        path: 'user/:id/dataset',
+        name: 'datasetCreate',
+        component: TheDatasetInfo
       }
     ]
   },
