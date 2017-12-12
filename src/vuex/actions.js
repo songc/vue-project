@@ -84,6 +84,7 @@ export const delFile = ({commit}, listRowKey) => {
   return fileApi.deleteByListRowKey(listRowKey)
 }
 
+// operation meta data
 export const postDatasetMeta = ({commit, dispatch}, {userId, datasetMeta}) => {
   return datasetMetaApi.save(userId, datasetMeta).then(res => {
     dispatch('getDatasetMetas', userId)

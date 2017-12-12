@@ -66,6 +66,11 @@ const routes = [
         }
       },
       {
+        path: 'dataset/:datasetId/get',
+        name: 'datasetBrowse',
+        component: DatasetBrowse
+      },
+      {
         path: 'user/:id/dashboard',
         name: 'dashBoard',
         component: TheCard
@@ -74,11 +79,6 @@ const routes = [
         path: 'user/:id/dataset/:datasetId/file',
         name: 'FileUpload',
         component: TheFileInfo
-      },
-      {
-        path: 'user/:id/dataset/:datasetId/get',
-        name: 'datasetBrowse',
-        component: DatasetBrowse
       },
       {
         path: 'user/:id/dataset/:datasetId/update',

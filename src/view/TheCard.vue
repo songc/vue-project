@@ -62,7 +62,7 @@ export default {
     },
     browseDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
-      this.$router.push({name: 'datasetBrowse', params: {id: this.$route.params.id, datasetId: data.id}})
+      this.$router.push({name: 'datasetBrowse', params: {datasetId: data.id}})
     },
     updateDataset(data) {
       this.$store.commit('changeCurrentDataset', data)
