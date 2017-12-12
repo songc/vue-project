@@ -25,7 +25,7 @@
       <Input v-model="datasetMeta.paper" type="text"></Input>
     </FormItem>
     <Button type="primary" @click="save">Save</Button>
-    <Button type="ghost">Cancel</Button>
+    <Button type="ghost" @click="$emit('cancel')">Cancel</Button>
   </Form>
 </template>
 
@@ -53,6 +53,9 @@ export default {
   methods: {
     save() {
       this.$store.dispatch('postDatasetMeta', {userId: this.$route.params.id, datasetMeta: this.datasetMeta})
+        .then(() => {
+          this.$emit('success')
+        })
     }
   }
 }

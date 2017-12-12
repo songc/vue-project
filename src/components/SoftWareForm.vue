@@ -7,7 +7,7 @@
       <Input v-model="software.version" type="text"></Input>
     </FormItem>
     <Button type="primary" @click="save">Save</Button>
-    <Button type="ghost">Cancel</Button>
+    <Button type="ghost" @click="$emit('cancel')">Cancel</Button>
   </Form>
 </template>
 
@@ -25,6 +25,9 @@ export default {
   methods: {
     save() {
       this.$store.dispatch('postSoftware', {userId: this.$route.params.id, software: this.software})
+        .then(() => {
+          this.$emit('success')
+        })
     }
   }
 }

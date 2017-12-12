@@ -16,7 +16,7 @@
       <InputNumber v-model="environment.pressure"></InputNumber>
     </FormItem>
       <Button type="primary" @click="save">Save</Button>
-      <Button type="ghost">Cancel</Button>
+      <Button type="ghost" @click="$emit('cancel')">Cancel</Button>
   </Form>
 </template>
 
@@ -37,6 +37,9 @@ export default {
   methods: {
     save() {
       this.$store.dispatch('postEnvironment', {userId: this.$route.params.id, environment: this.environment})
+        .then(() => {
+          this.$emit('success')
+        })
     }
   }
 }

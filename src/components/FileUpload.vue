@@ -1,7 +1,7 @@
 <template>
   <div>
     <Card  dis-hover :bordered="false">
-            <Upload multiple
+      <Upload multiple
               name="files"
               slot="title"
               :accept="datasetType==='CSV'? '.csv':'image/*'"
@@ -9,9 +9,9 @@
               :before-upload="handleUpload" 
               :action="uploadUrl">
               <Button type="ghost" icon="ios-cloud-upload-outline">Select the files</Button>
-            </Upload>
-            <Button v-show="files !=0" slot="extra" type="primary" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>
-            <Form :model="fileMeta" :label-width="80" label-position="left">
+      </Upload>
+      <Button v-show="files !=0" slot="extra" type="primary" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>
+      <Form :model="fileMeta" :label-width="80" label-position="left">
               <FormItem v-if="datasetType=='CSV'" label="IecMeta" prop="iecMetaId">
                 <Select v-if="iecMetas.length!==0" v-model="fileMeta.iecMetaId" style="width:300px">
                   <Option v-for="iecMeta in iecMetas" :value="iecMeta.id" :key="iecMeta.id">{{ iecMeta.name }}</Option>
@@ -52,8 +52,8 @@
                 <Button type="primary" @click="sampleModal=true">Create New</Button>
                 <InfoShow v-if="getSampleById" :info="getSampleById"></InfoShow> 
               </FormItem>
-            </Form>
-            <div v-if="files != 0">
+      </Form>
+      <div v-if="files != 0">
                待上传文件：
               <li 
                 v-for="(file, index) in files" 
@@ -61,22 +61,27 @@
                 {{ file.name }} 
                 <Button type="error" shape="circle" icon="close-round" @click="files.splice(index,1)" size="small"></Button>
               </li> 
-            </div>
+      </div>
     </Card>
-    <Modal v-model="iecMetaModal">
-      <IecMetaForm></IecMetaForm>
+    <Modal v-model="iecMetaModal" title="IecMeta Info">
+      <IecMetaForm @success="iecMetaModal=false" @cancel="iecMetaModal=false" ></IecMetaForm>
+      <div slot="footer"></div>
     </Modal>
-    <Modal v-model="imageMetaModal">
-      <ImageMetaForm></ImageMetaForm>
+    <Modal v-model="imageMetaModal" title="ImageMeta Info">
+      <ImageMetaForm @success="imageMetaModal=false" @cancel="imageMetaModal=false"></ImageMetaForm>
+      <div slot="footer"></div>
     </Modal>
-    <Modal v-model="environmentModal">
-      <EnvironmentForm></EnvironmentForm>
+    <Modal v-model="environmentModal" title="Environment Info">
+      <EnvironmentForm @success="environmentModal=false" @cancel="environmentModal=false"></EnvironmentForm>
+      <div slot="footer"></div>
     </Modal>
-    <Modal v-model="softwareModal">
-      <SoftwareForm></SoftwareForm>
+    <Modal v-model="softwareModal" title="Software Info">
+      <SoftwareForm @success="softwareModal=false" @cancel="softwareModal=false"></SoftwareForm>
+      <div slot="footer"></div>
     </Modal>
-    <Modal v-model="sampleModal">
-      <SampleForm></SampleForm>
+    <Modal v-model="sampleModal" title="Sample Info">
+      <SampleForm @success="sampleModal=false" @cancel="sampleModal=false"></SampleForm>
+      <div slot="footer"></div>
     </Modal>
   </div>
 </template>

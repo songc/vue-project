@@ -10,7 +10,7 @@
       <Input v-model="sample.period" type="text"></Input>
     </FormItem>
     <Button type="primary" @click="save">Save</Button>
-    <Button type="ghost">Cancel</Button>
+    <Button type="ghost" @click="$emit('cancel')">Cancel</Button>
   </Form>
 </template>
 
@@ -29,6 +29,9 @@ export default {
   methods: {
     save() {
       this.$store.dispatch('postSample', {userId: this.$route.params.id, sample: this.sample})
+        .then(() => {
+          this.$emit('success')
+        })
     }
   }
 }

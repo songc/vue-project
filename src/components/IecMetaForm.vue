@@ -31,7 +31,7 @@
         <Input v-model="iecMeta.stimulateDetail" type="textarea"></Input>
       </FormItem>
       <Button type="primary" @click="save">Save</Button>
-      <Button type="ghost">Cancel</Button>
+      <Button type="ghost" @click="$emit('cancel')">Cancel</Button>
   </Form>
 </template>
 
@@ -58,6 +58,9 @@ export default {
   methods: {
     save() {
       this.$store.dispatch('postIecMeta', {userId: this.$route.params.id, iecMeta: this.iecMeta})
+        .then(() => {
+          this.$emit('success')
+        })
     }
   }
 }

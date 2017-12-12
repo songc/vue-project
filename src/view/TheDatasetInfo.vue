@@ -1,7 +1,7 @@
 <template>
   <div>
     <Card class="main" dis-hover>
-      <p slot="title">dataset info</p>
+      <p slot="title">Dataset Info</p>
       <Button slot="extra" type="primary" @click="save">Create Dataset</Button>
       <Row>
         <Col span="12" offset="6">
@@ -41,11 +41,13 @@
         </Col>
       </Row>    
     </Card>
-      <Modal v-model="equipmentModal">
-        <Equipment></Equipment>
+      <Modal v-model="equipmentModal" title="Equipment Info">
+        <Equipment @success="equipmentModal=false" @cancel="equipmentModal=false"></Equipment>
+        <div slot="footer"></div>
       </Modal>
-      <Modal v-model="datasetMetaModal">
-        <DatasetMeta></DatasetMeta>
+      <Modal v-model="datasetMetaModal" title="DatasetMeta Info">
+        <DatasetMeta @success="datasetMetaModal=false" @cancel="datasetMetaModal=false"></DatasetMeta>
+        <div slot="footer"></div>
       </Modal>
   </div>
 </template>
