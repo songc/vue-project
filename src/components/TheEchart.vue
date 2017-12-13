@@ -1,12 +1,16 @@
 <template>
-<div>
+<div  class="the-echart">
   <div id="the-echart" ref="theEchart">
   </div>
   <Button @click="smooth(10,optionsData)">Smooth</Button>
   <Button @click="clearMarkPoint">ClearMarkPoint</Button>
+  <Button @click="extractAP">Extract AP</Button>
+  <Button @click="vaildWave">VaildAP</Button>
+  <Table :columns="columns" :data="waresFeature"></Table>
   <Modal :title="isStartPoint? 'add a startPoint':'add a endPonint'" v-model="modal" @on-cancel="modal=false" @on-ok="addMark(params)">
     <Input v-model="comment"></Input>
   </Modal>
+  
 </div>
 
 </template>
@@ -36,7 +40,9 @@ export default {
         seriesIndex: null,
         name: null
       },
-      wareArray: []
+      wareArray: [],
+      featureKey: ['xNumber', 'meanValue', 'deviation', 'skewness', 'kurtosis',
+        'activity', 'mobility', 'complexity', 'time', 'slop', 'y', 'area']
     }
   },
   computed: {
@@ -54,50 +60,47 @@ export default {
         let seriesIndex = wave.start.seriesIndex
         let startIndex = wave.start.dataIndex
         let endIndex = wave.end.dataIndex
-        return this.optionsData.data[seriesIndex].slice(startIndex, endIndex).map(x => parseFloat(x))
+        return this.optionsData.data[seriesIndex].slice(startIndex, endIndex)
       })
     },
-    xNumber() {
-      return this.wareArrayData.map(array => iecCal.calXNumber(array))
+    waresFeature() {
+      return this.wareArrayData.map(array => this.calFeature(array))
     },
-    meanValue() {
-      return this.wareArrayData.map(array => iecCal.calMeanValue(array))
-    },
-    subMean() {
-      return this.wareArrayData.map((array, index) => iecCal.calSubMean(array, this.meanValue[index]))
-    },
-    deviation() {
-      return this.subMean.map(array => iecCal.calDeviation(array))
-    },
-    skewness() {
-      return this.subMean.map((array, index) => iecCal.calSkewness(array, this.deviation[index]))
-    },
-    kurtosis() {
-      return this.subMean.map((array, index) => iecCal.calKurtosis(array, this.deviation[index]))
-    },
-    activity() {
-      return this.wareArrayData.map(array => iecCal.calActivity(array))
-    },
-    diff() {
-      return this.wareArrayData.map(array => iecCal.calDiff(array))
-    },
-    mobility() {
-      return this.diff.map((array, index) => iecCal.calMobility(array, this.activity[index]))
-    },
-    complexity() {
-      return this.diff.map((array, index) => iecCal.calComplexity(array, this.mobility[index]))
-    },
-    time() {
-      return this.wareArrayData.map(array => iecCal.calTime(array, 1))
-    },
-    slop() {
-      return this.wareArrayData.map(array => iecCal.calSlope(array))
-    },
-    y() {
-      return this.wareArrayData.map(array => iecCal.calY(array))
-    },
-    area() {
-      return this.subMean.map(array => iecCal.calArea(array))
+    columns() {
+      let columns = [{
+        type: 'index',
+        width: 80,
+        align: 'center',
+        fixed: 'left'
+      }, {
+        title: 'isAP',
+        key: 'isAP',
+        width: 80,
+        fixed: 'right',
+        render: (h, params) => {
+          return h('div', [
+            h('Button', {
+              props: {
+                type: 'text',
+                size: 'small'
+              }
+            }, 'View'),
+            h('Button', {
+              props: {
+                type: 'text',
+                size: 'small'
+              }
+            }, 'Edit')
+          ])
+        }
+      }]
+      return columns.concat(this.featureKey.map(key => {
+        return {
+          title: key,
+          key: key,
+          width: 150
+        }
+      }))
     }
   },
   watch: {
@@ -110,6 +113,15 @@ export default {
   },
   mounted() {
     this.chart = echarts.init(this.$refs.theEchart)
+    this.chart.setOption({
+      title: {text: 'example'},
+      tooltip: {},
+      xAxis: {
+        data: []
+      },
+      yAxis: {},
+      series: []
+    })
     let _this = this
     this.chart.on('click', function(params) {
       _this.modal = true
@@ -263,6 +275,54 @@ export default {
         }
         this.chart.setOption(options, true)
       }
+    },
+    calFeature(array) {
+      let meanValue = iecCal.calMeanValue(array)
+      let diff = iecCal.calDiff(array)
+      let subMean = iecCal.calSubMean(array, meanValue)
+      let deviation = iecCal.calDeviation(subMean)
+      let activity = iecCal.calActivity(array)
+      let mobility = iecCal.calMobility(diff, activity)
+      return {
+        xNumber: iecCal.calXNumber(array).toFixed(3),
+        meanValue: meanValue.toFixed(3),
+        deviation: deviation.toFixed(3),
+        skewness: iecCal.calSkewness(subMean, deviation).toFixed(3),
+        kurtosis: iecCal.calKurtosis(subMean, deviation).toFixed(3),
+        activity: activity.toFixed(3),
+        mobility: mobility.toFixed(3),
+        complexity: iecCal.calComplexity(diff, mobility).toFixed(3),
+        time: iecCal.calTime(array, 1).toFixed(3),
+        slop: iecCal.calSlope(array).toFixed(3),
+        y: iecCal.calY(array).toFixed(3),
+        area: iecCal.calArea(array).toFixed(3)
+      }
+    },
+    extractAP() {
+      let mySeries = this.chart.getOption().series
+      let xAxis = this.chart.getOption().xAxis[0].data
+      let dataArray = mySeries.map(serie => serie.data)
+      analysisApi.postExtraction(10, dataArray).then(res => {
+        res.data.map((x, index) => x.map(waveObject => {
+          let params = {
+            value: dataArray[index][waveObject.startIndex],
+            dataIndex: waveObject.startIndex,
+            name: xAxis[waveObject.startIndex],
+            seriesIndex: index
+          }
+          this.addMark(params)
+          params = {
+            value: dataArray[index][waveObject.endIndex],
+            dataIndex: waveObject.endIndex,
+            name: xAxis[waveObject.endIndex],
+            seriesIndex: index
+          }
+          this.addMark(params)
+        }))
+      })
+    },
+    vaildWave() {
+
     }
   }
 }

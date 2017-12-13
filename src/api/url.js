@@ -25,8 +25,8 @@ export const analysisUrl = {
   smooth: function(windowsWidth) {
     return `${this.base}/smooth/${windowsWidth}`
   },
-  extraction: rate => `/api/analysis/extraction/${rate}`,
-  judgement: rate => `/api/analysis/judgement/${rate}`,
+  extraction: rate => `/api/analysis/ap/extraction/${rate}`,
+  judgement: rate => `/api/analysis/ap/judgement/${rate}`,
   allRegionGrayAver: datasetId => `/api/analysis/image/multiple/${datasetId}`,
   singleRegionGrayAver: datasetId => `/api/analysis/image/single/${datasetId}`
 }

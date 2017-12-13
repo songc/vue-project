@@ -15,7 +15,7 @@ const getters = {
     }
     return {
       xAxis: dataArrayTranspose[0],
-      data: dataArrayTranspose.slice(1)
+      data: dataArrayTranspose.slice(1).map(array => array.map(x => parseFloat(x)))
     }
   },
   getFilesByDatasetId: (state, getters) => (id) => {
