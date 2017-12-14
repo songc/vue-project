@@ -6,7 +6,7 @@
   <Button @click="clearMarkPoint">ClearMarkPoint</Button>
   <Button @click="extractAP">Extract AP</Button>
   <Button @click="vaildWave">VaildAP</Button>
-  <Table :columns="columns" :data="waresFeature"></Table>
+  <Table :columns="columns" :data="wavesFeature"></Table>
   <Modal :title="isStartPoint? 'add a startPoint':'add a endPonint'" v-model="modal" @on-cancel="modal=false" @on-ok="addMark(params)">
     <Input v-model="comment"></Input>
   </Modal>
@@ -40,31 +40,29 @@ export default {
         seriesIndex: null,
         name: null
       },
-      wareArray: [],
+      waveArray: [],
       featureKey: ['xNumber', 'meanValue', 'deviation', 'skewness', 'kurtosis',
-        'activity', 'mobility', 'complexity', 'time', 'slop', 'y', 'area']
+        'activity', 'mobility', 'complexity', 'time', 'slop', 'y', 'area'],
+      wavesFeature: []
     }
   },
   computed: {
     optionsData: function() {
       return this.$store.getters.getData(1)
     },
-    ware() {
+    wave() {
       return {
         start: this.startPoint,
         end: this.endPoint
       }
     },
-    wareArrayData() {
-      return this.wareArray.map(wave => {
+    waveArrayData() {
+      return this.waveArray.map(wave => {
         let seriesIndex = wave.start.seriesIndex
         let startIndex = wave.start.dataIndex
         let endIndex = wave.end.dataIndex
         return this.optionsData.data[seriesIndex].slice(startIndex, endIndex)
       })
-    },
-    waresFeature() {
-      return this.wareArrayData.map(array => this.calFeature(array))
     },
     columns() {
       let columns = [{
@@ -84,13 +82,7 @@ export default {
                 type: 'text',
                 size: 'small'
               }
-            }, 'View'),
-            h('Button', {
-              props: {
-                type: 'text',
-                size: 'small'
-              }
-            }, 'Edit')
+            }, params.row.isAP)
           ])
         }
       }]
@@ -109,7 +101,8 @@ export default {
         this.updateChart(val)
       },
       deep: true
-    }
+    },
+    'waveArrayData': 'getWavesFeature'
   },
   mounted() {
     this.chart = echarts.init(this.$refs.theEchart)
@@ -147,7 +140,7 @@ export default {
             seriesIndex: params.seriesIndex
           }
           this.isStartPoint = !this.isStartPoint
-          this.wareArray.push(this.ware)
+          this.waveArray.push(this.wave)
         } else {
           return false
         }
@@ -169,7 +162,7 @@ export default {
       this.chart.setOption({
         series: mySeries
       })
-      this.wareArray = []
+      this.waveArray = []
     },
     validEndPoint(params) {
       if (params.seriesIndex === this.startPoint.seriesIndex) {
@@ -276,6 +269,9 @@ export default {
         this.chart.setOption(options, true)
       }
     },
+    getWavesFeature() {
+      this.wavesFeature = this.waveArrayData.map(arr => this.calFeature(arr))
+    },
     calFeature(array) {
       let meanValue = iecCal.calMeanValue(array)
       let diff = iecCal.calDiff(array)
@@ -295,7 +291,8 @@ export default {
         time: iecCal.calTime(array, 1).toFixed(3),
         slop: iecCal.calSlope(array).toFixed(3),
         y: iecCal.calY(array).toFixed(3),
-        area: iecCal.calArea(array).toFixed(3)
+        area: iecCal.calArea(array).toFixed(3),
+        isAP: 'no judge'
       }
     },
     extractAP() {
@@ -322,7 +319,11 @@ export default {
       })
     },
     vaildWave() {
-
+      analysisApi.postJudgement(10, this.waveArrayData).then(res => {
+        res.data.map((val, i, arr) => {
+          this.wavesFeature[i].isAP = val
+        })
+      })
     }
   }
 }
