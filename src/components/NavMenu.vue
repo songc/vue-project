@@ -16,7 +16,7 @@
         </template>
         <MenuItem name="teacher">Teacher</MenuItem>
         <MenuGroup title="Student">
-          <MenuItem name="phd">Ph.D.</MenuItem>
+          <MenuItem name="phd">Ph.D</MenuItem>
           <MenuItem name="master">Master</MenuItem>
         </MenuGroup>
       </Submenu>

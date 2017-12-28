@@ -1,6 +1,6 @@
 <template>
 <div class="thecard">
-  <Row class-name="thecard-row">
+  <Row v-if="datasets[0]" class-name="thecard-row">
     <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
       <Card class="thecard-card">
         <p slot="title">{{ dataset.name }}</p>
@@ -13,6 +13,9 @@
       </Card>
     </Col>
   </Row>
+  <div v-else class="thecard no-datasets">
+    <p>No datasets</p>
+  </div>
   <div class="thecard-page">
     <Page :total="total" :page-size='size' @on-change="changePageNum" show-total></Page>
   </div>
@@ -108,5 +111,11 @@ export default {
   align-items: flex-end;
   margin-top: 12px;
   text-align: center;
+}
+.no-datasets {
+  padding-top: 200px;
+  text-align: center;
+  min-height: 500px;
+  font-size: 50px;
 }
 </style>

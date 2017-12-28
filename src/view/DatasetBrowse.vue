@@ -22,7 +22,7 @@
           <FormItem prop="dataset.description" label="description">
             <Input type="textarea" v-model="dataset.description" placeholder="dataset description" :autosize="true" disabled></Input>
           </FormItem>
-          <InfoShow title="DatasetMeta"v-if="datasetMeta" :info="datasetMeta"></InfoShow>
+          <InfoShow title="DatasetMeta" v-if="datasetMeta" :info="datasetMeta"></InfoShow>
           <InfoShow title="Equipment" v-if="equipment" :info="equipment"></InfoShow>
         </Form>
       </TabPane>

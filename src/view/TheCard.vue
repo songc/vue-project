@@ -1,6 +1,6 @@
 <template>
 <div class="thecard">
-  <Row :gutter="16" class-name="thecard-row">
+  <Row v-if="datasets[0]" :gutter="16" class-name="thecard-row">
     <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
       <Card class="thecard-card">
         <p slot="title">{{ dataset.name }}</p>
@@ -15,10 +15,15 @@
       </Card>
     </Col>
   </Row>
+  <div v-else class="no-datasets">
+    <p>You has not created any dataset,you can 
+      <Button type="text" size="large" @click="createDataset">Create New Dataset</Button> or 
+      <Button type="text" size="large" @click="goPublicDatasets">Go to Public Datasets</Button> 
+    </p>
+  </div>
   <div class="thecard-page">
     <Page :current="number" :total="total" :page-size="size" @on-change="changePageNum" show-total></Page>
   </div>
-  </Modal>
 </div>
 </template>
 
@@ -108,17 +113,15 @@ export default {
         pageNumber: this.number - 1,
         pageSize: this.size
       }
-      this.$Spin.show()
       this.$store.dispatch('getDatasets', payload).then(res => {
         this.total = res.totalElements
-        this.$Spin.hide()
-      }).catch(res => {
-        this.$Spin.hide()
-        this.$Notice.error({
-          title: 'GetDatasets Fail',
-          desc: res
-        })
       })
+    },
+    createDataset() {
+      this.$router.push({name: 'datasetCreate', params: {id: this.$route.params.id}})
+    },
+    goPublicDatasets() {
+      this.$router.push({name: 'dataset'})
     }
   }
 }
@@ -144,5 +147,11 @@ export default {
   align-items: flex-end;
   margin-top: 12px;
   text-align: center;
+}
+.no-datasets{
+  padding-top: 150px;
+  min-height: 500px;
+  font-size: 25px;
+  text-align:center
 }
 </style>
