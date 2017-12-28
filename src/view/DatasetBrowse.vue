@@ -91,6 +91,9 @@ export default {
     selectedFileIndex() {
       return this.files.findIndex(file => file.rowKey === this.selectedFile)
     },
+    selectedFileMeta() {
+      return this.files.find(file => file.rowKey === this.selectedFile)
+    },
     f() {
       return this.$store.getters.getTranspose
     },
@@ -138,36 +141,36 @@ export default {
       }
     },
     getImageMeta() {
-      if (this.currentFile.imageMetaId) {
-        imageMetaApi.get(this.$route.params.id, this.currentFile.imageMetaId).then(res => {
+      if (this.selectedFileMeta.imageMetaId) {
+        imageMetaApi.get(this.$route.params.id, this.selectedFileMeta.imageMetaId).then(res => {
           this.imageMeta = res.data
         })
       }
     },
     getIecMeta() {
-      if (this.currentFile.iecMetaId) {
-        iecMetaApi.get(this.$route.params.id, this.currentFile.iecMetaId).then(res => {
+      if (this.selectedFileMeta.iecMetaId) {
+        iecMetaApi.get(this.$route.params.id, this.selectedFileMeta.iecMetaId).then(res => {
           this.iecMeta = res.data
         })
       }
     },
     getSoftware() {
-      if (this.currentFile.softwareId) {
-        softwareApi.get(this.$route.params.id, this.currentFile.softwareId).then(res => {
+      if (this.selectedFileMeta.softwareId) {
+        softwareApi.get(this.$route.params.id, this.selectedFileMeta.softwareId).then(res => {
           this.software = res.data
         })
       }
     },
     getSample() {
-      if (this.currentFile.sampleId) {
-        sampleApi.get(this.$route.params.id, this.currentFile.sampleId).then(res => {
+      if (this.selectedFileMeta.sampleId) {
+        sampleApi.get(this.$route.params.id, this.selectedFileMeta.sampleId).then(res => {
           this.sample = res.data
         })
       }
     },
     getEnvironment() {
-      if (this.currentFile.environmentId) {
-        environmentApi.get(this.$route.params.id, this.currentFile.environmentId).then(res => {
+      if (this.selectedFileMeta.environmentId) {
+        environmentApi.get(this.$route.params.id, this.selectedFileMeta.environmentId).then(res => {
           this.environment = res.data
         })
       }
