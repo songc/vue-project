@@ -53,4 +53,28 @@ const iecUtil = {
   }
 }
 
-export default iecUtil
+function calFeature(array) {
+  let meanValue = iecUtil.calMeanValue(array)
+  let diff = iecUtil.calDiff(array)
+  let subMean = iecUtil.calSubMean(array, meanValue)
+  let deviation = iecUtil.calDeviation(subMean)
+  let activity = iecUtil.calActivity(array)
+  let mobility = iecUtil.calMobility(diff, activity)
+  return {
+    xNumber: iecUtil.calXNumber(array),
+    meanValue: meanValue.toFixed(3),
+    deviation: deviation.toFixed(3),
+    skewness: iecUtil.calSkewness(subMean, deviation).toFixed(3),
+    kurtosis: iecUtil.calKurtosis(subMean, deviation).toFixed(3),
+    activity: activity.toFixed(3),
+    mobility: mobility.toFixed(3),
+    complexity: iecUtil.calComplexity(diff, mobility).toFixed(3),
+    time: iecUtil.calTime(array, 1),
+    slop: iecUtil.calSlope(array).toFixed(3),
+    y: iecUtil.calY(array),
+    area: iecUtil.calArea(array).toFixed(3),
+    isAP: 'no judge'
+  }
+}
+
+export default calFeature

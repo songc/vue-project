@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import iecCal from '../util/iecCal.js'
+import calFeature from '../util/iecCal.js'
 import analysisApi from '../api/analysis'
 import echarts from 'echarts'
 export default {
@@ -81,6 +81,9 @@ export default {
               props: {
                 type: 'text',
                 size: 'small'
+              },
+              style: {
+                color: 'red'
               }
             }, params.row.isAP)
           ])
@@ -163,6 +166,7 @@ export default {
         series: mySeries
       })
       this.waveArray = []
+      this.wavesFeature = []
     },
     validEndPoint(params) {
       if (params.seriesIndex === this.startPoint.seriesIndex) {
@@ -197,20 +201,13 @@ export default {
       })
     },
     updateChart(optionsData) {
-      function createLegend(data) {
-        let res = []
-        for (let index = 0; index < data.length; index++) {
-          res[index] = `channl${index}`
-        }
-        return res
-      }
       if (optionsData === undefined) {
         return false
       } else {
         let options = {
           title: {text: 'example'},
           legend: {
-            data: createLegend(optionsData.data)
+            data: optionsData.data.length > 8 ? null : optionsData.data.map((val, index) => `ch${index}`)
           },
           toolbox: {
             show: true,
@@ -270,30 +267,7 @@ export default {
       }
     },
     getWavesFeature() {
-      this.wavesFeature = this.waveArrayData.map(arr => this.calFeature(arr))
-    },
-    calFeature(array) {
-      let meanValue = iecCal.calMeanValue(array)
-      let diff = iecCal.calDiff(array)
-      let subMean = iecCal.calSubMean(array, meanValue)
-      let deviation = iecCal.calDeviation(subMean)
-      let activity = iecCal.calActivity(array)
-      let mobility = iecCal.calMobility(diff, activity)
-      return {
-        xNumber: iecCal.calXNumber(array).toFixed(3),
-        meanValue: meanValue.toFixed(3),
-        deviation: deviation.toFixed(3),
-        skewness: iecCal.calSkewness(subMean, deviation).toFixed(3),
-        kurtosis: iecCal.calKurtosis(subMean, deviation).toFixed(3),
-        activity: activity.toFixed(3),
-        mobility: mobility.toFixed(3),
-        complexity: iecCal.calComplexity(diff, mobility).toFixed(3),
-        time: iecCal.calTime(array, 1).toFixed(3),
-        slop: iecCal.calSlope(array).toFixed(3),
-        y: iecCal.calY(array).toFixed(3),
-        area: iecCal.calArea(array).toFixed(3),
-        isAP: 'no judge'
-      }
+      this.wavesFeature = this.waveArrayData.map(arr => calFeature(arr))
     },
     extractAP() {
       let mySeries = this.chart.getOption().series
