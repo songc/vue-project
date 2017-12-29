@@ -1,18 +1,38 @@
-<template>
-  <Card>
-    <p v-if="title" slot="title">{{title}}</p>     
-    <div>
-      <p v-for="key in Object.keys(info)" :key="key"><strong>{{key}}:&ensp;</strong>{{info[key]}}</p>
-    </div>
-  </Card>
-</template>
-
 <script>
+import DatasetMetaShow from './DatasetMetaShow'
+import EquipmentShow from './EquipmentShow'
+import IecMetaShow from './IecMetaShow'
+import ImageMetaShow from './ImageMetaShow'
+import SampleShow from './SampleShow'
+import SoftwareShow from './SoftwareShow'
+import {firstLowerCase} from '../util/StringUtil'
+import EnvironmentShow from './EnvironmentShow'
 export default {
   name: 'InfoShow',
+  components: {
+    DatasetMetaShow,
+    EquipmentShow,
+    IecMetaShow,
+    ImageMetaShow,
+    SampleShow,
+    SoftwareShow,
+    EnvironmentShow
+  },
   props: {
     info: Object,
     title: String
+  },
+  render: function(createElement) {
+    let propTitle = firstLowerCase(this.title)
+    return createElement('Card', [
+      createElement('p', {
+        slot: 'title'
+      }, this.title),
+      createElement(this.title + 'Show', {
+        props: {
+          [propTitle]: this.info
+        }
+      })])
   }
 }
 </script>

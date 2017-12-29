@@ -3,7 +3,7 @@
     <FormItem label="Name">
       <Input v-model="sample.name" type="text"></Input>
     </FormItem>
-    <FormItem label="Growth">
+    <FormItem label="Growth(day)">
       <Input v-model="sample.growth" type="text"></Input>
     </FormItem>
     <FormItem label="Period">

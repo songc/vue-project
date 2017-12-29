@@ -3,16 +3,16 @@
     <FormItem label="Name" prop="name">
       <Input v-model="environment.name" type="text"></Input>
     </FormItem>
-    <FormItem label="Light" prop="light">
+    <FormItem label="Light(Lux)" prop="light">
       <InputNumber v-model="environment.light" :min="0"></InputNumber>
     </FormItem>
-    <FormItem label="Temperature" prop="temperature">
+    <FormItem label="Temperature(℃)" prop="temperature">
       <InputNumber v-model="environment.temperature"></InputNumber>
     </FormItem>
-    <FormItem label="Humidity" prop="humidity">
+    <FormItem label="Humidity(%)" prop="humidity">
       <InputNumber v-model="environment.humidity"></InputNumber>
     </FormItem>
-    <FormItem label="Pressure" prop="pressure">
+    <FormItem label="Pressure(kPa)" prop="pressure">
       <InputNumber v-model="environment.pressure"></InputNumber>
     </FormItem>
       <Button type="primary" @click="save">Save</Button>
