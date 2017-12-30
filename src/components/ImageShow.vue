@@ -128,7 +128,7 @@ export default {
       }
     },
     getRegionResult() {
-      analysisApi.getSingleRegionGrayAver(this.$route.params.id, this.region).then(res => {
+      analysisApi.getSingleRegionGrayAver(this.$route.params.datasetId, this.region).then(res => {
         this.f = res.data.f
         this.f0 = res.data.f0
         this.xData = generateData(res.data.f.length, 1)

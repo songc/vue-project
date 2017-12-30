@@ -91,7 +91,7 @@ export default {
         naturalWidth: this.imageInfo.width,
         naturalHeight: this.imageInfo.height
       }
-      analysisApi.getAllRegionGrayAver(this.$route.params.id, this.region).then(res => {
+      analysisApi.getAllRegionGrayAver(this.$route.params.datasetId, this.region).then(res => {
         this.f = res.data.f
         this.f0 = res.data.f0
         this.xData = generateData(res.data.f[0].length, 1)
