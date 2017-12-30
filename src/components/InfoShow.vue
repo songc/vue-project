@@ -20,15 +20,16 @@ export default {
   },
   props: {
     info: Object,
-    title: String
+    title: String,
+    type: String
   },
   render: function(createElement) {
-    let propTitle = firstLowerCase(this.title)
+    let propTitle = firstLowerCase(this.type)
     return createElement('Card', [
       createElement('p', {
         slot: 'title'
       }, this.title),
-      createElement(this.title + 'Show', {
+      createElement(this.type + 'Show', {
         props: {
           [propTitle]: this.info
         }

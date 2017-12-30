@@ -27,7 +27,7 @@
                 <Option v-for="equipment in equipments" :value="equipment.id" :key="equipment.id">{{ equipment.name }}</Option>
               </Select>
               <Button type="primary" @click="equipmentModal=true">Create New</Button>
-              <InfoShow v-if="getEquipmentById" :info="getEquipmentById"></InfoShow> 
+              <InfoShow type="Equipment" v-if="getEquipmentById" title="Equipment" :info="getEquipmentById"></InfoShow> 
             </FormItem>
             <FormItem prop="datasetMetaId" label="DatasetMeta">
               <p v-if="datasetMetas.length===0">You hasn't any template, Go to Create</p>
@@ -35,7 +35,7 @@
                 <Option v-for="datasetMeta in datasetMetas" :value="datasetMeta.id" :key="datasetMeta.id">{{ datasetMeta.name }}</Option>
               </Select>
               <Button type="primary" @click="datasetMetaModal=true">Create New</Button>
-              <InfoShow v-if="getDatasetMetaById" :info="getDatasetMetaById"></InfoShow>
+              <InfoShow type="DatasetMeta" v-if="getDatasetMetaById" title="DatasetMeta" :info="getDatasetMetaById"></InfoShow>
             </FormItem>
           </Form>       
         </Col>

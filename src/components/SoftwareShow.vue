@@ -1,5 +1,5 @@
 <template>
-  <Form :model="software" :label-width="80" label-position="left">
+  <Form :model="software" :label-width="120" label-position="right" inline>
     <FormItem label="Name:">
       {{software.name}}
     </FormItem>

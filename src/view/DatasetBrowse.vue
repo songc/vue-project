@@ -22,17 +22,17 @@
           <FormItem prop="dataset.description" label="description">
             <Input type="textarea" v-model="dataset.description" placeholder="dataset description" :autosize="true" disabled></Input>
           </FormItem>
-          <InfoShow title="DatasetMeta" v-if="datasetMeta" :info="datasetMeta"></InfoShow>
-          <InfoShow title="Equipment" v-if="equipment" :info="equipment"></InfoShow>
+          <InfoShow title="DatasetMeta" type="DatasetMeta" v-if="datasetMeta" :info="datasetMeta"></InfoShow>
+          <InfoShow title="Equipment" type="Equipment" v-if="equipment" :info="equipment"></InfoShow>
         </Form>
       </TabPane>
       <TabPane label="File Info" name="fileMeta">
         <p v-if="!selectedFile" style="font-size: 25px;">Please seleted a file</p>
-        <InfoShow title="ImageMeta" v-if="imageMeta" :info="imageMeta"></InfoShow>
-        <InfoShow title="IecMeta" v-if="iecMeta" :info="iecMeta"></InfoShow>
-        <InfoShow title="Environment" v-if="environment" :info="environment"></InfoShow>
-        <InfoShow title="Sample" v-if="sample" :info="sample"></InfoShow>
-        <InfoShow title="Software" v-if="software" :info="software"></InfoShow>
+        <InfoShow title="ImageMeta" type="ImageMeta" v-if="imageMeta" :info="imageMeta"></InfoShow>
+        <InfoShow title="IecMeta" type="IecMeta" v-if="iecMeta" :info="iecMeta"></InfoShow>
+        <InfoShow title="Environment" type="Environment" v-if="environment" :info="environment"></InfoShow>
+        <InfoShow title="Sample" type="Sample" v-if="sample" :info="sample"></InfoShow>
+        <InfoShow title="Software" type="Software" v-if="software" :info="software"></InfoShow>
       </TabPane>
       <TabPane label="Content" name="content">
         <TheEchart v-if="dataset.type==='CSV'"></TheEchart>

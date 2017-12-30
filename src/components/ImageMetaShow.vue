@@ -1,5 +1,5 @@
 <template>
-  <Form :model="imageMeta" :label-width="80" label-position="left">
+  <Form :model="imageMeta" :label-width="120" label-position="right">
       <FormItem label="Name:">
         {{imageMeta.name}}
       </FormItem>

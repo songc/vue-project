@@ -1,5 +1,5 @@
 <template>
-  <Form :model="datasetMeta" :label-width="80" label-position="left">
+  <Form :model="datasetMeta" :label-width="120" label-position="right">
     <FormItem label="Name:" prop="name">
       {{datasetMeta.name}}
     </FormItem>

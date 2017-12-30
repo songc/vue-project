@@ -1,5 +1,5 @@
 <template>
-  <Form :model="equipment" :label-width="80" label-position="left">
+  <Form :model="equipment" :label-width="120" label-position="right">
     <FormItem label="Name:" prop="name">
       {{equipment.name}}
     </FormItem>

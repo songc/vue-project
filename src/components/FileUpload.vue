@@ -18,7 +18,7 @@
                 </Select>
                 <p v-else>You hasn't any template, Go to Create</p>
                 <Button type="primary" @click="iecMetaModal=true">Create New</Button>
-                <InfoShow v-if="getIecMetaById" :info="getIecMetaById"></InfoShow>  
+                <InfoShow type="IecMeta" v-if="getIecMetaById" title="IecMeta" :info="getIecMetaById"></InfoShow>  
               </FormItem>
               <FormItem v-if="datasetType=='IMAGE'" label="ImageMeta" prop="imageMetaId">
                 <Select v-if="imageMetas.length!==0" v-model="fileMeta.imageMetaId" style="width:300px">
@@ -26,7 +26,7 @@
                 </Select>
                 <p v-else>You hasn't any template, Go to Create</p>
                 <Button type="primary" @click="imageMetaModal=true">Create New</Button>
-                <InfoShow v-if="getImageMetaById" :info="getImageMetaById"></InfoShow> 
+                <InfoShow type="ImageMeta" v-if="getImageMetaById" title="ImageMeta" :info="getImageMetaById"></InfoShow> 
               </FormItem>
               <FormItem label="Software" prop="softwareId">
                 <Select v-if="softwares.length!==0" v-model="fileMeta.softwareId" style="width:300px">
@@ -34,7 +34,7 @@
                 </Select>
                 <p v-else>You hasn't any template, Go to Create</p>
                 <Button type="primary" @click="softwareModal=true">Create New</Button>
-                <InfoShow v-if="getSoftwareById" :info="getSoftwareById"></InfoShow> 
+                <InfoShow v-if="getSoftwareById" type="Software" title="Software" :info="getSoftwareById"></InfoShow> 
               </FormItem>
               <FormItem label="Environment" prop="environmentId">
                 <Select v-if="environments.length!==0" v-model="fileMeta.environmentId" style="width:300px">
@@ -42,7 +42,7 @@
                 </Select>
                 <p v-else>You hasn't any template, Go to Create</p>
                 <Button type="primary" @click="environmentModal=true">Create New</Button>
-                <InfoShow v-if="getEnvironmentById" :info="getEnvironmentById"></InfoShow> 
+                <InfoShow v-if="getEnvironmentById" type="Environment" title="Environment" :info="getEnvironmentById"></InfoShow> 
               </FormItem>
               <FormItem label="Sample" prop="sampleId">
                 <Select v-if="samples.length!==0" v-model="fileMeta.sampleId" style="width:300px">
@@ -50,7 +50,7 @@
                 </Select>
                 <p v-else>You hasn't any template, Go to Create</p>
                 <Button type="primary" @click="sampleModal=true">Create New</Button>
-                <InfoShow v-if="getSampleById" :info="getSampleById"></InfoShow> 
+                <InfoShow v-if="getSampleById" type="Sample" title="Sample" :info="getSampleById"></InfoShow> 
               </FormItem>
       </Form>
       <div v-if="files != 0">
