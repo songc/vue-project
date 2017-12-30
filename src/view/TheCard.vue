@@ -1,20 +1,22 @@
 <template>
 <div class="thecard">
-  <Row v-if="datasets[0]" :gutter="16" class-name="thecard-row">
-    <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
-      <Card class="thecard-card">
-        <p slot="title">{{ dataset.name }}</p>
-        <p slot="extra">{{ dataset.author }} </p>
-        <p>{{ dataset.description | formatDescription }}</p>
-        <div class="thecard-card-div">
+  <div v-if="datasets[0]" class="thecard-row">
+    <Row  :gutter="16">
+      <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
+        <Card class="thecard-card">
+          <p slot="title">{{ dataset.name }}</p>
+          <p slot="extra">{{ dataset.author }} </p>
+          <p>{{ dataset.description | formatDescription }}</p>
+          <div class="thecard-card-div">
           <Button type="info" @click="browseDataset(dataset)">Browse</Button>
           <Button type="ghost" @click="updateDataset(dataset)">Modify</Button>
           <Button type="ghost" @click="downLoadDataset(dataset)">DownLoad</Button>
           <Button type="warning" @click="deleteDataset(dataset)">Delete</Button>
-        </div>
-      </Card>
-    </Col>
-  </Row>
+          </div>
+        </Card>
+      </Col>
+    </Row>
+  </div>
   <div v-else class="no-datasets">
     <p>You has not created any dataset,you can 
       <Button type="text" size="large" @click="createDataset">Create New Dataset</Button> or 
@@ -140,6 +142,9 @@ export default {
 }
 .thecard-col {
   margin: 12px 0px;
+}
+.thecard-row {
+  min-height: 600px;
 }
 .thecard-card-div{
   display: flex;

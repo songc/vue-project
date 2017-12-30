@@ -191,7 +191,7 @@ export default {
   background-color: #fff;
 }
 .dataset-browse-tree{
-  max-height: 800px;
+  min-height: 800px;
   overflow: auto;
 }
 .dataset-browse-tabs{

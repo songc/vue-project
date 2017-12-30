@@ -1,18 +1,20 @@
 <template>
 <div class="thecard">
-  <Row v-if="datasets[0]" class-name="thecard-row">
-    <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
-      <Card class="thecard-card">
-        <p slot="title">{{ dataset.name }}</p>
-        <p slot="extra">{{ dataset.author }} </p>
-        <p>{{ dataset.description | formatDescription }}</p>
-        <div class="thecard-card-div">
-          <Button type="info" @click="browseDataset(dataset)">Browse</Button>
-          <Button type="ghost" @click="downLoadDataset(dataset)">DownLoad</Button>
-        </div>
-      </Card>
-    </Col>
-  </Row>
+  <div v-if="datasets[0]" class="thecard-row">
+    <Row >
+      <Col span="8" v-for="(dataset, index) in datasets" :key="index" class-name="thecard-col">
+        <Card class="thecard-card">
+          <p slot="title">{{ dataset.name }}</p>
+          <p slot="extra">{{ dataset.author }} </p>
+          <p>{{ dataset.description | formatDescription }}</p>
+          <div class="thecard-card-div">
+            <Button type="info" @click="browseDataset(dataset)">Browse</Button>
+            <Button type="ghost" @click="downLoadDataset(dataset)">DownLoad</Button>
+          </div>
+        </Card>
+      </Col>
+    </Row>
+  </div>
   <div v-else class="thecard no-datasets">
     <p>No datasets</p>
   </div>
@@ -101,6 +103,9 @@ export default {
 }
 .thecard-col {
   padding: 12px;
+}
+.thecard-row {
+  min-height: 600px;
 }
 .thecard-card {
   margin: 12px;
