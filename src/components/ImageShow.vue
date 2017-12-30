@@ -19,8 +19,7 @@
       <SignalChart :xData="xData" :yData="f" :width="800" :height="400" :single="true" title="f"> </SignalChart>
       <SignalChart :xData="xData" :yData="f0" :width="800" :height="400" :single="true" title="f0"> </SignalChart>
       <SignalChart :xData="xData" :yData="f0DivF" :width="800" :height="400" :single="true" title="f0/f"> </SignalChart>
-      <SignalChart :xData="xData" :yData="negF0DivF" :width="800" :height="400" :single="true" title="-f0/f"> </SignalChart>
-      
+      <SignalChart :xData="xData" :yData="negF0DivF" :width="800" :height="400" :single="true" title="-f0/f"> </SignalChart>     
   </div>
 </template>
 

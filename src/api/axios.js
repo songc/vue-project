@@ -1,7 +1,7 @@
 import {LoadingBar, Notice} from 'iview'
 import axios from 'axios'
 
-axios.defaults.timeout = 15000
+// axios.defaults.timeout = 15000
 
 axios.interceptors.request.use(config => {
   LoadingBar.start()
