@@ -78,7 +78,7 @@ export default {
       this.$router.push({name: name, params: {id: this.userId}})
     },
     search() {
-      this.$router.push(`/dataset?search=${this.seachKeyWord}`)
+      this.$router.push({name: 'dataset', query: {search: this.seachKeyWord}})
     },
     createDataset() {
       if (this.isLogin) {

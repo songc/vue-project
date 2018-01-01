@@ -1,13 +1,14 @@
 <template>
   <Row type="flex" justify="space-around" align="top" class-name="layout-footer">
     <Col span="6">
-    <h4>About us</h4>
-    <ul>
-      <li>Teacher</li>
-      <li>Student</li>
-      <li>Project</li>
-      <li>Parper</li>
-    </ul>
+      <h4>About us</h4>
+      <ButtonGroup vertical size="small">
+        <Button type="text" @click="go('teacher')">Teacher</Button>
+        <Button type="text" @click="go('master')">Master</Button>
+        <Button type="text" @click="go('phd')">Ph.D</Button>
+        <Button type="text" @click="go('project')">Project</Button>
+        <Button type="text" @click="go('paper')">Paper</Button>
+      </ButtonGroup>
     </Col>
     <Col span="6">
     <h4>Suggest</h4>
@@ -17,11 +18,11 @@
     </ul>
     </Col>
     <Col span="6">
-    <h4>Contack us</h4>
-    <p>Telephone: +86-62737778</p>
+      <h4>Contack us</h4>
+      <p>Telephone: +86-62737778</p>
     </Col>
     <Col span="6">
-    <img src="../assets/logo1.png">
+      <img src="../assets/logo1.png">
     </Col>
   </Row>
 </template>
@@ -31,6 +32,11 @@ export default {
   data() {
     return {
 
+    }
+  },
+  methods: {
+    go(name) {
+      this.$router.push({name: name})
     }
   }
 }

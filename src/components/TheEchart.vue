@@ -2,15 +2,21 @@
 <div  class="the-echart">
   <div id="the-echart" ref="theEchart">
   </div>
-  <Button @click="smooth(10,optionsData)">Smooth</Button>
+  <label for="windowsWidth">The windowsWidth of smooth:</label>
+  <InputNumber id="windowsWidth" v-model="windowsWidth" :min="1" @on-change="smooth"></InputNumber>
+  <br>
+  <br>
   <Button @click="clearMarkPoint">ClearMarkPoint</Button>
   <Button @click="extractAP">Extract AP</Button>
   <Button @click="vaildWave">VaildAP</Button>
-  <Table :columns="columns" :data="wavesFeature"></Table>
+  <br>
+  <br>
+  <Table :columns="columns" :data="wavesFeature" ref="table"></Table>
+  <br>
+  <Button type="primary" size="large" @click="exportData()"><Icon type="ios-download-outline"></Icon> Export data</Button>
   <Modal :title="isStartPoint? 'add a startPoint':'add a endPonint'" v-model="modal" @on-cancel="modal=false" @on-ok="addMark(params)">
     <Input v-model="comment"></Input>
-  </Modal>
-  
+  </Modal>  
 </div>
 
 </template>
@@ -25,6 +31,7 @@ export default {
     return {
       modal: false,
       isStartPoint: true,
+      windowsWidth: 1,
       comment: '',
       chart: null,
       params: null,
@@ -187,9 +194,9 @@ export default {
         return false
       }
     },
-    smooth(windowsWidth, optionsData) {
-      let data = optionsData
-      analysisApi.postSmooth(windowsWidth, optionsData.data).then(res => {
+    smooth(windowsWidth) {
+      let data = this.optionsData
+      analysisApi.postSmooth(windowsWidth, this.optionsData.data).then(res => {
         data.data = res.data
       }).then(() => {
         this.updateChart(data)
@@ -207,7 +214,7 @@ export default {
         let options = {
           title: {text: 'example'},
           legend: {
-            data: optionsData.data.length > 8 ? null : optionsData.data.map((val, index) => `ch${index}`)
+            data: optionsData.xAxis.length > 8 ? null : optionsData.xAxis.map((val, index) => `ch${index}`)
           },
           toolbox: {
             show: true,
@@ -297,6 +304,11 @@ export default {
         res.data.map((val, i, arr) => {
           this.wavesFeature[i].isAP = val
         })
+      })
+    },
+    exportData() {
+      this.$refs.table.exportCsv({
+        filename: 'Analysis Results'
       })
     }
   }
