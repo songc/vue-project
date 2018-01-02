@@ -1,9 +1,20 @@
 <template>
   <div>
-    <InputNumber v-model="region.width" :max="Math.floor(imageInfo.width/2)" :min="50"></InputNumber>
-    <InputNumber v-model="region.height" :max="Math.floor(imageInfo.height/2)" :min="50"></InputNumber>
-    <p>width:{{imageInfo.width}}</p>
-    <p>height:{{imageInfo.height}}</p>     
+    <h3>The information of region (Unit: px):</h3>
+    <Form label-position="left" :label-width="50" inline>
+      <FormItem label="Width:">
+        <InputNumber v-model="region.width" :max="Math.floor(imageInfo.width/2)" :min="50"></InputNumber>
+      </FormItem>
+      <FormItem label="Height:">
+        <InputNumber v-model="region.height" :max="Math.floor(imageInfo.height/2)" :min="50"></InputNumber>
+      </FormItem>
+    </Form>
+    <div>
+      <h3>The size infomation of image (Unit: px):</h3>
+      <Tag type="border">width:{{imageInfo.width}}</Tag>
+      <Tag type="border">height:{{imageInfo.height}}</Tag>     
+    </div>
+    <br>
     <Card :padding="0"
           :bordered="false"
            dis-hover style="text-align: center; position:relative;">
@@ -18,6 +29,7 @@
           :width="800" 
           :height="600"></MultiChart>
     </Card>
+    <br>
     <Button type="primary" @click="getRegionResult">get</Button>
     <SignalChart :xData="xData" :yData="f" :width="800" :height="400" :single="false" title="f"> </SignalChart>
     <SignalChart :xData="xData" :yData="f0" :width="800" :height="400" :single="false" title="f0"> </SignalChart>

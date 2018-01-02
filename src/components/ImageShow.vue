@@ -2,12 +2,28 @@
   <div>
       <Slider v-model="xAxis" range :max="imageInfo.width"></Slider>
       <Slider v-model="yAxis" range :max="imageInfo.height"></Slider>
-      <InputNumber v-model="region.startX" :max="maxValue.startX" :min="0"></InputNumber>
-      <InputNumber v-model="region.startY" :max="maxValue.startY" :min="0"></InputNumber>
-      <InputNumber v-model="region.width" :max="maxValue.width" :min="1"></InputNumber>
-      <InputNumber v-model="region.height" :max="maxValue.height" :min="1"></InputNumber>
-      <p>width:{{imageInfo.width}}</p>
-      <p>height:{{imageInfo.height}}</p>     
+      <br>
+      <h3>The information of the selected region (Unit:px):</h3>
+      <br>
+      <Form :model="region" label-position="left" :label-width="50" inline>
+        <FormItem label="StartX:">
+          <InputNumber v-model="region.startX" :max="maxValue.startX" :min="0"></InputNumber>
+        </FormItem>
+        <FormItem label="StartY:">
+          <InputNumber v-model="region.startY" :max="maxValue.startY" :min="0"></InputNumber>
+        </FormItem>
+        <FormItem label="Width:">
+          <InputNumber id="width" v-model="region.width" :max="maxValue.width" :min="1"></InputNumber>
+        </FormItem>
+        <FormItem label="Height:">
+          <InputNumber v-model="region.height" :max="maxValue.height" :min="1"></InputNumber>
+        </FormItem> 
+      </Form>
+      <h3>The size information of the selected image (Unit:px):</h3>
+      <Tag type="border">width:{{imageInfo.width}}</Tag>
+      <Tag type="border">height:{{imageInfo.height}}</Tag>
+      <br>
+      <br>     
       <Card :padding="0"
             :bordered="false" 
             dis-hover style="text-align: center;">
@@ -15,6 +31,7 @@
           <canvas ref="canvas2" width="800px" height="600px" class="base"></canvas>
           <canvas ref="clip" width="800px" height="600px"></canvas>
       </Card>
+      <br>
       <Button type="primary" @click="getRegionResult">get</Button>
       <SignalChart :xData="xData" :yData="f" :width="800" :height="400" :single="true" title="f"> </SignalChart>
       <SignalChart :xData="xData" :yData="f0" :width="800" :height="400" :single="true" title="f0"> </SignalChart>
