@@ -27,12 +27,7 @@ const state = {
     updatedAt: 0,
     userId: 0
   },
-  currentFile: {
-    rowKey: '',
-    parentId: 0,
-    name: '',
-    content: ''
-  },
+  currentFile: {},
   datasets: [],
   files: [],
   multiRegion: {

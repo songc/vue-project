@@ -2,12 +2,12 @@
 <div>
   <Row type="flex" justify="center" class-name="dataset-browse-row">
     <Col span="4" class-name="dataset-browse-tree">
-    <Card :bordered="false" dis-hover>
+      <Card :bordered="false" dis-hover>
       <p slot="title">files</p>
       <RadioGroup v-model="selectedFile" vertical>
         <Radio v-for="(file, index) in files" :label="file.rowKey" :key="index" >{{ file.name }}</Radio>
       </RadioGroup>
-    </Card>
+      </Card>
     </Col>
     <Col span="16">
     <Tabs value="info" class="dataset-browse-tabs">
@@ -119,13 +119,23 @@ export default {
       })
     },
     fetchFile() {
-      this.$store.dispatch('getFileByRowKey', this.selectedFile).then(() => {
+      if (this.dataset.type === 'CSV') {
+        this.$store.dispatch('getFileByRowKey', this.selectedFile).then(() => {
+          this.getImageMeta()
+          this.getIecMeta()
+          this.getEnvironment()
+          this.getSample()
+          this.getSoftware()
+        })
+      }
+      if (this.dataset.type === 'IMAGE') {
+        this.$store.commit('changeCurrentFile', this.selectedFileMeta)
         this.getImageMeta()
         this.getIecMeta()
         this.getEnvironment()
         this.getSample()
         this.getSoftware()
-      })
+      }
     },
     getDatasetMeta() {
       if (this.dataset.datasetMetaId) {
