@@ -1,10 +1,12 @@
 import {LoadingBar, Notice} from 'iview'
 import axios from 'axios'
 
-// axios.defaults.timeout = 15000
+axios.defaults.timeout = 15000
 
+let request = 0
 axios.interceptors.request.use(config => {
   LoadingBar.start()
+  request++
   return config
 }, error => {
   LoadingBar.error()
@@ -16,9 +18,13 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(response => {
-  LoadingBar.finish()
+  request--
+  if (request === 0) {
+    LoadingBar.finish()
+  }
   return response
 }, error => {
+  request--
   LoadingBar.error()
   Notice.error({
     title: 'Error',

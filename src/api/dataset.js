@@ -45,7 +45,8 @@ const datasetApi = {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
-      data: data
+      data: data,
+      timeout: 60000
     })
   }
 }
