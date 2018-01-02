@@ -36,7 +36,7 @@
       </TabPane>
       <TabPane label="Content" name="content">
         <TheEchart v-if="dataset.type==='CSV'"></TheEchart>
-        <ImageShow v-else-if="dataset.type==='IMAGE'"></ImageShow>
+        <SingleRegion v-else-if="dataset.type==='IMAGE'"></SingleRegion>
       </TabPane>
       <TabPane v-if="dataset.type==='IMAGE'" label="MultiRegion" name="multiRegion">
         <MultiRegion></MultiRegion>
@@ -52,7 +52,7 @@
 
 <script>
 import InfoShow from '../components/InfoShow'
-import ImageShow from '../components/ImageShow'
+import SingleRegion from '../components/SingleRegion'
 import TheEchart from '../components/TheEchart'
 import MultiRegion from '../components/MultiRegion'
 import HeatMap from '../components/HeatMap'
@@ -61,7 +61,7 @@ import {imageMetaApi, iecMetaApi, datasetMetaApi, equipmentApi, environmentApi, 
 export default {
   components: {
     TheEchart,
-    ImageShow,
+    SingleRegion,
     MultiRegion,
     HeatMap,
     InfoShow

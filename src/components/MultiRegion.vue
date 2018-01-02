@@ -12,7 +12,7 @@
     <div>
       <h3>The size infomation of image (Unit: px):</h3>
       <Tag type="border">width:{{imageInfo.width}}</Tag>
-      <Tag type="border">height:{{imageInfo.height}}</Tag>     
+      <Tag type="border">height:{{imageInfo.height}}</Tag>
     </div>
     <br>
     <Card :padding="0"
@@ -20,33 +20,33 @@
            dis-hover style="text-align: center; position:relative;">
         <canvas ref="canvas" width="800px" height="600px" class="base"></canvas>
         <!-- <canvas ref="clip" width="800px" height="600px"></canvas> -->
-        <MultiChart  
+        <MultiChart
           v-if="f!==[]"
-          :scale="times" 
-          :xData="getAxis(false)" 
-          :yData="getAxis(true)" 
-          :data="f" 
-          :width="800" 
+          :scale="times"
+          :xData="getAxis(false)"
+          :yData="getAxis(true)"
+          :data="f"
+          :width="800"
           :height="600"></MultiChart>
     </Card>
     <br>
     <Button type="primary" @click="getRegionResult">get</Button>
-    <SignalChart :xData="xData" :yData="f" :width="800" :height="400" :single="false" title="f"> </SignalChart>
-    <SignalChart :xData="xData" :yData="f0" :width="800" :height="400" :single="false" title="f0"> </SignalChart>
-    <SignalChart :xData="xData" :yData="f0DivF" :width="800" :height="400" :single="false" title="f0/f"> </SignalChart>
-    <SignalChart :xData="xData" :yData="negF0DivF" :width="800" :height="400" :single="false" title="-f0/f"> </SignalChart>
+    <SingleChart :xData="xData" :yData="f" :width="800" :height="400" :single="false" title="f"> </SingleChart>
+    <SingleChart :xData="xData" :yData="f0" :width="800" :height="400" :single="false" title="f0"> </SingleChart>
+    <SingleChart :xData="xData" :yData="f0DivF" :width="800" :height="400" :single="false" title="f0/f"> </SingleChart>
+    <SingleChart :xData="xData" :yData="negF0DivF" :width="800" :height="400" :single="false" title="-f0/f"> </SingleChart>
   </div>
 </template>
 
 <script>
 import { scaleing, generateData, getDived, getNeg } from '../util/imageUtil'
-import SignalChart from './SignalChart'
+import SingleChart from './SingleChart'
 import MultiChart from './MultiChart'
 import analysisApi from '../api/analysis.js'
 export default {
   name: 'MultiRegion',
   components: {
-    SignalChart,
+    SingleChart,
     MultiChart
   },
   data() {

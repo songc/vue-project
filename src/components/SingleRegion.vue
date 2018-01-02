@@ -17,15 +17,15 @@
         </FormItem>
         <FormItem label="Height:">
           <InputNumber v-model="region.height" :max="maxValue.height" :min="1"></InputNumber>
-        </FormItem> 
+        </FormItem>
       </Form>
       <h3>The size information of the selected image (Unit:px):</h3>
       <Tag type="border">width:{{imageInfo.width}}</Tag>
       <Tag type="border">height:{{imageInfo.height}}</Tag>
       <br>
-      <br>     
+      <br>
       <Card :padding="0"
-            :bordered="false" 
+            :bordered="false"
             dis-hover style="text-align: center;">
           <canvas ref="canvas" width="800px" height="600px" class="base" style="display:none"></canvas>
           <canvas ref="canvas2" width="800px" height="600px" class="base"></canvas>
@@ -33,21 +33,21 @@
       </Card>
       <br>
       <Button type="primary" @click="getRegionResult">get</Button>
-      <SignalChart :xData="xData" :yData="f" :width="800" :height="400" :single="true" title="f"> </SignalChart>
-      <SignalChart :xData="xData" :yData="f0" :width="800" :height="400" :single="true" title="f0"> </SignalChart>
-      <SignalChart :xData="xData" :yData="f0DivF" :width="800" :height="400" :single="true" title="f0/f"> </SignalChart>
-      <SignalChart :xData="xData" :yData="negF0DivF" :width="800" :height="400" :single="true" title="-f0/f"> </SignalChart>     
+      <SingleChart :xData="xData" :yData="f" :width="800" :height="400" :single="true" title="f"> </SingleChart>
+      <SingleChart :xData="xData" :yData="f0" :width="800" :height="400" :single="true" title="f0"> </SingleChart>
+      <SingleChart :xData="xData" :yData="f0DivF" :width="800" :height="400" :single="true" title="f0/f"> </SingleChart>
+      <SingleChart :xData="xData" :yData="negF0DivF" :width="800" :height="400" :single="true" title="-f0/f"> </SingleChart>
   </div>
 </template>
 
 <script>
 import {scaleing, generateData, getDived, getNeg} from '../util/imageUtil'
-import SignalChart from './SignalChart'
+import SingleChart from './SingleChart'
 import analysisApi from '../api/analysis.js'
 export default {
   name: 'imageShow',
   components: {
-    SignalChart
+    SingleChart
   },
   data() {
     return {
@@ -157,5 +157,5 @@ export default {
 <style scoped>
   .base{
     position: absolute;
-  } 
+  }
 </style>
