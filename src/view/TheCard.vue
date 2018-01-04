@@ -77,7 +77,7 @@ export default {
     },
     downLoadDataset(data) {
       const linkElement = document.createElement('a')
-      linkElement.setAttribute('href', `/api/dataset/${data.id}/zip`)
+      linkElement.setAttribute('href', `/api/dataset/${data.id}/zip?name=${data.name}`)
       linkElement.setAttribute('download', data.name + '.zip')
       var clickEvent = new MouseEvent('click', {
         view: window,
