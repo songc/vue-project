@@ -22,7 +22,7 @@
       <p>Telephone: +86-62737778</p>
     </Col>
     <Col span="6">
-      <img src="../assets/logo1.png">
+      <h1>PlantEleSh</h1>
     </Col>
   </Row>
 </template>

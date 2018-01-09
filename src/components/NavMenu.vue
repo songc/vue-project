@@ -2,11 +2,10 @@
   <Menu mode="horizontal" theme="light" @on-select="go" :active-name="$route.name">
     <Row type="flex" justify="space-between" align="middle">
       <Col span="3">
-      <img class="menu-logo" src="../assets/logo1.png" @click="goHome">
+        <h2 @click="goHome">PlantEleSh</h2>
       </Col>
       <Col span="9" class-name="navmenu">
-      <MenuItem name="dashBoard" v-show="isLogin">DashBoard
-      </MenuItem>
+      <MenuItem name="dashBoard" v-show="isLogin">DashBoard</MenuItem>
       <MenuItem name="dataset">Dataset</MenuItem>
       <MenuItem name="project">Project</MenuItem>
       <MenuItem name="paper">Paper</MenuItem>
