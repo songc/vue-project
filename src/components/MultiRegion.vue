@@ -3,10 +3,10 @@
     <h3>The information of region (Unit: px):</h3>
     <Form label-position="left" :label-width="50" inline>
       <FormItem label="Width:">
-        <InputNumber v-model="region.width" :max="Math.floor(imageInfo.width/2)" :min="50"></InputNumber>
+        <InputNumber v-model="region.width" :max="Math.floor(imageInfo.width/2)" :min="100"></InputNumber>
       </FormItem>
       <FormItem label="Height:">
-        <InputNumber v-model="region.height" :max="Math.floor(imageInfo.height/2)" :min="50"></InputNumber>
+        <InputNumber v-model="region.height" :max="Math.floor(imageInfo.height/2)" :min="100"></InputNumber>
       </FormItem>
     </Form>
     <div>
@@ -58,8 +58,8 @@ export default {
         height: 0
       },
       region: {
-        width: 50,
-        height: 50
+        width: 100,
+        height: 100
       },
       xData: [],
       f: [],

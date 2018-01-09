@@ -58,10 +58,10 @@ export default {
         height: 600
       },
       region: {
-        startX: 50,
-        startY: 50,
-        width: 50,
-        height: 50
+        startX: 100,
+        startY: 100,
+        width: 200,
+        height: 200
       },
       xData: [],
       f: [],
