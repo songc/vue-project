@@ -54,7 +54,7 @@
               <p>College of Information and Electrical Engineering</p>
               <p>China Agricultural University</p>
               <p>Tel:+86-010-62737778  Fax: +86-010-62737778</p>
-              <p>Email: biomed_hl@263.net</p>
+              <p>Email: hlan@cau.edu.cn</p>
             </Col>
           </Row>
           <h4>Research Interests</h4>
