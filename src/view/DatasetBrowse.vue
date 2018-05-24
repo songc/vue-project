@@ -44,6 +44,9 @@
       <TabPane v-if="f[0] && dataset.type==='IMAGE'" label="HeatMap" name="heatMap">
         <HeatMap  :xData="getAxis(false)" :yData="getAxis(true)" :data="signalData" :width="800" :height="500"></HeatMap>
       </TabPane>
+      <TabPane label="Predict" name="predict">
+        <ClassfiResultShow></ClassfiResultShow>
+      </TabPane>
     </Tabs>
     </Col>
   </Row>
@@ -56,6 +59,7 @@ import SingleRegion from '../components/SingleRegion'
 import TheEchart from '../components/TheEchart'
 import MultiRegion from '../components/MultiRegion'
 import HeatMap from '../components/HeatMap'
+import ClassfiResultShow from '../components/ClassfiResultShow'
 import {generateData} from '../util/imageUtil'
 import {imageMetaApi, iecMetaApi, datasetMetaApi, equipmentApi, environmentApi, softwareApi, sampleApi} from '../api/metaData'
 export default {
@@ -64,7 +68,8 @@ export default {
     SingleRegion,
     MultiRegion,
     HeatMap,
-    InfoShow
+    InfoShow,
+    ClassfiResultShow
   },
   data() {
     return {

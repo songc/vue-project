@@ -29,10 +29,17 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-        target: 'http://localhost:8080',
+        target: 'http://hadoop-hbase-1:8080',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
+        },
+      },
+      '/predict': {
+        target: 'http://10.6.72.168:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/predict': ''
         }
       }
     },
