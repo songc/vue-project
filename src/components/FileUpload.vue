@@ -10,7 +10,7 @@
               :action="uploadUrl">
               <Button type="ghost" icon="ios-cloud-upload-outline">Select the files</Button>
       </Upload>
-      <Button v-show="files !=0" slot="extra" type="primary" @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传' }}</Button>
+      <Button v-show="files !=0" slot="extra" type="primary" @click="upload" :loading="loadingStatus">{{ loadingStatus ? 'Uploading' : 'Upload' }}</Button>
       <Form :model="fileMeta" :label-width="80" label-position="left">
               <FormItem v-if="datasetType=='CSV'" label="IecMeta" prop="iecMetaId">
                 <Select v-if="iecMetas.length!==0" v-model="fileMeta.iecMetaId" style="width:300px">
@@ -54,7 +54,7 @@
               </FormItem>
       </Form>
       <div v-if="files != 0">
-               待上传文件：
+               The file to upload：
               <li 
                 v-for="(file, index) in files" 
                 :key="file.name">

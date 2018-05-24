@@ -18,7 +18,7 @@
     </ul>
     </Col>
     <Col span="6">
-      <h4>Contack us</h4>
+      <h4>Contact us</h4>
       <p>Telephone: +86-62737778</p>
     </Col>
     <Col span="6">
