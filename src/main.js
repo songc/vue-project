@@ -6,10 +6,11 @@ import router from './router/router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import store from './vuex/store'
+import locale from 'iview/dist/locale/en-US'
 // import './mock/mock'
 
 Vue.config.productionTip = false
-Vue.use(iView)
+Vue.use(iView, {locale})
 
 /* eslint-disable no-new */
 new Vue({
