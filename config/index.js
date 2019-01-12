@@ -33,6 +33,13 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
+        },
+      },
+      '/predict': {
+        target: 'http://10.6.72.168:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/predict': ''
         }
       }
     },

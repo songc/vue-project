@@ -56,6 +56,7 @@ import SingleRegion from '../components/SingleRegion'
 import TheEchart from '../components/TheEchart'
 import MultiRegion from '../components/MultiRegion'
 import HeatMap from '../components/HeatMap'
+import ClassfiResultShow from '../components/ClassfiResultShow'
 import {generateData} from '../util/imageUtil'
 import {imageMetaApi, iecMetaApi, datasetMetaApi, equipmentApi, environmentApi, softwareApi, sampleApi} from '../api/metaData'
 export default {
@@ -64,7 +65,8 @@ export default {
     SingleRegion,
     MultiRegion,
     HeatMap,
-    InfoShow
+    InfoShow,
+    ClassfiResultShow
   },
   data() {
     return {

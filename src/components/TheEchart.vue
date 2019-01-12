@@ -212,7 +212,7 @@ export default {
         return false
       } else {
         let options = {
-          title: {text: 'example'},
+          title: {text: 'Signal'},
           legend: {
             data: optionsData.xAxis.length > 8 ? null : optionsData.xAxis.map((val, index) => `ch${index}`)
           },
