@@ -44,9 +44,6 @@
       <TabPane v-if="f[0] && dataset.type==='IMAGE'" label="HeatMap" name="heatMap">
         <HeatMap  :xData="getAxis(false)" :yData="getAxis(true)" :data="signalData" :width="800" :height="500"></HeatMap>
       </TabPane>
-      <TabPane label="Predict" name="predict">
-        <ClassfiResultShow></ClassfiResultShow>
-      </TabPane>
     </Tabs>
     </Col>
   </Row>
