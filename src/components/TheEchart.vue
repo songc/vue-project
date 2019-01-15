@@ -15,7 +15,7 @@
   <br>
   <Button type="primary" size="large" @click="exportData()"><Icon type="ios-download-outline"></Icon> Export data</Button>
   <Modal :title="isStartPoint? 'add a startPoint':'add a endPonint'" v-model="modal" @on-cancel="modal=false" @on-ok="addMark(params)">
-    <Input v-model="comment"></Input>
+    <Input v-model="comment"/>
   </Modal>  
 </div>
 

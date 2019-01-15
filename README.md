@@ -22,11 +22,19 @@
 - **index.html ## 入口网页**
 - **package.json  ## npm依赖配置文件**
 
+### 调用关系图
+![vue文件调用关系图.png](https://i.loli.net/2019/01/15/5c3de5101b2c7.png)
+
 ### 依赖和系统需求
 
 1. node.js：8.0 及以上，
 2. Git
 3. 编辑器：vscode （插件：Vetur）
+
+### 学习基础
+1. 语言：[JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript), [HTML](https://developer.mozilla.org/zh-CN/docs/Web/HTML), [CSS](https://developer.mozilla.org/zh-CN/docs/Web/CSS),
+[Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
+2. 框架：[Vue](https://cn.vuejs.org/v2/guide/), [Vuex](https://vuex.vuejs.org/zh/), [Vue-router](https://router.vuejs.org/zh/), [iview](https://www.iviewui.com/docs/guide/install), [axios](https://github.com/axios/axios), [Echarts](https://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts), [Mathjs](http://mathjs.org/)
 
 ## Build Setup
 
